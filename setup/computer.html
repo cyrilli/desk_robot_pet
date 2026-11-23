@@ -378,10 +378,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 用 Arduino CLI 让 coding agent 编译程序
 </summary>
 <p>安装 Arduino CLI 后打开新终端，执行 <code>arduino-cli version</code>。能看到版本号后，在课程包根目录执行以下命令。最后一行编译 Tobi 的表情程序。<a href="https://arduino.github.io/arduino-cli/latest/installation/">Arduino CLI 安装说明</a></p>
+<!--email_off-->
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">arduino-cli</span> core update-index <span class="at">--additional-urls</span> https://espressif.github.io/arduino-esp32/package_esp32_index.json</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">arduino-cli</span> core install esp32:esp32@3.3.10 <span class="at">--additional-urls</span> https://espressif.github.io/arduino-esp32/package_esp32_index.json</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">arduino-cli</span> lib install <span class="st">"Adafruit GFX Library@1.13.0"</span> <span class="st">"Adafruit SSD1306@2.5.17"</span> <span class="st">"Adafruit BusIO@1.17.4"</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">arduino-cli</span> compile <span class="at">--fqbn</span> esp32:esp32:esp32c3 firmware/original</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<!--/email_off-->
 如果在 IDE 里选了其他 3.x 版本，将第二行的版本号改成同一个。若一边编译成功、另一边报缺库，对照 IDE 的 Library Manager 和终端里 <code>arduino-cli lib list</code> 的结果，确认两边安装了相同的库。
 </details>
 
