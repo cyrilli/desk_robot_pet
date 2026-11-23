@@ -1,0 +1,127 @@
+.tobi-flow {
+  --flow-ink: #44353f;
+  --flow-accent: #75536c;
+  --flow-rule: #dcd3d5;
+  container-type: inline-size;
+  display: block;
+  width: 100%;
+  margin: 1.25em 0;
+  border-block: 2px solid var(--flow-accent);
+  color: #383434;
+  line-height: 1.5;
+  text-align: start;
+}
+
+.tobi-flow strong {
+  display: block;
+  color: var(--flow-ink);
+  font-weight: 650;
+}
+
+.tobi-flow-intro,
+.tobi-flow-rest {
+  padding: .75em 1em;
+  background: #f5f1f2;
+}
+
+.tobi-flow-intro > span,
+.tobi-flow-rest > span,
+.tobi-flow-decision > span {
+  display: block;
+  margin-top: .22em;
+}
+
+.tobi-flow-path {
+  display: grid;
+  grid-template-columns: minmax(0, 1.28fr) 1.25em minmax(0, 1fr) 1.25em minmax(0, .74fr);
+  gap: .65em;
+  align-items: center;
+  padding: 1em;
+  border-top: 1px solid var(--flow-rule);
+}
+
+.tobi-flow-rest { border-top: 1px solid var(--flow-rule); }
+
+.tobi-flow-trace {
+  display: block;
+  width: 100%;
+  max-width: 17em;
+  height: auto;
+  margin-top: .45em;
+  overflow: visible;
+  color: var(--flow-accent);
+}
+
+.tobi-flow-trace text {
+  fill: var(--flow-ink);
+  font-family: inherit;
+  font-size: 15px;
+}
+
+.tobi-flow-guide { fill: none; stroke: var(--flow-rule); stroke-dasharray: 3 4; }
+.tobi-flow-signal { fill: none; stroke: currentColor; stroke-width: 2.8; }
+.tobi-flow-trace circle { fill: currentColor; }
+
+.tobi-flow-arrow {
+  display: grid;
+  place-items: center;
+  color: var(--flow-accent);
+  font-size: 1.4em;
+  line-height: 1;
+}
+
+.tobi-flow-arrow::before { content: "→"; }
+
+.tobi-flow-output {
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: .38em;
+  text-align: center;
+}
+
+/* Show the 640 × 320 OLED area of each 768 × 480 simulation capture. */
+.tobi-flow-screen {
+  display: block;
+  position: relative;
+  width: min(6em, 100%);
+  aspect-ratio: 2;
+  overflow: hidden;
+  border-radius: .18em;
+  background: #071015;
+}
+
+.tobi-flow-screen img {
+  position: absolute;
+  top: -24.375%;
+  left: -10%;
+  display: block;
+  width: 120%;
+  height: 150%;
+  max-width: none;
+  max-height: none;
+}
+
+@media (min-width: 992px) {
+  .presentation .tobi-flow-path { padding-block: .5em; }
+  .presentation .tobi-flow-intro, .presentation .tobi-flow-rest { padding-block: .45em; }
+  .presentation .tobi-flow-trace { max-width: 15em; }
+}
+
+@container (max-width: 620px) {
+  .tobi-flow-path {
+    grid-template-columns: minmax(0, 1fr);
+    gap: .35em;
+    padding: 1em;
+  }
+  .tobi-flow-trace { max-width: 17em; }
+  .tobi-flow-arrow { justify-self: start; margin-left: .25em; font-size: 1.15em; }
+  .tobi-flow-arrow::before { content: "↓"; }
+  .tobi-flow-output {
+    display: flex;
+    gap: .8em;
+    align-items: center;
+    text-align: start;
+  }
+  .tobi-flow-screen { width: 5em; flex-shrink: 0; }
+}

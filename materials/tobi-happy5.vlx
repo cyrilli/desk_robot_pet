@@ -1,0 +1,133 @@
+{
+  "format": "velxio-project",
+  "version": 1,
+  "exportedAt": "2026-11-23T00:00:00.000Z",
+  "name": "Tobi happy5",
+  "boards": [
+    {
+      "id": "aitewinrobot-esp32c3-supermini",
+      "name": "Tobi ESP32-C3",
+      "boardKind": "aitewinrobot-esp32c3-supermini",
+      "x": 80,
+      "y": 100,
+      "activeFileGroupId": "group-aitewinrobot-esp32c3-supermini",
+      "languageMode": "arduino",
+      "serialBaudRate": 115200,
+      "libraries": [
+        "Adafruit SSD1306",
+        "Adafruit GFX Library",
+        "Adafruit BusIO"
+      ]
+    }
+  ],
+  "fileGroups": {
+    "group-aitewinrobot-esp32c3-supermini": [
+      {
+        "name": "happy5.ino",
+        "content": "// Tobi by Sam Zare, MIT. Upstream commit 428afbe3785887b91920e57dab453c5c4b815f24.\n// Course changes: address, wiring comment, input pulldown, diagnostic logs, arched happy eyes.\n/*\n  Robot with Natural Animated Eyes - ESP32-C3 Mini + 0.96\" OLED (SSD1306) + TTP223 Touch Module\n\n  Actual wiring based on your schematic:\n   OLED  -> I2C  : SDA = GPIO20, SCL = GPIO21, VDD = 3.3V (Red), GND (Black)\n   Touch -> TTP223: I/O = GPIO10 (Orange), VCC = 3.3V, GND\n   Speaker (LOA) -> One terminal to GND, the other to GPIO9\n                    (Reserved for future sound effects - currently unused)\n\n  \u26a0\ufe0f Note: GPIO9 is a boot strapping pin on the ESP32-C3\n  (the same pin used by the onboard BOOT function).\n  Using it for a speaker is generally safe because it only matters\n  during reset or power-up. However, if the board ever fails to boot\n  or enters download mode unexpectedly, GPIO9 should be the first pin\n  to investigate.\n\n  Eye modes:\n   DEFAULT / HAPPY / ANGRY / SLEEPY / SURPRISED / CRYING\n\n  Behavior:\n   - Automatically cycles through DEFAULT, HAPPY, ANGRY, SLEEPY,\n     and SURPRISED every 15 seconds.\n   - Single tap on the touch sensor -> HAPPY mode for 3 seconds,\n     then returns to DEFAULT (the 15-second timer restarts).\n   - Double tap within 400 ms -> CRYING mode for 3 seconds,\n     then returns to DEFAULT.\n   - Features random smooth blinking, subtle pupil movement,\n     and gentle breathing animation during sleep for a more\n     natural and lifelike appearance.\n\n  Required libraries:\n   - Adafruit GFX Library\n   - Adafruit SSD1306\n*/\n\n#include <Wire.h>\n#include <Adafruit_GFX.h>\n#include <Adafruit_SSD1306.h>\n\n//---------------------------------------pin setting---------------------------------------\n\n#define SDA_PIN        20\n#define SCL_PIN        21\n#define TOUCH_PIN      10\n// #define BUZZER_PIN     9   // // Future update: Speaker support can be added for sound effects and voice playback.\n\n#define SCREEN_WIDTH   128\n#define SCREEN_HEIGHT  64\n#define OLED_RESET     -1\n#define SCREEN_ADDRESS 0x3C // If nothing appears on the display, try changing the I2C address to 0x3D.\n\nconst unsigned long IDLE_SWITCH_INTERVAL      = 15000; // Cycle through eye expressions every 15 seconds\nconst unsigned long HAPPY_DURATION = 5000;\nconst unsigned long CRYING_DURATION = 3000;\nconst unsigned long TOUCH_EXPRESSION_DURATION = 3000;  // Duration of the Happy/Crying expression\nconst unsigned long DOUBLE_TAP_WINDOW         = 400;   // Maximum time between two taps (ms)\nconst unsigned long DEBOUNCE_TIME             = 50;    // Touch debounce time\nconst unsigned long FRAME_INTERVAL            = 30;    // Render one animation frame every 30 ms\n\n// ------------------------------------------------------------------\n\nAdafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);\n\nenum Mood { MOOD_DEFAULT, MOOD_HAPPY, MOOD_ANGRY, MOOD_SLEEPY, MOOD_SURPRISED, MOOD_CRYING };\n\nMood currentMood = MOOD_DEFAULT;\n\nMood idleCycle[] = { MOOD_DEFAULT, MOOD_HAPPY, MOOD_ANGRY, MOOD_SLEEPY, MOOD_SURPRISED };\nconst int idleCycleLength = sizeof(idleCycle) / sizeof(idleCycle[0]);\nint idleCycleIndex = 0;\n\nunsigned long lastIdleSwitch = 0;\nunsigned long lastFrameTime = 0;\n\n// ------------------------------------------touch setting -------------------------------------------------\nbool lastTouchState = false;\nunsigned long lastTouchChangeTime = 0;\nbool waitingSecondTap = false;\nunsigned long waitingForSecondTap = 0;\n\nbool tempExpressionActive = false;\nunsigned long tempExpressionStart = 0;\nunsigned long activeExpressionDuration = TOUCH_EXPRESSION_DURATION;\n\n// ---------------------- Animation: Blinking ----------------------\nenum BlinkPhase { BLINK_IDLE, BLINK_CLOSING, BLINK_HOLD, BLINK_OPENING };\nBlinkPhase blinkPhase = BLINK_IDLE;\nunsigned long blinkPhaseStart = 0;\nunsigned long nextBlinkAt = 0;\nfloat blinkAmount = 0.0f; //full open =1 , close =0 \n\nconst unsigned long BLINK_CLOSE_MS = 90;\nconst unsigned long BLINK_HOLD_MS  = 70;\nconst unsigned long BLINK_OPEN_MS  = 110;\n\n// ---------------------- Animation: Pupil Movement ----------------------\nfloat lookX = 0, lookY = 0;\nfloat targetLookX = 0, targetLookY = 0;\nunsigned long nextLookChangeAt = 0;\n\n// ---------------------- Animation Helper Functions ----------------------\nbool moodHasPupil(Mood m) {\n  return (m == MOOD_DEFAULT || m == MOOD_ANGRY || m == MOOD_SURPRISED || m == MOOD_CRYING);\n}\nbool moodBlinks(Mood m) {\n  return (m != MOOD_SLEEPY);\n}\n\nvoid scheduleNextBlink() {\n  nextBlinkAt = millis() + random(2000, 5500);\n}\n\nvoid scheduleNextLook() {\n  nextLookChangeAt = millis() + random(1500, 3500);\n}\n\nvoid updateBlink() {\n  unsigned long now = millis();\n\n  if (!moodBlinks(currentMood)) {\n    blinkPhase = BLINK_IDLE;\n    blinkAmount = 0;\n    return;\n  }\n\n  switch (blinkPhase) {\n    case BLINK_IDLE:\n      blinkAmount = 0;\n      if (now >= nextBlinkAt) {\n        blinkPhase = BLINK_CLOSING;\n        blinkPhaseStart = now;\n      }\n      break;\n    case BLINK_CLOSING: {\n      float t = (float)(now - blinkPhaseStart) / BLINK_CLOSE_MS;\n      if (t >= 1.0f) { blinkAmount = 1.0f; blinkPhase = BLINK_HOLD; blinkPhaseStart = now; }\n      else blinkAmount = t;\n      break;\n    }\n    case BLINK_HOLD: {\n      blinkAmount = 1.0f;\n      if (now - blinkPhaseStart >= BLINK_HOLD_MS) { blinkPhase = BLINK_OPENING; blinkPhaseStart = now; }\n      break;\n    }\n    case BLINK_OPENING: {\n      float t = (float)(now - blinkPhaseStart) / BLINK_OPEN_MS;\n      if (t >= 1.0f) { blinkAmount = 0.0f; blinkPhase = BLINK_IDLE; scheduleNextBlink(); }\n      else blinkAmount = 1.0f - t;\n      break;\n    }\n  }\n}\n\nvoid forceQuickBlink() {\n  \n// Creates a smooth transition when changing expressions.\n  blinkPhase = BLINK_CLOSING;\n  blinkPhaseStart = millis();\n}\n\nvoid updateLook() {\n  unsigned long now = millis();\n\n  if (!moodHasPupil(currentMood)) {\n    lookX = 0; lookY = 0;\n    return;\n  }\n\n  float rangeX = 4, rangeY = 3;\n  if (currentMood == MOOD_ANGRY)     { rangeX = 2.5; rangeY = 2; }\n  if (currentMood == MOOD_SURPRISED) { rangeX = 2.5; rangeY = 2; }\n  if (currentMood == MOOD_CRYING)    { rangeX = 2;   rangeY = 1.5; }\n\n  if (now >= nextLookChangeAt) {\n    targetLookX = random(-100, 101) / 100.0f * rangeX;\n    targetLookY = random(-100, 101) / 100.0f * rangeY;\n    scheduleNextLook();\n  }\n  \n// Smoothly move toward the target (lerp)\n  lookX += (targetLookX - lookX) * 0.06f;\n  lookY += (targetLookY - lookY) * 0.06f;\n}\n\n//--------eye function----------------------\n\nvoid clearScreen() { display.clearDisplay(); }\n\n\nvoid drawEyeBoxWithBlink(int x, int y, int w, int h, int radius, float blink) {\n  display.fillRoundRect(x, y, w, h, radius, SSD1306_WHITE);\n  if (blink > 0.02f) {\n    int coverH = (int)(h * blink);\n    display.fillRect(x - 2, y - 2, w + 4, coverH + 2, SSD1306_BLACK);\n  }\n}\n\nvoid drawPupil(int cx, int cy, int r, float offX, float offY) {\n  display.fillCircle(cx + (int)offX, cy + (int)offY, r, SSD1306_BLACK);\n \n  display.fillCircle(cx + (int)offX - r / 3, cy + (int)offY - r / 3, max(1, r / 4), SSD1306_WHITE);\n}\n\nvoid drawDefaultEyes(float blink, float lx, float ly) {\n  int lx1 = 20, ly1 = 18, w = 35, h = 35;\n  int rx1 = 73, ry1 = 18;\n  drawEyeBoxWithBlink(lx1, ly1, w, h, 10, blink);\n  drawEyeBoxWithBlink(rx1, ry1, w, h, 10, blink);\n  if (blink < 0.85f) {\n    drawPupil(lx1 + w / 2, ly1 + h / 2, 7, lx, ly);\n    drawPupil(rx1 + w / 2, ry1 + h / 2, 7, lx, ly);\n  }\n}\n\nvoid drawHappyEyes(float blink) {\n  const int halfWidth = 16;\n  const float archHeight = 14.0f * (1.0f - blink);\n  for (int dx = -halfWidth; dx <= halfWidth; ++dx) {\n    // The arch is highest in the middle. A full blink flattens it.\n    float position = (float)dx / halfWidth;\n    int y = 40 - lroundf(archHeight * (1.0f - position * position));\n    display.fillCircle(35 + dx, y, 2, SSD1306_WHITE);\n    display.fillCircle(93 + dx, y, 2, SSD1306_WHITE);\n  }\n}\n\nvoid drawAngryEyes(float blink, float lx, float ly) {\n  int lx1 = 20, ly1 = 22, w = 35, h = 28;\n  int rx1 = 73, ry1 = 22;\n  drawEyeBoxWithBlink(lx1, ly1, w, h, 6, blink);\n  drawEyeBoxWithBlink(rx1, ry1, w, h, 6, blink);\n  if (blink < 0.85f) {\n    drawPupil(lx1 + w / 2, ly1 + h / 2 + 2, 6, lx, ly);\n    drawPupil(rx1 + w / 2, ry1 + h / 2 + 2, 6, lx, ly);\n  }\n  // Angry eyebrows are always drawn above the eyes (even while blinking)\n  display.fillTriangle(15, 18, 55, 18, 15, 30, SSD1306_BLACK);\n  display.fillTriangle(113, 18, 73, 18, 113, 30, SSD1306_BLACK);\n}\n\nvoid drawSleepyEyes() {\n// Gentle breathing: the eye line height slowly oscillates.\n  float breathe = (sin(millis() / 1400.0f) + 1.0f) / 2.0f; // 0..1\n  int h = 4 + (int)(breathe * 3);\n  int y = 33 - h / 2;\n  display.fillRoundRect(18, y, 38, h, h / 2, SSD1306_WHITE);\n  display.fillRoundRect(72, y, 38, h, h / 2, SSD1306_WHITE);\n}\n\nvoid drawSurprisedEyes(float blink, float lx, float ly) {\n  int cxL = 38, cxR = 90, cy = 35, r = 22;\n  display.fillCircle(cxL, cy, r, SSD1306_WHITE);\n  display.fillCircle(cxR, cy, r, SSD1306_WHITE);\n  if (blink > 0.02f) {\n    int coverH = (int)(r * 2 * blink);\n    display.fillRect(cxL - r - 2, cy - r - 2, r * 2 + 4, coverH + 2, SSD1306_BLACK);\n    display.fillRect(cxR - r - 2, cy - r - 2, r * 2 + 4, coverH + 2, SSD1306_BLACK);\n  }\n  if (blink < 0.85f) {\n    drawPupil(cxL, cy, 8, lx, ly);\n    drawPupil(cxR, cy, 8, lx, ly);\n  }\n}\n\nvoid drawCryingEyes(float blink, float lx, float ly) {\n  int lx1 = 20, ly1 = 20, w = 35, h = 26;\n  int rx1 = 73, ry1 = 20;\n  drawEyeBoxWithBlink(lx1, ly1, w, h, 10, blink);\n  drawEyeBoxWithBlink(rx1, ry1, w, h, 10, blink);\n  if (blink < 0.85f) {\n    drawPupil(lx1 + w / 2, ly1 + h / 2, 6, lx, ly);\n    drawPupil(rx1 + w / 2, ry1 + h / 2, 6, lx, ly);\n  }\n\n// Animated tears: one tear per eye falls downward in a continuous loop.\n  unsigned long t = millis() % 1400;\n  float p = t / 1400.0f; // 0..1\n  int dropY = 46 + (int)(p * 14);\n  int alpha = (p < 0.85f) ? 1 : 0; \n  if (alpha) {\n    display.fillTriangle(lx1 + 10, dropY, lx1 + 18, dropY, lx1 + 14, dropY + 10, SSD1306_WHITE);\n    display.fillCircle(lx1 + 14, dropY + 10, 4, SSD1306_WHITE);\n    display.fillTriangle(rx1 + 10, dropY, rx1 + 18, dropY, rx1 + 14, dropY + 10, SSD1306_WHITE);\n    display.fillCircle(rx1 + 14, dropY + 10, 4, SSD1306_WHITE);\n  }\n}\n\nvoid renderFrame() {\n  clearScreen();\n  switch (currentMood) {\n    case MOOD_DEFAULT:   drawDefaultEyes(blinkAmount, lookX, lookY);   break;\n    case MOOD_HAPPY:     drawHappyEyes(blinkAmount);                  break;\n    case MOOD_ANGRY:     drawAngryEyes(blinkAmount, lookX, lookY);     break;\n    case MOOD_SLEEPY:    drawSleepyEyes();                            break;\n    case MOOD_SURPRISED: drawSurprisedEyes(blinkAmount, lookX, lookY); break;\n    case MOOD_CRYING:    drawCryingEyes(blinkAmount, lookX, lookY);    break;\n  }\n  display.display();\n}\n\n// --------------------change mood --------------------\n\nvoid setMood(Mood m) {\n  currentMood = m;\n  Serial.printf(\"MOOD=%d t=%lu\\n\", (int)m, millis());\n  forceQuickBlink();  \n  scheduleNextLook();\n}\n\nvoid triggerExpression(Mood m) {\n  setMood(m);\n  activeExpressionDuration = (m == MOOD_HAPPY) ? HAPPY_DURATION : CRYING_DURATION;\n  tempExpressionActive = true;\n  tempExpressionStart = millis();\n}\n\n// ---------------------- Touch Logic ----------------------\n\nvoid handleTouch() {\n  bool rawState = (digitalRead(TOUCH_PIN) == HIGH);\n  unsigned long now = millis();\n\n  if (rawState != lastTouchState && (now - lastTouchChangeTime) > DEBOUNCE_TIME) {\n    lastTouchChangeTime = now;\n    lastTouchState = rawState;\n\n    if (rawState == false) {\n      if (waitingSecondTap && (now - waitingForSecondTap) <= DOUBLE_TAP_WINDOW) {\n        waitingSecondTap = false;\n        triggerExpression(MOOD_CRYING);\n      } else {\n        waitingSecondTap = true;\n        waitingForSecondTap = now;\n      }\n    }\n  }\n\n  if (waitingSecondTap && (now - waitingForSecondTap) > DOUBLE_TAP_WINDOW) {\n    waitingSecondTap = false;\n    triggerExpression(MOOD_HAPPY);\n  }\n}\n\n// ---------------------- Automatic Expression Cycle ----------------------\nvoid handleIdleCycle() {\n  if (tempExpressionActive) return;\n  unsigned long now = millis();\n  if (now - lastIdleSwitch >= IDLE_SWITCH_INTERVAL) {\n    lastIdleSwitch = now;\n    idleCycleIndex = (idleCycleIndex + 1) % idleCycleLength;\n    setMood(idleCycle[idleCycleIndex]);\n  }\n}\n\nvoid handleTempExpressionTimeout() {\n  if (tempExpressionActive && (millis() - tempExpressionStart >= activeExpressionDuration)) {\n    tempExpressionActive = false;\n    idleCycleIndex = 0;\n    lastIdleSwitch = millis();\n    setMood(MOOD_DEFAULT);\n  }\n}\n\n// ---------------------- Setup / Loop ----------------------\n\nvoid setup() {\n  #if ARDUINO_USB_CDC_ON_BOOT\n  Serial.begin(115200);\n#else\n  Serial.begin(115200, SERIAL_8N1, 3, 4); // UART diagnostics avoid I2C pins 20/21.\n#endif\n  pinMode(TOUCH_PIN, INPUT_PULLDOWN); // Low at rest; button connects GPIO10 to 3V3 in simulation.\n  randomSeed(analogRead(0));\n\n  Wire.begin(SDA_PIN, SCL_PIN);\n  Wire.setClock(400000); \n\n  if (!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS)) {\n    Serial.begin(115200);\n    Serial.println(\"OLED not found! Check the wiring and I2C address.\");\n    while (true) { delay(1000); }\n  }\n\n  display.clearDisplay();\n  display.display();\n\n  lastIdleSwitch = millis();\n  scheduleNextBlink();\n  scheduleNextLook();\n  renderFrame();\n  Serial.println(\"TOBI READY: SDA20 SCL21 TOUCH10 OLED0x3C\");\n}\n\nvoid loop() {\n  handleTouch();\n  handleTempExpressionTimeout();\n  handleIdleCycle();\n\n  unsigned long now = millis();\n  if (now - lastFrameTime >= FRAME_INTERVAL) {\n    lastFrameTime = now;\n    updateBlink();\n    updateLook();\n    renderFrame();\n  }\n}\n"
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "oled",
+      "metadataId": "ssd1306-i2c-4pin",
+      "x": 330,
+      "y": 100,
+      "properties": {
+        "i2cAddress": "0x3c"
+      }
+    },
+    {
+      "id": "touch",
+      "metadataId": "pushbutton",
+      "x": 330,
+      "y": 310,
+      "properties": {
+        "color": "green",
+        "label": "Touch"
+      }
+    }
+  ],
+  "activeBoardId": "aitewinrobot-esp32c3-supermini",
+  "wires": [
+    {
+      "id": "vcc",
+      "start": {
+        "componentId": "aitewinrobot-esp32c3-supermini",
+        "pinName": "3V3"
+      },
+      "end": {
+        "componentId": "oled",
+        "pinName": "VCC"
+      },
+      "waypoints": [],
+      "color": "#d45454"
+    },
+    {
+      "id": "gnd",
+      "start": {
+        "componentId": "aitewinrobot-esp32c3-supermini",
+        "pinName": "GND"
+      },
+      "end": {
+        "componentId": "oled",
+        "pinName": "GND"
+      },
+      "waypoints": [],
+      "color": "#444444"
+    },
+    {
+      "id": "sda",
+      "start": {
+        "componentId": "aitewinrobot-esp32c3-supermini",
+        "pinName": "RX"
+      },
+      "end": {
+        "componentId": "oled",
+        "pinName": "SDA"
+      },
+      "waypoints": [],
+      "color": "#32845c"
+    },
+    {
+      "id": "scl",
+      "start": {
+        "componentId": "aitewinrobot-esp32c3-supermini",
+        "pinName": "TX"
+      },
+      "end": {
+        "componentId": "oled",
+        "pinName": "SCL"
+      },
+      "waypoints": [],
+      "color": "#3978b4"
+    },
+    {
+      "id": "input",
+      "start": {
+        "componentId": "aitewinrobot-esp32c3-supermini",
+        "pinName": "10"
+      },
+      "end": {
+        "componentId": "touch",
+        "pinName": "1.l"
+      },
+      "waypoints": [],
+      "color": "#c18434"
+    },
+    {
+      "id": "high",
+      "start": {
+        "componentId": "aitewinrobot-esp32c3-supermini",
+        "pinName": "3V3"
+      },
+      "end": {
+        "componentId": "touch",
+        "pinName": "2.l"
+      },
+      "waypoints": [],
+      "color": "#d45454"
+    }
+  ]
+}

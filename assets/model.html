@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tobi 头盔与打印件查看器</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; color: #35332d; background: #faf8f3; font: 15px/1.5 -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+  .toolbar, .views, .controls, .legend, .footer { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+  .toolbar { padding: 8px 12px; background: #fffefa; border-bottom: 1px solid #dedbd4; }
+  .views { margin-left: auto; }
+  button, select { font: inherit; color: inherit; border: 1px solid #c8c2b7; background: #fffefa; border-radius: 4px; padding: 3px 8px; cursor: pointer; }
+  button[aria-pressed="true"] { background: #46453b; color: white; border-color: #46453b; }
+  button:focus-visible, select:focus-visible, canvas:focus-visible, a:focus-visible { outline: 2px solid #743e84; outline-offset: 1px; }
+  .stage { position: relative; background: #f3f0e9; }
+  canvas { width: 100%; height: clamp(180px, calc(100dvh - 185px), 328px); display: block; touch-action: none; cursor: grab; }
+  canvas:active { cursor: grabbing; }
+  .legend { position: absolute; top: 8px; left: 12px; gap: 14px; pointer-events: none; font-size: 14px; }
+  .legend span { display: flex; align-items: center; gap: 5px; }
+  .legend i { width: 12px; height: 12px; border-radius: 2px; background: #e6ac49; border: 1px solid #a87c31; }
+  .legend span + span i { background: #53938e; border-color: #427773; }
+  .controls { padding: 6px 12px; background: #f3f0e9; border-block: 1px solid #e0ddd6; }
+  .hint { margin-left: auto; font-size: 13px; }
+  .footer { justify-content: space-between; align-items: baseline; padding: 7px 12px; }
+  #status { margin: 0; font-size: 14px; }
+  .links { display: flex; flex-wrap: wrap; gap: 12px; font-size: 14px; }
+  a { color: #664562; }
+  [hidden] { display: none !important; }
+  @media (max-width: 600px) {
+    .views { margin-left: 0; }
+    .toolbar, .controls, .footer { padding-inline: 8px; }
+    .toolbar { row-gap: 7px; }
+    .hint { margin-left: 0; }
+    .legend { left: 8px; }
+    canvas { height: clamp(180px, calc(100dvh - 250px), 290px); }
+  }
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <label for="model">模型</label>
+  <select id="model">
+    <option value="Helmet1.stl">头盔与底座</option>
+    <option value="helmet-only">头盔（Helmet1）</option>
+    <option value="Core .stl">底座（Core）</option>
+    <option value="Core 2.stl">小板（Core 2）</option>
+    <option value="nameplate.stl">TOBI 名牌</option>
+    <option value="nameplate-mika.stl">MIKA 名牌</option>
+    <option value="base.stl">参数化底壳</option>
+    <option value="lid.stl">参数化盖子</option>
+    <option value="coupon.stl">窗口试片</option>
+  </select>
+  <div class="views" id="assembly" role="group" aria-label="头盔与底座">
+    <button type="button" id="closed" aria-pressed="true">合起</button>
+    <button type="button" id="exploded" aria-pressed="false">从底部分解</button>
+  </div>
+</div>
+<div class="stage">
+  <canvas id="view" tabindex="0" aria-label="Tobi 三维模型。拖动或用方向键旋转。"></canvas>
+  <div class="legend" id="legend"><span><i></i>头盔 Helmet1</span><span><i></i>底座 Core</span></div>
+</div>
+<div class="controls">
+  <div class="views" id="helmet-views" role="group" aria-label="观察方向" style="margin-left:0">
+    <button type="button" data-camera="front">正面</button>
+    <button type="button" data-camera="bottom">底面</button>
+    <button type="button" data-camera="back">背面</button>
+  </div>
+  <button type="button" id="left" aria-label="向左旋转">左转</button><button type="button" id="right" aria-label="向右旋转">右转</button>
+  <button type="button" id="up" aria-label="向上旋转">俯仰</button><button type="button" id="zoom">放大</button><button type="button" id="reset">复位</button>
+  <span class="hint">可拖动或用方向键旋转</span>
+</div>
+<div class="footer">
+  <p id="status" role="status">正在读取头盔模型…</p>
+  <div class="links"><a id="download" href="../materials/Helmet1.stl" download>下载头盔 STL</a><a href="../tutorial/06-change-enclosure.html" target="_top">外壳教程</a><a href="../classroom/demo.html#enclosure" target="_top">课堂演示</a></div>
+</div>
+<script>
+const helmet = 'Helmet1.stl';
+const core = 'Core .stl';
+const canvas = document.querySelector('#view');
+const select = document.querySelector('#model');
+const status = document.querySelector('#status');
+const download = document.querySelector('#download');
+const gl = canvas.getContext('webgl', {antialias: true, preserveDrawingBuffer: true});
+const ctx = gl ? null : canvas.getContext('2d');
+const meshCache = new Map();
+const singleParts = {helmet: 'helmet-only', core, core2: 'Core 2.stl'};
+const requestedPart = new URLSearchParams(location.search).get('part');
+if (Object.hasOwn(singleParts, requestedPart)) select.value = singleParts[requestedPart];
+const angles = {front: [0, .025], bottom: [0, -Math.PI / 2], back: [Math.PI, .07]};
+const gold = [.92, .68, .29], teal = [.33, .59, .57], steel = [.47, .55, .65], clay = [.67, .57, .68];
+let parts = [], drawing, program, buffer, yaw, pitch, zoom, separated = false;
+let drag, frame, loadId = 0;
+
+function parse(buffer) {
+  const reader = new DataView(buffer), size = buffer.byteLength;
+  const count = size >= 84 ? reader.getUint32(80, true) : 0;
+  const faces = [];
+  if (count && size === 84 + count * 50) {
+    for (let i = 0; i < count; i++) {
+      const vertices = [];
+      for (let j = 0; j < 3; j++) {
+        const start = 96 + i * 50 + j * 12;
+        vertices.push([0, 4, 8].map(offset => reader.getFloat32(start + offset, true)));
+      }
+      faces.push(vertices);
+    }
+  } else {
+    let vertices = [];
+    for (const match of new TextDecoder().decode(buffer).matchAll(/vertex\s+([\d.eE+\-]+)\s+([\d.eE+\-]+)\s+([\d.eE+\-]+)/g)) {
+      vertices.push(match.slice(1).map(Number));
+      if (vertices.length === 3) { faces.push(vertices); vertices = []; }
+    }
+  }
+  if (!faces.length) throw Error('没有可显示的网格');
+  return faces;
+}
+async function fetchMesh(file) {
+  if (!meshCache.has(file)) {
+    const response = await fetch('../materials/' + encodeURIComponent(file));
+    if (!response.ok) throw Error('无法读取 ' + file);
+    meshCache.set(file, parse(await response.arrayBuffer()));
+  }
+  return meshCache.get(file);
+}
+function isHelmetPart() {
+  return [helmet, ...Object.values(singleParts)].includes(select.value);
+}
+function prepare() {
+  const lo = [Infinity, Infinity, Infinity], hi = [-Infinity, -Infinity, -Infinity];
+  drawing = [];
+  for (const {file, faces} of parts) {
+    const color = file === helmet ? gold : file === core ? teal : file === 'Core 2.stl' ? steel : clay;
+    const down = select.value === helmet && file === core && separated ? 29 : 0;
+    for (const face of faces) {
+      const vertices = face.map(([x, y, z]) => isHelmetPart() ? [x, z - down, -y] : [x, y, z]);
+      for (const v of vertices) for (let i = 0; i < 3; i++) {
+        lo[i] = Math.min(lo[i], v[i]); hi[i] = Math.max(hi[i], v[i]);
+      }
+      drawing.push({vertices, color});
+    }
+  }
+  const span = hi.map((q, i) => q - lo[i]), center = lo.map((q, i) => (hi[i] + q) / 2);
+  const bounds = Math.max(...span);
+  for (const face of drawing) face.vertices = face.vertices.map(p => p.map((v, i) => (v - center[i]) / bounds));
+}
+function resetCamera() {
+  [yaw, pitch] = isHelmetPart() ? [-.48, .17] : [.5, -.5];
+  if (select.value === core) pitch = .40;
+  if (select.value === 'Core 2.stl') [yaw, pitch] = [-2.53, .26];
+  zoom = 1;
+  scheduleDraw();
+}
+function initGL() {
+  function shader(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src); gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw Error(gl.getShaderInfoLog(s));
+    return s;
+  }
+  program = gl.createProgram();
+  gl.attachShader(program, shader(gl.VERTEX_SHADER, 'attribute vec3 point; attribute vec3 color; uniform vec2 scale; varying vec3 paint; void main(){gl_Position=vec4(point.xy*scale,-point.z*0.65,1.0);paint=color;}'));
+  gl.attachShader(program, shader(gl.FRAGMENT_SHADER, 'precision mediump float; varying vec3 paint; void main(){gl_FragColor=vec4(paint,1.0);}'));
+  gl.linkProgram(program);
+  if (!gl.getProgramParameter(program, gl.LINK_STATUS)) throw Error('无法初始化查看器');
+  buffer = gl.createBuffer();
+}
+function draw() {
+  frame = 0;
+  if (!drawing?.length || !canvas.clientWidth || !canvas.clientHeight) return;
+  const ratio = Math.min(devicePixelRatio || 1, 2);
+  const w = Math.round(canvas.clientWidth * ratio), h = Math.round(canvas.clientHeight * ratio);
+  if (canvas.width !== w || canvas.height !== h) {canvas.width = w; canvas.height = h;}
+  const size = Math.min(w, h) * .83 * zoom, sy = Math.sin(yaw), cy = Math.cos(yaw), sp = Math.sin(pitch), cp = Math.cos(pitch);
+  const rotate = ([x, y, z]) => {
+    const d = -x * sy + z * cy;
+    return [x * cy + z * sy, y * cp - d * sp, y * sp + d * cp];
+  };
+  const data = new Float32Array(drawing.length * 18), sorted = [];
+  let index = 0;
+  for (const face of drawing) {
+    const [a, b, c] = face.vertices.map(rotate);
+    const u = b.map((q,i) => q-a[i]), v = c.map((q,i) => q-a[i]);
+    const normal = [u[1]*v[2]-u[2]*v[1], u[2]*v[0]-u[0]*v[2], u[0]*v[1]-u[1]*v[0]];
+    const length = Math.hypot(...normal) || 1;
+    const light = .46 + .52 * Math.max(0, (-.33*normal[0]+.57*normal[1]+.75*normal[2])/length);
+    const color = face.color.map(k => k * light);
+    if (gl) {
+      for (const p of [a,b,c]) { data.set(p,index); data.set(color,index+3); index+=6; }
+    } else {
+      sorted.push({v:[a,b,c], color, z:(a[2]+b[2]+c[2])/3});
+    }
+  }
+  if (gl) {
+    if (!program) initGL();
+    gl.viewport(0,0,w,h);
+    gl.clearColor(243/255,240/255,233/255,1); gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    gl.useProgram(program); gl.enable(gl.DEPTH_TEST); gl.depthFunc(gl.LEQUAL);
+    gl.bindBuffer(gl.ARRAY_BUFFER,buffer); gl.bufferData(gl.ARRAY_BUFFER,data,gl.DYNAMIC_DRAW);
+    for (const [attr,offset] of [['point',0],['color',12]]) {
+      const location = gl.getAttribLocation(program,attr);
+      gl.enableVertexAttribArray(location); gl.vertexAttribPointer(location,3,gl.FLOAT,false,24,offset);
+    }
+    gl.uniform2f(gl.getUniformLocation(program,'scale'),size*2/w,size*2/h);
+    gl.drawArrays(gl.TRIANGLES,0,index/6);
+  } else if (ctx) {
+    ctx.fillStyle = '#f3f0e9'; ctx.fillRect(0,0,w,h);
+    for (const face of sorted.sort((a,b) => a.z - b.z)) {
+      ctx.beginPath();
+      face.v.forEach(([x,y],i) => { if (i) ctx.lineTo(w/2+x*size,h/2-y*size); else ctx.moveTo(w/2+x*size,h/2-y*size); });
+      ctx.closePath(); ctx.fillStyle = 'rgb('+face.color.map(c => Math.round(c*255)).join(',')+')'; ctx.fill();
+    }
+  }
+}
+function scheduleDraw() { if (!frame) frame = requestAnimationFrame(draw); }
+function configure() {
+  const assembly = select.value === helmet;
+  document.querySelector('#assembly').hidden = document.querySelector('#legend').hidden = !assembly;
+  document.querySelector('#helmet-views').hidden = !isHelmetPart();
+  document.querySelector('#closed').setAttribute('aria-pressed', String(!separated));
+  document.querySelector('#exploded').setAttribute('aria-pressed', String(separated));
+  if (assembly) {
+    status.textContent = separated ? '底座沿竖直方向下移，露出底板和两侧支架。' : '正面开口对应实物上的屏幕，底座位于头盔下方。';
+  } else {
+    const dims = [0,1,2].map(i => {
+      let lo = Infinity, hi = -Infinity;
+      for (const face of parts[0].faces) for (const p of face) {lo=Math.min(lo,p[i]); hi=Math.max(hi,p[i]);}
+      return (hi-lo).toFixed(1);
+    });
+    status.textContent = '模型尺寸（X × Y × Z） ' + dims.join(' × ') + ' mm';
+  }
+}
+async function load() {
+  const id = ++loadId, assembly = select.value === helmet;
+  const file = select.value === 'helmet-only' ? helmet : select.value;
+  separated = false; drawing = null; parts = [];
+  download.href = '../materials/' + encodeURIComponent(file);
+  download.textContent = file === helmet ? '下载头盔 STL' : '下载当前 STL';
+  status.textContent = '正在读取模型…';
+  try {
+    const files = assembly ? [helmet,core] : [file];
+    const meshes = await Promise.all(files.map(fetchMesh));
+    if (id !== loadId) return;
+    parts = files.map((file,i) => ({file,faces:meshes[i]}));
+    prepare(); configure(); resetCamera();
+  } catch (error) {
+    if (id === loadId) status.textContent = '模型未能打开。可以下载 STL 后用切片器查看。';
+  }
+}
+function showAssembly(open) {
+  if (select.value !== helmet || !parts.length) return;
+  separated = open; prepare(); configure(); resetCamera();
+}
+document.querySelector('#closed').onclick = () => showAssembly(false);
+document.querySelector('#exploded').onclick = () => showAssembly(true);
+document.querySelectorAll('[data-camera]').forEach(button => button.onclick = () => {
+  [yaw,pitch] = angles[button.dataset.camera]; zoom = 1; scheduleDraw();
+});
+select.onchange = load;
+document.querySelector('#left').onclick = () => { yaw -= .30; scheduleDraw(); };
+document.querySelector('#right').onclick = () => { yaw += .30; scheduleDraw(); };
+document.querySelector('#up').onclick = () => { pitch += .30; scheduleDraw(); };
+document.querySelector('#zoom').onclick = () => { zoom = zoom >= 1.79 ? 1 : zoom + .2; scheduleDraw(); };
+document.querySelector('#reset').onclick = resetCamera;
+canvas.onpointerdown = e => { drag = [e.clientX,e.clientY]; canvas.setPointerCapture(e.pointerId); };
+canvas.onpointermove = e => {
+  if (!drag) return;
+  yaw += (e.clientX-drag[0]) * .01; pitch += (e.clientY-drag[1]) * .01;
+  drag = [e.clientX,e.clientY]; scheduleDraw();
+};
+canvas.onpointerup = canvas.onpointercancel = () => { drag = null; };
+canvas.onkeydown = e => {
+  const step = {ArrowLeft:[-.2,0], ArrowRight:[.2,0], ArrowUp:[0,.2], ArrowDown:[0,-.2]}[e.key];
+  if (step) { e.preventDefault(); yaw += step[0]; pitch += step[1]; scheduleDraw(); }
+};
+new ResizeObserver(scheduleDraw).observe(canvas);
+load();
+</script>
+</body>
+</html>

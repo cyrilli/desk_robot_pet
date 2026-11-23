@@ -1,0 +1,36 @@
+--- before.ino
++++ after.ino
+@@ -52,6 +52,8 @@
+ #define SCREEN_ADDRESS 0x3C // If nothing appears on the display, try changing the I2C address to 0x3D.
+ 
+ const unsigned long IDLE_SWITCH_INTERVAL      = 15000; // Cycle through eye expressions every 15 seconds
++const unsigned long HAPPY_DURATION = 5000;
++const unsigned long CRYING_DURATION = 3000;
+ const unsigned long TOUCH_EXPRESSION_DURATION = 3000;  // Duration of the Happy/Crying expression
+ const unsigned long DOUBLE_TAP_WINDOW         = 400;   // Maximum time between two taps (ms)
+ const unsigned long DEBOUNCE_TIME             = 50;    // Touch debounce time
+@@ -80,6 +82,7 @@
+ 
+ bool tempExpressionActive = false;
+ unsigned long tempExpressionStart = 0;
++unsigned long activeExpressionDuration = TOUCH_EXPRESSION_DURATION;
+ 
+ // ---------------------- Animation: Blinking ----------------------
+ enum BlinkPhase { BLINK_IDLE, BLINK_CLOSING, BLINK_HOLD, BLINK_OPENING };
+@@ -308,6 +311,7 @@
+ 
+ void triggerExpression(Mood m) {
+   setMood(m);
++  activeExpressionDuration = (m == MOOD_HAPPY) ? HAPPY_DURATION : CRYING_DURATION;
+   tempExpressionActive = true;
+   tempExpressionStart = millis();
+ }
+@@ -351,7 +355,7 @@
+ }
+ 
+ void handleTempExpressionTimeout() {
+-  if (tempExpressionActive && (millis() - tempExpressionStart >= TOUCH_EXPRESSION_DURATION)) {
++  if (tempExpressionActive && (millis() - tempExpressionStart >= activeExpressionDuration)) {
+     tempExpressionActive = false;
+     idleCycleIndex = 0;
+     lastIdleSwitch = millis();

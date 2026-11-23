@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>项目来源与测试记录 – 开源桌宠制作课</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-061c4b646e8116ed2081afd30138456f.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-76c230a13cbd885a5aa63ade2975abbc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">跳至主要内容</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="网站">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">开源桌宠制作课</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">首页</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../start.html"> 
+<span class="menu-text">开始制作</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../projects/index.html"> 
+<span class="menu-text">参考项目</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../extensions/index.html"> 
+<span class="menu-text">进阶改造</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../classroom/demo.html"> 
+<span class="menu-text">课堂演示</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../reference/index.html"> 
+<span class="menu-text">排错与资料</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+            <div id="quarto-search" class="" title="搜索"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">本页内容</h2>
+   
+  <ul>
+  <li><a href="#原项目与许可" id="toc-原项目与许可" class="nav-link active" data-scroll-target="#原项目与许可">原项目与许可</a></li>
+  <li><a href="#tobi-基础固件与接线" id="toc-tobi-基础固件与接线" class="nav-link" data-scroll-target="#tobi-基础固件与接线">Tobi 基础固件与接线</a></li>
+  <li><a href="#固件测试" id="toc-固件测试" class="nav-link" data-scroll-target="#固件测试">固件测试</a></li>
+  <li><a href="#头盔支架与打印试片" id="toc-头盔支架与打印试片" class="nav-link" data-scroll-target="#头盔支架与打印试片">头盔、支架与打印试片</a></li>
+  <li><a href="#复现环境" id="toc-复现环境" class="nav-link" data-scroll-target="#复现环境">复现环境</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">项目来源与测试记录</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>这里列出的结果对应 2026 年 11 月 23 日的课程文件。基础程序在 ESP32-C3 仿真中运行。课堂上的双舵机画布使用经典 ESP32，便于直接观察两只舵臂。实物烧录、打印试装和带负载运动仍需验证。</p>
+<section id="原项目与许可" class="level2">
+<h2 class="anchored" data-anchor-id="原项目与许可">原项目与许可</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>项目</th>
+<th>本课使用的内容</th>
+<th>许可及核对范围</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://github.com/samrobotech/Tobi-esp32-robot">Tobi</a></td>
+<td>桌宠固件、照片、接线资料和三个 STL。README 的作者为 Sam Zare，许可证署名 SRT。</td>
+<td>MIT，课程包保留原许可证。课程固件已编译并在仿真中运行。</td>
+</tr>
+<tr class="even">
+<td><a href="https://github.com/lucasfernandoprojects/desktop-companion-robot">Lucas</a></td>
+<td>声音、情绪和休眠行为的参考项目。源码使用 128 × 128 的 SH1107 显示驱动。</td>
+<td>GPL-3.0，已核对资料和源码，尚未运行。</td>
+</tr>
+<tr class="odd">
+<td><a href="https://github.com/jamro/tiny-engineer">Tiny Engineer</a></td>
+<td>多舵机机构及电脑控制的参考项目。</td>
+<td>软件 MIT，硬件设计 CERN-OHL-S-2.0，已核对文档，尚未装配或运行。</td>
+</tr>
+</tbody>
+</table>
+<p>课程包 <code>3d-models/</code> 中的三个文件取自 Tobi 项目的同一次提交。分发自己的版本时，保留相应项目的来源和许可证，并记下自己的修改。<a href="https://github.com/samrobotech/Tobi-esp32-robot/tree/428afbe3785887b91920e57dab453c5c4b815f24">Tobi 对应提交</a></p>
+</section>
+<section id="tobi-基础固件与接线" class="level2">
+<h2 class="anchored" data-anchor-id="tobi-基础固件与接线">Tobi 基础固件与接线</h2>
+<p>课程包中的 <code>firmware/original/original.ino</code> 是讲义使用的基础版本。它按单击、双击切换表情，参数和接线如下。逐行修改记录保存在补丁里。<a href="../materials/course-corrections.patch">下载课程修正补丁</a></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>位置</th>
+<th>课程文件中的设置</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>屏幕地址</td>
+<td>在 <code>SCREEN_ADDRESS</code> 中填入虚拟 OLED 的地址 <code>0x3C</code>。接实物时先扫描实际地址。</td>
+</tr>
+<tr class="even">
+<td>数据线和触摸输入</td>
+<td>文件头、引脚定义和接线图使用同一组引脚。OLED 接 SDA20、SCL21，TTP223 的 OUT 接 GPIO10。</td>
+</tr>
+<tr class="odd">
+<td>GPIO10 空闲电平</td>
+<td>设为 <code>INPUT_PULLDOWN</code>，仿真按钮按下时输入变高。实物 TTP223 用高电平有效、非锁存模式。</td>
+</tr>
+<tr class="even">
+<td>串口记录</td>
+<td>启动时打印 <code>TOBI READY</code>，切换表情时输出 <code>MOOD</code> 和以毫秒为单位的 <code>t</code>。</td>
+</tr>
+<tr class="odd">
+<td>笑眼</td>
+<td><code>drawHappyEyes()</code> 为每只眼睛画一道向上拱起的弧线，眨眼时弧线压低。</td>
+</tr>
+<tr class="even">
+<td>C3 的诊断串口</td>
+<td>默认 UART0 的引脚与课程 I²C 引脚重叠。使用板载原生 USB 时，在 IDE 中启用 <strong>USB CDC On Boot</strong>。使用非 CDC 配置时，程序将诊断 UART 映射到 RX3、TX4。</td>
+</tr>
+</tbody>
+</table>
+<p>课程接线图采用 USB 供电，只接开发板、屏幕和触摸模块。原图里的电池、充电模块和发声器件不参与这套电路。实物使用课程包的 <code>hardware/wiring.svg</code>。</p>
+</section>
+<section id="固件测试" class="level2">
+<h2 class="anchored" data-anchor-id="固件测试">固件测试</h2>
+<p>以下六份 ESP32-C3 固件均已编译。<code>original</code>、<code>happy5</code>、<code>focus</code> 和 <code>head_motion</code> 还在 QEMU 中接收了 GPIO10 的输入，并产生了相应的串口与屏幕数据。</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>程序</th>
+<th>记录的结果</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>original</code></td>
+<td>单击的开心表情持续 3001 ms，双击的哭泣表情持续 3000 ms。恢复普通眼睛 15000 ms 后，空闲表情自动轮换。该工程也在 Velxio 浏览器编辑器中导入、编译并运行。</td>
+</tr>
+<tr class="even">
+<td><code>happy5</code></td>
+<td>开心持续 5000 ms，哭泣持续 3001 ms。</td>
+</tr>
+<tr class="odd">
+<td><code>focus</code></td>
+<td>长按后进入 <code>RUNNING</code>，松手后继续计时。再次触摸可以取消。第二轮在 25001 ms 后进入 <code>DONE</code>，触摸后回到 <code>IDLE</code>。</td>
+</tr>
+<tr class="even">
+<td><code>hardware_check</code></td>
+<td>编译成功。实际屏幕地址和触摸电平需要连接自己的开发板读取。</td>
+</tr>
+<tr class="odd">
+<td><code>servo_check</code></td>
+<td>编译成功。舵机的供电和机械负载需在实物上测试。</td>
+</tr>
+<tr class="even">
+<td><code>head_motion</code></td>
+<td>单击时俯仰通道（GPIO5）占空比从中位 7.5% 变为 7.9% 后回中。双击时水平通道（GPIO6）依次为 7.0%、8.0%、7.5%。两种表情各持续 3001 ms。</td>
+</tr>
+</tbody>
+</table>
+<p><strong>连续输入。</strong> C3 在 627 ms 时开始摇头，1211 ms 时识别到单击，屏幕随即切换到笑眼。1229 ms 时水平轴收到回中命令，1486 ms 时程序又识别到双击。它记下最新的摇头动作，替换仍在等候的点头。到 1529 ms，水平轴已回中停留 300 ms，下一次摇头才开始。后来空闲轮换到笑眼时，两路控制信号都保持在中位。<a href="../materials/head_motion.zip">双舵机源码</a> · <a href="../reference/simulation.html">仿真复核步骤</a></p>
+<p><strong>Velxio 双舵机画布。</strong> 经典 ESP32 工程沿用 C3 版的手势判断、眼睛绘制和动作时序，按板型调整了接线与串口。仿真记录确认两路输出分别接到 GPIO25、GPIO26。单击时通道 0 的占空比从 7.5% 变到 7.9% 后回中。双击时通道 1 依次为 7.0%、8.0%、7.5%。同次运行记录了 4116 次屏幕 I²C 事务。把点头偏移从 80 微秒改为 60 微秒再运行，GPIO25 的目标由 1580 变为 1560 微秒，GPIO26 的摇头序列正常。<a href="../materials/tobi-head-motion-esp32.vlx">下载双舵机画布工程</a></p>
+<p>基础表情回放根据 QEMU 写入 SSD1306 的 I²C 数据生成。双舵机课堂实录直接记录 Velxio 编辑器显示的 OLED 和舵臂。舵臂在画布中的转角取决于仿真模型，实物转角、负载和供电余量需上机测量。</p>
+</section>
+<section id="头盔支架与打印试片" class="level2">
+<h2 class="anchored" data-anchor-id="头盔支架与打印试片">头盔、支架与打印试片</h2>
+<ul>
+<li><strong>项目自带的零件。</strong> <code>Helmet1.stl</code> 是有面窗、底部敞开的头壳。<code>Core .stl</code> 是带两侧立架的底板，按 STL 原有坐标放置时，它与头壳底沿对齐。<code>Core 2.stl</code> 是小折板，作者没有说明其固定用途。照片和项目说明能确认面窗显示、头部触摸，电路板的具体固定位置还需要结合器件试装。<a href="../classroom/demo.html#enclosure">三个原始零件</a></li>
+<li><strong>双轴头架。</strong> U 形架和桌面底座是为点头、摇头设计的课程部件。模型可预览俯仰和水平转动，并可单独渲染 U 形架与底座。舵盘、安装耳和固定点的尺寸仍需用自己的器件核对。<a href="../classroom/demo.html#neck">双轴结构</a></li>
+<li><strong>名牌和方形外壳练习。</strong> 名牌、底壳、盖子与窗口试片都已从对应 SCAD 导出 STL。名牌的图取自 PrusaSlicer 切片中的三层打印路径。<code>case.scad</code> 用来练开孔和盒盖配合。<code>assembly-case.scad</code> 用三组导槽、挡块、USB 开口和触摸区展示电路板怎样装入。把试片窗口从 22 mm 加宽到 23 mm 后，已核对窗口中心和导槽位置。以上模型均未打印，实际装配还需检查板厚、走线空间和隔壳触摸灵敏度。<a href="../assets/tobi-assembly.html">选做方形外壳的装配图</a></li>
+</ul>
+</section>
+<section id="复现环境" class="level2">
+<h2 class="anchored" data-anchor-id="复现环境">复现环境</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>项目</th>
+<th>记录的版本或设置</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Velxio</td>
+<td>本地容器镜像 <code>sha256:2f3c65c4ce11fc681e79758fa6edce43f7b5d052b2922b1d8ae570794792aeef</code>，使用 QEMU 运行固件。</td>
+</tr>
+<tr class="even">
+<td>编译目标</td>
+<td>ESP32-C3 为 <code>esp32:esp32:esp32c3</code>，课堂经典 ESP32 为 <code>esp32:esp32:esp32</code>。镜像内为 Arduino-ESP32 3.3.10、ESP-IDF 5.5.4。</td>
+</tr>
+<tr class="odd">
+<td>显示库</td>
+<td>Adafruit GFX 1.13.0、Adafruit SSD1306 2.5.17、Adafruit BusIO 1.17.4。</td>
+</tr>
+<tr class="even">
+<td>建模与切片</td>
+<td>OpenSCAD 导出 STL，PrusaSlicer 2.9.7 切片。</td>
+</tr>
+</tbody>
+</table>
+<p>教师备课目录的 <code>upstream/</code> 存原文件，<code>patches/</code> 存修改对照，<code>verification/</code> 存串口日志和测试摘要。学生可从各章下载课程包和对应练习。用本机 Arduino IDE 或 CLI 复现时，记下板型和软件包版本，便于和容器的编译结果核对。</p>
+<p><a href="https://www.arduino.cc/en/software/">Arduino 软件</a> · <a href="https://docs.espressif.com/projects/arduino-esp32/en/latest/">Arduino-ESP32 文档</a> · <a href="https://openscad.org/documentation.html">OpenSCAD 文档</a> · <a href="https://help.prusa3d.com/category/prusaslicer_204">PrusaSlicer 文档</a> · <a href="https://github.com/davidmonterocrespo24/velxio">Velxio 源码</a></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script>
+// Keep the same TOC links available when the reading column fills the screen.
+document.addEventListener('DOMContentLoaded', () => {
+  const toc = document.querySelector('body.nav-sidebar #quarto-margin-sidebar #TOC');
+  if (!toc) return;
+  const disclosure = document.createElement('details');
+  disclosure.className = 'course-toc';
+  const summary = document.createElement('summary');
+  summary.textContent = toc.querySelector('#toc-title')?.textContent || 'On this page';
+  toc.before(disclosure);
+  disclosure.append(summary, toc);
+  const wide = window.matchMedia('(min-width: 1700px)');
+  const update = () => { disclosure.open = wide.matches; };
+  update();
+  wide.addEventListener('change', update);
+  toc.addEventListener('click', (event) => {
+    if (!wide.matches && event.target.closest('a')) disclosure.open = false;
+  });
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+document.querySelectorAll('main pre').forEach(pre=>{
+  if(pre.classList.contains('sourceCode')||!pre.querySelector('code'))return;
+  const wrapper=document.createElement('div'); wrapper.className='prompt-code';
+  pre.before(wrapper); wrapper.append(pre);
+  const copy=document.createElement('button'); copy.className='prompt-copy';
+  copy.type='button'; copy.textContent='复制'; copy.setAttribute('aria-label','复制这段内容');
+  const status=document.createElement('span'); status.className='visually-hidden'; status.setAttribute('aria-live','polite');
+  wrapper.append(copy,status);
+  copy.addEventListener('click',async()=>{
+    try {await navigator.clipboard.writeText(pre.querySelector('code').textContent);copy.textContent='已复制';status.textContent='内容已复制';}
+    catch {copy.textContent='请选中文字复制';status.textContent='自动复制不可用，请选中文字复制';}
+  });
+});
+const button=document.querySelector('.presentation-toggle');
+if(button)button.addEventListener('click',()=>{const active=document.body.classList.toggle('presentation');button.setAttribute('aria-pressed',String(active));button.textContent=active?'退出投影字号':'使用投影字号';});
+const contents=document.querySelector('body.classroom #TOC');
+if(button && contents){
+  const disclosure=document.createElement('details');
+  disclosure.className='classroom-toc';
+  const summary=document.createElement('summary');
+  summary.textContent='本页目录';
+  const list=document.createElement('ul');
+  for(const item of contents.querySelectorAll('a[data-scroll-target^="#"]')){
+    const row=document.createElement('li');
+    const link=document.createElement('a');
+    link.href=item.dataset.scrollTarget;
+    link.textContent=item.textContent.trim();
+    row.append(link);
+    list.append(row);
+  }
+  disclosure.append(summary,list);
+  button.after(disclosure);
+}
+});
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      const newWindowLabel = "(opens in a new tab)";
+      const newWindowNoteId = "quarto-ext-newwindow-label";
+      // Links reference one hidden label through aria-describedby, so the
+      // announcement never changes their accessible name.
+      var describeNewWindow = (link) => {
+        if (!window.document.getElementById(newWindowNoteId)) {
+          var newWindowNote = window.document.createElement("span");
+          newWindowNote.id = newWindowNoteId;
+          newWindowNote.hidden = true;
+          newWindowNote.textContent = newWindowLabel;
+          window.document.body.appendChild(newWindowNote);
+        }
+        var describedBy = (link.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean);
+        if (!describedBy.includes(newWindowNoteId)) {
+          describedBy.push(newWindowNoteId);
+          link.setAttribute("aria-describedby", describedBy.join(" "));
+        }
+      }
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+            describeNewWindow(link);
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"可滚动的代码","output":"可滚动的输出"};
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>系统思维与系统工程探究 · 智能桌宠</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link active" href="../reference/sources.html" aria-current="page">
+<p>来源与验证记录</p>
+</a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

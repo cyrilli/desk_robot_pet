@@ -1,0 +1,77 @@
+--- before.ino
++++ after.ino
+@@ -1,8 +1,10 @@
++// Tobi by Sam Zare, MIT. Upstream commit 428afbe3785887b91920e57dab453c5c4b815f24.
++// Course changes: address, wiring comment, input pulldown, diagnostic logs, arched happy eyes.
+ /*
+   Robot with Natural Animated Eyes - ESP32-C3 Mini + 0.96" OLED (SSD1306) + TTP223 Touch Module
+ 
+   Actual wiring based on your schematic:
+-   OLED  -> I2C  : SDA = GPIO21 (Green), SCL = GPIO20 (Blue), VDD = 3.3V (Red), GND (Black)
++   OLED  -> I2C  : SDA = GPIO20, SCL = GPIO21, VDD = 3.3V (Red), GND (Black)
+    Touch -> TTP223: I/O = GPIO10 (Orange), VCC = 3.3V, GND
+    Speaker (LOA) -> One terminal to GND, the other to GPIO9
+                     (Reserved for future sound effects - currently unused)
+@@ -47,7 +49,7 @@
+ #define SCREEN_WIDTH   128
+ #define SCREEN_HEIGHT  64
+ #define OLED_RESET     -1
+-#define SCREEN_ADDRESS // If nothing appears on the display, try changing the I2C address to 0x3D.
++#define SCREEN_ADDRESS 0x3C // If nothing appears on the display, try changing the I2C address to 0x3D.
+ 
+ const unsigned long IDLE_SWITCH_INTERVAL      = 15000; // Cycle through eye expressions every 15 seconds
+ const unsigned long TOUCH_EXPRESSION_DURATION = 3000;  // Duration of the Happy/Crying expression
+@@ -210,15 +212,14 @@
+ }
+ 
+ void drawHappyEyes(float blink) {
+-// Happy eyes: upward curve (like ^)
+-  display.fillRoundRect(15, 25, 40, 22, 12, SSD1306_WHITE);
+-  display.fillRect(15, 10, 40, 18, SSD1306_BLACK);
+-  display.fillRoundRect(73, 25, 40, 22, 12, SSD1306_WHITE);
+-  display.fillRect(73, 10, 40, 18, SSD1306_BLACK);
+-  if (blink > 0.3f) {
+-    int coverH = (int)(20 * blink);
+-    display.fillRect(13, 25, 44, coverH, SSD1306_BLACK);
+-    display.fillRect(71, 25, 44, coverH, SSD1306_BLACK);
++  const int halfWidth = 16;
++  const float archHeight = 14.0f * (1.0f - blink);
++  for (int dx = -halfWidth; dx <= halfWidth; ++dx) {
++    // The arch is highest in the middle. A full blink flattens it.
++    float position = (float)dx / halfWidth;
++    int y = 40 - lroundf(archHeight * (1.0f - position * position));
++    display.fillCircle(35 + dx, y, 2, SSD1306_WHITE);
++    display.fillCircle(93 + dx, y, 2, SSD1306_WHITE);
+   }
+ }
+ 
+@@ -300,6 +301,7 @@
+ 
+ void setMood(Mood m) {
+   currentMood = m;
++  Serial.printf("MOOD=%d t=%lu\n", (int)m, millis());
+   forceQuickBlink();  
+   scheduleNextLook();
+ }
+@@ -360,7 +362,12 @@
+ // ---------------------- Setup / Loop ----------------------
+ 
+ void setup() {
+-  pinMode(TOUCH_PIN, INPUT);
++  #if ARDUINO_USB_CDC_ON_BOOT
++  Serial.begin(115200);
++#else
++  Serial.begin(115200, SERIAL_8N1, 3, 4); // UART diagnostics avoid I2C pins 20/21.
++#endif
++  pinMode(TOUCH_PIN, INPUT_PULLDOWN); // Low at rest; button connects GPIO10 to 3V3 in simulation.
+   randomSeed(analogRead(0));
+ 
+   Wire.begin(SDA_PIN, SCL_PIN);
+@@ -379,6 +386,7 @@
+   scheduleNextBlink();
+   scheduleNextLook();
+   renderFrame();
++  Serial.println("TOBI READY: SDA20 SCL21 TOUCH10 OLED0x3C");
+ }
+ 
+ void loop() {

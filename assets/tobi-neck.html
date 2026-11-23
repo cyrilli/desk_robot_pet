@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tobi 双舵机头架</title>
+<style>
+*{box-sizing:border-box}html{color-scheme:light}body{margin:0;background:#faf9f5;color:#292e2d;font:16px/1.45 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}
+main{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(208px,1fr);align-items:center;padding:8px 18px;gap:16px}
+canvas{height:clamp(246px,55vh,340px);width:100%;display:block}
+aside{min-width:0}.axis{padding:8px 0;border-bottom:1px solid #d9d5cb}.axis:last-child{border:0}
+.axis strong{font-weight:650}.axis small{display:block;color:#505653;font:inherit;font-size:.9em}
+.swatch{width:11px;height:11px;border-radius:50%;display:inline-block;margin:0 8px 1px 0}.pitch{background:#a35535}.yaw{background:#287570}
+output{font:600 .85em ui-monospace,monospace;margin-left:7px;white-space:nowrap}
+.controls{display:flex;align-items:center;flex-wrap:wrap;gap:7px}.readout{min-height:1.5em;font-size:14px;color:#49514e;margin:7px 0 0}
+button{font:inherit;color:#2d3936;background:#fffefa;border:1px solid #aeb5aa;border-radius:4px;padding:5px 11px;cursor:pointer}
+button:hover:not(:disabled),button:focus-visible{border-color:#387167;background:#eef3ee}
+button:focus-visible,a:focus-visible{outline:2px solid #387167;outline-offset:2px}button[aria-pressed=true],button[aria-pressed=true]:hover:not(:disabled),button[aria-pressed=true]:focus-visible{color:white;background:#355d56;border-color:#355d56}button:disabled{opacity:.55;cursor:default}
+.panel{border-top:1px solid #d9d5cb;padding:10px 18px}.init{margin:0;min-height:27px;color:#48514e;font-size:14px}
+.fallback{margin:12px 18px}.note{margin:0;font-size:13px;color:#59605a}.live:empty{display:none}
+@media(max-width:560px){main{grid-template-columns:1fr;gap:0;padding:2px 12px 8px}canvas{height:clamp(215px,38vh,250px)}aside{display:grid;grid-template-columns:1fr 1fr;gap:12px}.axis{border:none;padding:4px 0}.axis strong{font-size:14.5px}.axis small{font-size:12.5px}.swatch{width:8px;height:8px;margin-right:5px}output{display:block;margin:1px 0 2px 13px;font-size:13px}.panel{padding:8px 12px}.controls{gap:6px}button{font-size:14px}}
+</style>
+<main>
+  <canvas id="neck-view" role="img" aria-label="Tobi 头盔的双轴结构方案。点头时头盔绕左右横轴转动，摇头时整个头架绕底座竖轴转动。"></canvas>
+  <aside aria-label="舵机的位置与信号">
+    <div class="axis"><strong><i class="swatch pitch"></i>俯仰舵机</strong><output id="pitch-value" aria-label="俯仰脉宽">1500 µs</output><small>装在 U 形架侧面，带头盔点头。</small></div>
+    <div class="axis"><strong><i class="swatch yaw"></i>偏航舵机</strong><output id="yaw-value" aria-label="偏航脉宽">1500 µs</output><small>固定在底座，带整个 U 形架摇头。</small></div>
+  </aside>
+</main>
+<section class="panel" aria-label="固件记录回放">
+  <div class="controls"><button type="button" id="nod" disabled aria-pressed="false">回放单击 · 点头</button><button type="button" id="shake" disabled aria-pressed="false">回放双击 · 摇头</button><button type="button" id="center" disabled>复位</button></div>
+  <p class="readout" role="status" id="record">正在读取头盔模型和固件记录…</p>
+  <p class="note">结构方案。脉宽来自固件，模型转角为示意，实物需标定。</p>
+</section>
+<div id="neck-live" class="live"></div>
+<noscript><p class="fallback">启用 JavaScript 可播放模型。也可在 OpenSCAD 打开 <a href="../materials/tobi-neck.scad">双轴头架源码</a>，调整 pitch 或 yaw 检查转动关系。</p></noscript>
+<script src="tobi-neck-parts.js"></script>
+<script src="tobi-neck-motion.js"></script>
+<script src="tobi-neck-live.js" defer></script>
+</html>

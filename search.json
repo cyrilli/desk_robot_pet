@@ -1,0 +1,1331 @@
+[
+  {
+    "objectID": "reference/prompts.html",
+    "href": "reference/prompts.html",
+    "title": "给 coding agent 的请求示例",
+    "section": "",
+    "text": "在 coding agent 中打开解压后的 course-kit/。选一段和手头任务对应的请求，把方括号中的内容换成你的文件名、测量值或日志。"
+  },
+  {
+    "objectID": "reference/prompts.html#读懂触摸信号",
+    "href": "reference/prompts.html#读懂触摸信号",
+    "title": "给 coding agent 的请求示例",
+    "section": "读懂触摸信号",
+    "text": "读懂触摸信号\n请读 README.md、hardware/wiring.svg 和 firmware/original/original.ino。\n列出开发板、屏幕、触摸模块的引脚和固件用到的库，注明依据来自哪个文件。\n从一次按下和松开开始，跟踪到开心表情被画出的那一行。\n如果接线图、注释和代码的引脚不同，请指出具体位置。"
+  },
+  {
+    "objectID": "reference/prompts.html#修改一种行为",
+    "href": "reference/prompts.html#修改一种行为",
+    "title": "给 coding agent 的请求示例",
+    "section": "修改一种行为",
+    "text": "修改一种行为\n在 [草图副本路径] 中，把单击后的开心表情从 3 秒延长到 5 秒。\n双击后的哭泣仍为 3 秒，手势识别窗口保持 400 毫秒。\n先找出原来哪些行为共用同一个计时参数，再修改副本并编译。\n给出单击、双击各一次的检查步骤，说明要对照哪两条串口记录。"
+  },
+  {
+    "objectID": "reference/prompts.html#为头盔设计支架",
+    "href": "reference/prompts.html#为头盔设计支架",
+    "title": "给 coding agent 的请求示例",
+    "section": "为头盔设计支架",
+    "text": "为头盔设计支架\n请打开 [SCAD 源文件]，参考 3d-models/Helmet1.stl 和同目录的底板模型。\n[尺寸表路径] 记录了 OLED 电路板、显示区、排针和面窗的位置，单位都是毫米。\n为这块 OLED 设计从头盔底部装入的托架。先列出还缺的安装尺寸，等我实测。\n尺寸齐备后分别导出托架和一小段能试插 PCB 的夹槽。标出仍需试装的配合位置。"
+  },
+  {
+    "objectID": "reference/prompts.html#增加硬件模块",
+    "href": "reference/prompts.html#增加硬件模块",
+    "title": "给 coding agent 的请求示例",
+    "section": "增加硬件模块",
+    "text": "增加硬件模块\n我要增加 [模块的完整型号]，厂商规格见 [文件或链接]。\n请结合我的 [开发板型号和接线表]，核对所需电压、电流、接口和可用引脚。\n用 [器件安装位置和实测尺寸] 检查模块和插线是否有空间。\n先写一个能单独测试模块的小程序，说明应观察到什么。\n单独测试通过后，再接入桌宠程序，同时更新接线表、物料清单和整机测试步骤。"
+  },
+  {
+    "objectID": "reference/prompts.html#核对修改结果",
+    "href": "reference/prompts.html#核对修改结果",
+    "title": "给 coding agent 的请求示例",
+    "section": "核对修改结果",
+    "text": "核对修改结果\n列出本次改动的文件，并给我看具体的代码差异。\n列出实际执行的编译或测试命令、所用板型和观察到的输出。\n标明还有哪些行为仅根据代码推断，哪些尺寸或动作需要实物检查。"
+  },
+  {
+    "objectID": "reference/index.html",
+    "href": "reference/index.html",
+    "title": "排错与资料",
+    "section": "",
+    "text": "屏幕没有亮、触摸后表情不变、舵臂停在原位，这三种现象要查的地方不同。记录你使用的板型、做过的操作和第一条报错，再从对应的现象查起。按现象排错\n\n\n\n需要做什么\n去哪里看\n\n\n\n\n下载程序、接线图和三个头盔零件\n学生课程包\n\n\n在电脑上运行 Tobi，或看两个舵机怎样动作\nVelxio 工程与操作步骤\n\n\n理解 GPIO、I²C、PWM、切片等词语\n常用术语\n\n\n请 coding agent 读代码、改模型或分析报错\n请求示例\n\n\n核对原项目的作者、课程使用的版本和测试结果\n来源与验证记录"
+  },
+  {
+    "objectID": "reference/sources.html",
+    "href": "reference/sources.html",
+    "title": "项目来源与测试记录",
+    "section": "",
+    "text": "这里列出的结果对应 2026 年 11 月 23 日的课程文件。基础程序在 ESP32-C3 仿真中运行。课堂上的双舵机画布使用经典 ESP32，便于直接观察两只舵臂。实物烧录、打印试装和带负载运动仍需验证。"
+  },
+  {
+    "objectID": "reference/sources.html#原项目与许可",
+    "href": "reference/sources.html#原项目与许可",
+    "title": "项目来源与测试记录",
+    "section": "原项目与许可",
+    "text": "原项目与许可\n\n\n\n项目\n本课使用的内容\n许可及核对范围\n\n\n\n\nTobi\n桌宠固件、照片、接线资料和三个 STL。README 的作者为 Sam Zare，许可证署名 SRT。\nMIT，课程包保留原许可证。课程固件已编译并在仿真中运行。\n\n\nLucas\n声音、情绪和休眠行为的参考项目。源码使用 128 × 128 的 SH1107 显示驱动。\nGPL-3.0，已核对资料和源码，尚未运行。\n\n\nTiny Engineer\n多舵机机构及电脑控制的参考项目。\n软件 MIT，硬件设计 CERN-OHL-S-2.0，已核对文档，尚未装配或运行。\n\n\n\n课程包 3d-models/ 中的三个文件取自 Tobi 项目的同一次提交。分发自己的版本时，保留相应项目的来源和许可证，并记下自己的修改。Tobi 对应提交"
+  },
+  {
+    "objectID": "reference/sources.html#tobi-基础固件与接线",
+    "href": "reference/sources.html#tobi-基础固件与接线",
+    "title": "项目来源与测试记录",
+    "section": "Tobi 基础固件与接线",
+    "text": "Tobi 基础固件与接线\n课程包中的 firmware/original/original.ino 是讲义使用的基础版本。它按单击、双击切换表情，参数和接线如下。逐行修改记录保存在补丁里。下载课程修正补丁\n\n\n\n\n\n\n\n位置\n课程文件中的设置\n\n\n\n\n屏幕地址\n在 SCREEN_ADDRESS 中填入虚拟 OLED 的地址 0x3C。接实物时先扫描实际地址。\n\n\n数据线和触摸输入\n文件头、引脚定义和接线图使用同一组引脚。OLED 接 SDA20、SCL21，TTP223 的 OUT 接 GPIO10。\n\n\nGPIO10 空闲电平\n设为 INPUT_PULLDOWN，仿真按钮按下时输入变高。实物 TTP223 用高电平有效、非锁存模式。\n\n\n串口记录\n启动时打印 TOBI READY，切换表情时输出 MOOD 和以毫秒为单位的 t。\n\n\n笑眼\ndrawHappyEyes() 为每只眼睛画一道向上拱起的弧线，眨眼时弧线压低。\n\n\nC3 的诊断串口\n默认 UART0 的引脚与课程 I²C 引脚重叠。使用板载原生 USB 时，在 IDE 中启用 USB CDC On Boot。使用非 CDC 配置时，程序将诊断 UART 映射到 RX3、TX4。\n\n\n\n课程接线图采用 USB 供电，只接开发板、屏幕和触摸模块。原图里的电池、充电模块和发声器件不参与这套电路。实物使用课程包的 hardware/wiring.svg。"
+  },
+  {
+    "objectID": "reference/sources.html#固件测试",
+    "href": "reference/sources.html#固件测试",
+    "title": "项目来源与测试记录",
+    "section": "固件测试",
+    "text": "固件测试\n以下六份 ESP32-C3 固件均已编译。original、happy5、focus 和 head_motion 还在 QEMU 中接收了 GPIO10 的输入，并产生了相应的串口与屏幕数据。\n\n\n\n\n\n\n\n程序\n记录的结果\n\n\n\n\noriginal\n单击的开心表情持续 3001 ms，双击的哭泣表情持续 3000 ms。恢复普通眼睛 15000 ms 后，空闲表情自动轮换。该工程也在 Velxio 浏览器编辑器中导入、编译并运行。\n\n\nhappy5\n开心持续 5000 ms，哭泣持续 3001 ms。\n\n\nfocus\n长按后进入 RUNNING，松手后继续计时。再次触摸可以取消。第二轮在 25001 ms 后进入 DONE，触摸后回到 IDLE。\n\n\nhardware_check\n编译成功。实际屏幕地址和触摸电平需要连接自己的开发板读取。\n\n\nservo_check\n编译成功。舵机的供电和机械负载需在实物上测试。\n\n\nhead_motion\n单击时俯仰通道（GPIO5）占空比从中位 7.5% 变为 7.9% 后回中。双击时水平通道（GPIO6）依次为 7.0%、8.0%、7.5%。两种表情各持续 3001 ms。\n\n\n\n连续输入。 C3 在 627 ms 时开始摇头，1211 ms 时识别到单击，屏幕随即切换到笑眼。1229 ms 时水平轴收到回中命令，1486 ms 时程序又识别到双击。它记下最新的摇头动作，替换仍在等候的点头。到 1529 ms，水平轴已回中停留 300 ms，下一次摇头才开始。后来空闲轮换到笑眼时，两路控制信号都保持在中位。双舵机源码 · 仿真复核步骤\nVelxio 双舵机画布。 经典 ESP32 工程沿用 C3 版的手势判断、眼睛绘制和动作时序，按板型调整了接线与串口。仿真记录确认两路输出分别接到 GPIO25、GPIO26。单击时通道 0 的占空比从 7.5% 变到 7.9% 后回中。双击时通道 1 依次为 7.0%、8.0%、7.5%。同次运行记录了 4116 次屏幕 I²C 事务。把点头偏移从 80 微秒改为 60 微秒再运行，GPIO25 的目标由 1580 变为 1560 微秒，GPIO26 的摇头序列正常。下载双舵机画布工程\n基础表情回放根据 QEMU 写入 SSD1306 的 I²C 数据生成。双舵机课堂实录直接记录 Velxio 编辑器显示的 OLED 和舵臂。舵臂在画布中的转角取决于仿真模型，实物转角、负载和供电余量需上机测量。"
+  },
+  {
+    "objectID": "reference/sources.html#头盔支架与打印试片",
+    "href": "reference/sources.html#头盔支架与打印试片",
+    "title": "项目来源与测试记录",
+    "section": "头盔、支架与打印试片",
+    "text": "头盔、支架与打印试片\n\n项目自带的零件。 Helmet1.stl 是有面窗、底部敞开的头壳。Core .stl 是带两侧立架的底板，按 STL 原有坐标放置时，它与头壳底沿对齐。Core 2.stl 是小折板，作者没有说明其固定用途。照片和项目说明能确认面窗显示、头部触摸，电路板的具体固定位置还需要结合器件试装。三个原始零件\n双轴头架。 U 形架和桌面底座是为点头、摇头设计的课程部件。模型可预览俯仰和水平转动，并可单独渲染 U 形架与底座。舵盘、安装耳和固定点的尺寸仍需用自己的器件核对。双轴结构\n名牌和方形外壳练习。 名牌、底壳、盖子与窗口试片都已从对应 SCAD 导出 STL。名牌的图取自 PrusaSlicer 切片中的三层打印路径。case.scad 用来练开孔和盒盖配合。assembly-case.scad 用三组导槽、挡块、USB 开口和触摸区展示电路板怎样装入。把试片窗口从 22 mm 加宽到 23 mm 后，已核对窗口中心和导槽位置。以上模型均未打印，实际装配还需检查板厚、走线空间和隔壳触摸灵敏度。选做方形外壳的装配图"
+  },
+  {
+    "objectID": "reference/sources.html#复现环境",
+    "href": "reference/sources.html#复现环境",
+    "title": "项目来源与测试记录",
+    "section": "复现环境",
+    "text": "复现环境\n\n\n\n\n\n\n\n项目\n记录的版本或设置\n\n\n\n\nVelxio\n本地容器镜像 sha256:2f3c65c4ce11fc681e79758fa6edce43f7b5d052b2922b1d8ae570794792aeef，使用 QEMU 运行固件。\n\n\n编译目标\nESP32-C3 为 esp32:esp32:esp32c3，课堂经典 ESP32 为 esp32:esp32:esp32。镜像内为 Arduino-ESP32 3.3.10、ESP-IDF 5.5.4。\n\n\n显示库\nAdafruit GFX 1.13.0、Adafruit SSD1306 2.5.17、Adafruit BusIO 1.17.4。\n\n\n建模与切片\nOpenSCAD 导出 STL，PrusaSlicer 2.9.7 切片。\n\n\n\n教师备课目录的 upstream/ 存原文件，patches/ 存修改对照，verification/ 存串口日志和测试摘要。学生可从各章下载课程包和对应练习。用本机 Arduino IDE 或 CLI 复现时，记下板型和软件包版本，便于和容器的编译结果核对。\nArduino 软件 · Arduino-ESP32 文档 · OpenSCAD 文档 · PrusaSlicer 文档 · Velxio 源码"
+  },
+  {
+    "objectID": "start.html",
+    "href": "start.html",
+    "title": "开始制作",
+    "section": "",
+    "text": "第一次运行 Tobi，先等屏幕显示普通眼睛，再摸一下，看它换成笑眼。手边有开发板就接实物，只有电脑也可以在 Velxio 做同一个实验。",
+    "crumbs": [
+      "首页",
+      "开始制作"
+    ]
+  },
+  {
+    "objectID": "start.html#打开课程包",
+    "href": "start.html#打开课程包",
+    "title": "开始制作",
+    "section": "打开课程包",
+    "text": "打开课程包\n解压课程包，在编辑器或 coding agent 中打开含有 README.md 的 course-kit/ 文件夹。保存一份刚解压的程序，后面在副本上做修改。下载学生课程包\n\n\n\n\n\n\n\n\n目录\n里面有什么\n什么时候打开\n\n\n\n\nhardware/\nbom.csv 器件清单、wiring.svg 接线图\n买器件、查引脚或接线时\n\n\nfirmware/\nhardware_check 自检程序、original 表情程序\n检查实物，或阅读和修改手势代码时\n\n\nsimulation/\ntobi-original.vlx 基础电路工程\n在 Velxio 里运行 Tobi 时\n\n\n3d-models/\nHelmet1.stl 头壳、Core .stl 底板、Core 2.stl 小折板\n观察头盔和面窗、为器件设计支架时",
+    "crumbs": [
+      "首页",
+      "开始制作"
+    ]
+  },
+  {
+    "objectID": "start.html#第一次运行",
+    "href": "start.html#第一次运行",
+    "title": "开始制作",
+    "section": "第一次运行",
+    "text": "第一次运行\n用电脑仿真。 在 Velxio 的 Open project 中选择 simulation/tobi-original.vlx，载入后点 Run。等 OLED 亮起，单击绿色 Touch，看屏幕换成笑眼。等眼睛恢复后，快速双击，看眼睛下方是否出现泪滴。暂时没有可用的仿真环境时，可以先看讲义里的运行回放。打开 Velxio 官方编辑器 · Velxio 导入步骤 · 触摸回放\n用实物运行。 按课程接线图，在断电时接好 ESP32-C3、OLED 和 TTP223。先上传 hardware_check.ino，从串口确认能找到屏幕，并且触摸时出现 TOUCH=1、松开时出现 TOUCH=0。再上传 original.ino，用同样两种手势检查屏幕。核对器件 · 设置 Arduino IDE · 接线、自检与烧录",
+    "crumbs": [
+      "首页",
+      "开始制作"
+    ]
+  },
+  {
+    "objectID": "start.html#从读程序到改头盔",
+    "href": "start.html#从读程序到改头盔",
+    "title": "开始制作",
+    "section": "从读程序到改头盔",
+    "text": "从读程序到改头盔\n\n\n\n学习内容\n制作步骤\n\n\n\n\n读懂手势\n从 GPIO10 的触摸信号找到判断单击和双击的函数，再看程序怎样把眼睛画到屏幕上。Tobi 的组成 · 用 coding agent 读代码\n\n\n修改行为\n先把笑眼的持续时间改为 5 秒，再试着用长按启动一个可取消的学习计时器。修改表情时长 · 学习提醒\n\n\n改造结构\n先逐件看头壳、底板和小折板。为自己的屏幕做托架时，量面窗和电路板，先打印一小段托架试装。三个头盔零件 · 测量与建模 · 打印与装配\n\n\n联合调试代码和结构\n让单击带动俯仰舵机，双击带动水平舵机。先在 Velxio 看两只舵臂，再看装上头盔后各自带动哪些零件。双舵机课堂工程",
+    "crumbs": [
+      "首页",
+      "开始制作"
+    ]
+  },
+  {
+    "objectID": "start.html#记录自己的修改",
+    "href": "start.html#记录自己的修改",
+    "title": "开始制作",
+    "section": "记录自己的修改",
+    "text": "记录自己的修改\n每次改动记下板型、程序版本、操作和观察到的结果。例如，测笑眼的时长时，可以贴出进入开心表情和恢复普通眼睛的两条串口记录，并注明来自仿真还是实物。做个人设计时，这些记录能说明你为什么保留或调整某个方案。个人设计 · 制作记录模板",
+    "crumbs": [
+      "首页",
+      "开始制作"
+    ]
+  },
+  {
+    "objectID": "extensions/enclosure.html",
+    "href": "extensions/enclosure.html",
+    "title": "可拆名牌的插槽与试装",
+    "section": "",
+    "text": "课程提供了一块可编辑的名牌。要把名牌装在 Tobi 的头壳上，可以在名牌背面加插片，再为它设计一个固定在壳上的槽座。先在实物上选位置，留出面窗、触摸区、USB 插头和拆下底板所需的空间。名牌源文件 · 头壳与器件测量",
+    "crumbs": [
+      "首页",
+      "继续尝试",
+      "可拆名牌的插槽与试装"
+    ]
+  },
+  {
+    "objectID": "extensions/enclosure.html#确定插入方向",
+    "href": "extensions/enclosure.html#确定插入方向",
+    "title": "可拆名牌的插槽与试装",
+    "section": "确定插入方向",
+    "text": "确定插入方向\n把名牌贴在预选位置，沿计划的方向移入和取出，确认不会碰到底板或挡住手指。画出连接处的剖面，标出壳壁、槽座、插片以及固定槽座的位置。如果选择螺钉固定，还要量螺钉末端到内部电路板的距离。",
+    "crumbs": [
+      "首页",
+      "继续尝试",
+      "可拆名牌的插槽与试装"
+    ]
+  },
+  {
+    "objectID": "extensions/enclosure.html#用试片选槽宽",
+    "href": "extensions/enclosure.html#用试片选槽宽",
+    "title": "可拆名牌的插槽与试装",
+    "section": "用试片选槽宽",
+    "text": "用试片选槽宽\n假设插片宽 10.0 mm，槽宽 10.4 mm，插片居中时两侧各留 0.2 mm。可以请 coding agent 把插片宽度和单侧间隙设为 OpenSCAD 参数，再生成一块带三个槽的局部试片。\n\n\n\n插片宽度\n单侧间隙\n槽宽\n\n\n\n\n10.0 mm\n0.2 mm\n10.4 mm\n\n\n10.0 mm\n0.3 mm\n10.6 mm\n\n\n10.0 mm\n0.4 mm\n10.8 mm\n\n\n\n给各槽标好尺寸，使用与最终零件相同的材料和打印方向。用同一块插片逐槽试装，记下哪个需要用力、哪个插到底仍会晃动。把既能顺畅插入又能稳定定位的间隙用于槽座，再打印整件。",
+    "crumbs": [
+      "首页",
+      "继续尝试",
+      "可拆名牌的插槽与试装"
+    ]
+  },
+  {
+    "objectID": "extensions/enclosure.html#装上名牌后检查",
+    "href": "extensions/enclosure.html#装上名牌后检查",
+    "title": "可拆名牌的插槽与试装",
+    "section": "装上名牌后检查",
+    "text": "装上名牌后检查\n反复取下和装回名牌，检查槽口有无裂纹或松动。接上 USB，观察面窗内的眼睛是否完整，再触摸预定位置，确认安装后仍能触发表情。切片与装配",
+    "crumbs": [
+      "首页",
+      "继续尝试",
+      "可拆名牌的插槽与试装"
+    ]
+  },
+  {
+    "objectID": "extensions/interaction.html",
+    "href": "extensions/interaction.html",
+    "title": "表情绘制与手势识别",
+    "section": "",
+    "text": "打开 firmware/original/original.ino。在 renderFrame() 中找到开心状态，再读它调用的 drawHappyEyes()。两道笑弧的中间比端点高。屏幕左上角是 (0, 0)，向下时 y 增大，因此弧顶的 y 坐标比两端小。128 × 64 的屏幕可用的 x 坐标为 0 至 127，y 坐标为 0 至 63。\n可以用空心眼眶和偏向一侧的瞳孔画出视线的方向。在工作副本里，给 coding agent 一组可以在屏幕上核对的尺寸。\n单击后，我想让两只眼睛向右看。请在 original.ino 增加 drawMyEyes()。\n左右眼的中心分别是 (38,32) 和 (90,32)，各画一个半径为 10 像素的空心圆。\n每只眼睛里画一个半径为 3 像素的实心瞳孔，圆心在眼眶中心右侧 4 像素。\n在 renderFrame() 的开心分支调用它。沿用现有的手势和计时。\n运行后单击，检查两个瞳孔是否都在眼眶中心的右侧。等 3 秒，观察画面恢复，再双击确认仍会显示泪滴。",
+    "crumbs": [
+      "首页",
+      "继续尝试",
+      "表情绘制与手势识别"
+    ]
+  },
+  {
+    "objectID": "extensions/interaction.html#在屏幕上画一双向右看的眼睛",
+    "href": "extensions/interaction.html#在屏幕上画一双向右看的眼睛",
+    "title": "表情绘制与手势识别",
+    "section": "",
+    "text": "打开 firmware/original/original.ino。在 renderFrame() 中找到开心状态，再读它调用的 drawHappyEyes()。两道笑弧的中间比端点高。屏幕左上角是 (0, 0)，向下时 y 增大，因此弧顶的 y 坐标比两端小。128 × 64 的屏幕可用的 x 坐标为 0 至 127，y 坐标为 0 至 63。\n可以用空心眼眶和偏向一侧的瞳孔画出视线的方向。在工作副本里，给 coding agent 一组可以在屏幕上核对的尺寸。\n单击后，我想让两只眼睛向右看。请在 original.ino 增加 drawMyEyes()。\n左右眼的中心分别是 (38,32) 和 (90,32)，各画一个半径为 10 像素的空心圆。\n每只眼睛里画一个半径为 3 像素的实心瞳孔，圆心在眼眶中心右侧 4 像素。\n在 renderFrame() 的开心分支调用它。沿用现有的手势和计时。\n运行后单击，检查两个瞳孔是否都在眼眶中心的右侧。等 3 秒，观察画面恢复，再双击确认仍会显示泪滴。",
+    "crumbs": [
+      "首页",
+      "继续尝试",
+      "表情绘制与手势识别"
+    ]
+  },
+  {
+    "objectID": "extensions/interaction.html#区分长按和单击",
+    "href": "extensions/interaction.html#区分长按和单击",
+    "title": "表情绘制与手势识别",
+    "section": "区分长按和单击",
+    "text": "区分长按和单击\n若要加一种长按手势，需要先决定程序何时确认单击。课程固件在松手时才记录一次短触。要识别长按，还需要在按下时记下时间。持续按满 1 秒时发出一次长按事件，并记下这次按压已经处理。随后松手时跳过短触判断。学习提醒中的长按处理\n分别试一次短触、快速双击、按住略短于 1 秒和超过 1 秒。把串口中的事件与手指动作对照，尤其注意按住数秒时只出现一次长按，松手后也没有额外的单击。最后留出一段空闲时间，观察自动轮换是否继续。",
+    "crumbs": [
+      "首页",
+      "继续尝试",
+      "表情绘制与手势识别"
+    ]
+  },
+  {
+    "objectID": "extensions/servo.html",
+    "href": "extensions/servo.html",
+    "title": "用两个舵机实现点头和摇头",
+    "section": "",
+    "text": "单击 Tobi，屏幕显示笑眼，头部向前点一下再回中。双击时屏幕出现泪滴，头部向两侧转动再回中。下载双舵机工程，用官方编辑器的 Open project 载入，点 Run，试这两种手势。上方的舵臂负责点头，下方的舵臂负责摇头。下载双舵机画布工程 · 打开 Velxio 官方编辑器 · 课堂操作演示",
+    "crumbs": [
+      "首页",
+      "继续尝试",
+      "用两个舵机实现点头和摇头"
+    ]
+  },
+  {
+    "objectID": "extensions/servo.html#从触摸到舵机信号",
+    "href": "extensions/servo.html#从触摸到舵机信号",
+    "title": "用两个舵机实现点头和摇头",
+    "section": "从触摸到舵机信号",
+    "text": "从触摸到舵机信号\n程序确认手势后，triggerExpression() 切换表情，requestMotion() 安排相应的动作。只有触摸触发的笑眼会带来点头。空闲时即使轮换到同一幅笑眼，头部也保持静止。\n舵机根据控制脉冲的高电平时长选择目标位置。示例程序用 ESP32 的 LEDC 外设以 14 位分辨率产生脉冲，每 20 ms 发一个脉冲（50 Hz），中位设为 1500 µs。观察舵臂时，也可以在串口监视器里核对程序依次发出了哪些目标。\n\n\n\n手势\n俯仰轴的目标脉宽\n水平轴的目标脉宽\n\n\n\n\n单击\n1580 → 1500 µs\n保持中位\n\n\n双击\n保持中位\n1400 → 1600 → 1500 µs\n\n\n\n主循环反复调用 updateMotion(now)。每个目标保持约 300 ms，这期间程序仍会读取触摸、刷新屏幕。当前动作中如果又识别出手势，屏幕马上更新，程序记下最新的待执行动作。当前轴回中并停满 300 ms 后，才轮到下一次动作。",
+    "crumbs": [
+      "首页",
+      "继续尝试",
+      "用两个舵机实现点头和摇头"
+    ]
+  },
+  {
+    "objectID": "extensions/servo.html#在-velxio-中改变动作速度",
+    "href": "extensions/servo.html#在-velxio-中改变动作速度",
+    "title": "用两个舵机实现点头和摇头",
+    "section": "在 Velxio 中改变动作速度",
+    "text": "在 Velxio 中改变动作速度\n课堂画布采用 ESP32 DevKit V1。在工程的 head_motion_canvas.ino 里找到 MOTION_STEP_MS。可以请 coding agent 将它从 300 改为 450，保留两轴各自的脉宽，再把改好的代码放回工程运行。\n单击后，比较串口中两条俯仰轴记录（GPIO25）的 t= 时间，差值应约为 450 ms。双击后，水平轴（GPIO26）的三条记录之间也应各相差约 450 ms。两只舵臂经过的位置相同，从一个目标到下一个目标的间隔变长了。仿真操作与记录",
+    "crumbs": [
+      "首页",
+      "继续尝试",
+      "用两个舵机实现点头和摇头"
+    ]
+  },
+  {
+    "objectID": "extensions/servo.html#将线路接到-esp32-c3",
+    "href": "extensions/servo.html#将线路接到-esp32-c3",
+    "title": "用两个舵机实现点头和摇头",
+    "section": "将线路接到 ESP32-C3",
+    "text": "将线路接到 ESP32-C3\n课程实物使用 ESP32-C3。准备接线时，先看开发板的型号，再对照相应一列。OLED 和触摸模块由开发板的 3V3 与 GND 供电。ESP32-C3 双舵机固件\n\n\n\n信号\nVelxio 课堂画布 · ESP32 DevKit V1\n课程实物 · ESP32-C3\n\n\n\n\n触摸输入\nGPIO27（Touch 按钮）\nGPIO10（TTP223 的 OUT）\n\n\nOLED 的 SDA、SCL\nGPIO21、GPIO22\nGPIO20、GPIO21\n\n\n俯仰舵机信号\nGPIO25\nGPIO5\n\n\n水平舵机信号\nGPIO26\nGPIO6\n\n\n\n开发板用 USB 供电。两只舵机的电源正极接外部稳压电源正极，舵机地线、电源负极和开发板 GND 连在一起，让控制脉冲有共同的电压参考。选择电源时查两只舵机的额定电压和堵转电流，也要核对信号电平和允许的脉宽。初次测试可逐个将舵机的信号线接到 GPIO5，用自检程序检查空载回中。每次改接线前先断电。单舵机自检程序 · Adafruit 舵机供电图例",
+    "crumbs": [
+      "首页",
+      "继续尝试",
+      "用两个舵机实现点头和摇头"
+    ]
+  },
+  {
+    "objectID": "extensions/servo.html#将两个转轴装到头壳下方",
+    "href": "extensions/servo.html#将两个转轴装到头壳下方",
+    "title": "用两个舵机实现点头和摇头",
+    "section": "将两个转轴装到头壳下方",
+    "text": "将两个转轴装到头壳下方\n先看头壳 Helmet1.stl、底板 Core .stl 和小折板 Core 2.stl。头架保留了 Tobi 的头形。水平舵机固定在桌面底座上，绕竖直轴带动上层转向。上层的 U 形架托住头部，一侧舵机绕水平轴带动头部俯仰，对侧用同轴支点承托。可以在 OpenSCAD 中分别改变 pitch 和 yaw，检查哪些零件随各轴运动，再看低头同时转向时壳体与底座之间的空间。课程包的三个零件 · 双轴头架模型\n装舵盘前先让两轴空载回中，再断电安装。装好支架后先逐轴小幅转动，接着装入屏幕、传感器和开发板，观察转到两侧时线束是否被拉紧、头壳是否碰到底座。课堂 Velxio 画布可观察两只舵臂，ESP32-C3 仿真也可核对固件发出的控制脉冲。带上整个头部后的实际转角、能否回中及供电是否稳定，需要用装好的实物测量。",
+    "crumbs": [
+      "首页",
+      "继续尝试",
+      "用两个舵机实现点头和摇头"
+    ]
+  },
+  {
+    "objectID": "classroom/demo.html",
+    "href": "classroom/demo.html",
+    "title": "Tobi 桌宠的工作原理与双舵机改造",
+    "section": "",
+    "text": "使用投影字号"
+  },
+  {
+    "objectID": "classroom/demo.html#original",
+    "href": "classroom/demo.html#original",
+    "title": "Tobi 桌宠的工作原理与双舵机改造",
+    "section": "Tobi 实物与仿真 0–3 分钟",
+    "text": "Tobi 实物与仿真 0–3 分钟\n仿真回放中有两次操作。第 2 秒附近，单击松手后经过短暂延迟，两只眼睛变成向上拱起的笑弧。第 8 秒附近，快速双击，第二次松手时眼睛下方出现泪滴。\n\n\n\nSam Zare 制作的 Tobi，两只眼睛共用一块小屏幕。\n\n\n\nVelxio 仿真回放。画面下方的 HIGH 表示按钮按着，LOW 表示按钮松开。\n\n\n\n\nVelxio 仿真操作\n\n下载 Tobi 工程，打开官方编辑器，点文件区的 Open project，选中下载的 .vlx 文件，再点 Load → Run。屏幕亮起后，单击绿色 Touch 按钮，再快速双击，观察两种表情。回放末尾还记录了空闲时的自动表情切换。\n\n\n\nVelxio 里的开发板、OLED、绿色 Touch 按钮和串口面板。\n\n\n下载 Tobi 仿真工程 · 打开 Velxio 官方编辑器 · 仿真操作说明"
+  },
+  {
+    "objectID": "classroom/demo.html#inside",
+    "href": "classroom/demo.html#inside",
+    "title": "Tobi 桌宠的工作原理与双舵机改造",
+    "section": "硬件和接线 3–6 分钟",
+    "text": "硬件和接线 3–6 分钟\nTTP223 触摸模块检测手指是否接触，ESP32-C3 开发板根据触摸信号判断手势，再将对应的表情画面发给 OLED 屏幕。\n\n\n\n从右下角的触摸模块出发，沿 OUT 线找到开发板上的 10 号引脚，再沿 20、21 号引脚找到右上角的屏幕。\n\n\n\n触摸信号。 模块的 OUT 引脚接到开发板的 GPIO10。手指接触时，OUT 电压约为 3.3 V，开发板读到高电平（HIGH）。松手后电压降到约 0 V，开发板读到低电平（LOW）。仿真按钮也输出这两种电平。\n屏幕通信。 屏幕通过 I²C 接收画面。GPIO20 接屏幕的数据线 SDA，GPIO21 接时钟线 SCL，用于同步数据传输。\n供电与共地。 USB 给开发板供电，板上的 3V3 给两块模块供电。三个部件的 GND 连在一起，才有共同的电压基准。接实物时先断电，按引脚名接线。"
+  },
+  {
+    "objectID": "classroom/demo.html#principle",
+    "href": "classroom/demo.html#principle",
+    "title": "Tobi 桌宠的工作原理与双舵机改造",
+    "section": "从触摸到表情 6–10 分钟",
+    "text": "从触摸到表情 6–10 分钟\n图中每一次从高电平降到低电平，都对应一次松手。开发板记录第一次松手的时间，再根据第二次松手是否出现在 400 毫秒内，决定显示哪种表情。\n\n  \n    TTP223 OUT → ESP32-C3 GPIO10\n    手指碰到时读到 1（高电平），松开后回到 0（低电平）。波形从左向右读。\n  \n  \n    \n      触摸一次\n      \n        \n        10\n        \n        第一次松手\n      \n    \n    \n    \n      开发板判为单击\n      第一次松手后已超过 400 毫秒，仍没有第二次松手。\n    \n    \n    \n      \n      OLED 显示笑眼\n    \n  \n  \n    \n      连续触摸两次\n      \n        \n        10\n        \n        \n        第一次松手第二次松手\n      \n    \n    \n    \n      开发板判为双击\n      两次松手相隔不超过 400 毫秒，第二次松手时就能确认。\n    \n    \n    \n      \n      OLED 显示哭泣\n    \n  \n  \n    表情显示 3 秒 → 回到普通眼睛\n    一直没人摸时，约每 15 秒换一次：普通、开心、生气、困倦、惊讶，依次轮换。\n  \n\n\n\n第二次松手超出 400 毫秒的示例\n\n以第一次松手为 0 毫秒。手指在第 300 毫秒再次接触，到第 550 毫秒才松开。超过 400 毫秒时，程序只记录到一次松手，判为单击并显示开心表情。第 550 毫秒的松手启动下一轮计时。如果没有后续触摸，程序会再次判为单击，并重新计算开心表情的持续时间。"
+  },
+  {
+    "objectID": "classroom/demo.html#firmware",
+    "href": "classroom/demo.html#firmware",
+    "title": "Tobi 桌宠的工作原理与双舵机改造",
+    "section": "触摸判断和表情绘制 10–14 分钟",
+    "text": "触摸判断和表情绘制 10–14 分钟\n写进开发板、上电后就运行的程序叫固件。firmware/original/original.ino 中的三段代码分别对应工作原理图里的触摸输入、手势判断和屏幕输出。\n\n读取 GPIO10 的触摸信号\nbool rawState = (digitalRead(TOUCH_PIN) == HIGH);\nTOUCH_PIN 就是 GPIO10。digitalRead 读到高电平时，rawState 为真。程序反复来读，把新值和上一次的值比较。一直按住时，每次读到的都是高。等它从高变低，handleTouch() 才记一次松手。\n\n\n判断单击和双击\n第一次松手时，程序记下时间 waitingForSecondTap，并把 waitingSecondTap 设为真，表示正在等第二次。下面几行是又收到一次松手时要检查的条件。\nif (waitingSecondTap && (now - waitingForSecondTap) &lt;= DOUBLE_TAP_WINDOW) {\n  waitingSecondTap = false;\n  triggerExpression(MOOD_CRYING);\n}\nnow - waitingForSecondTap 是距第一次松手经过的毫秒数。例如，两次松手相隔 250 毫秒，满足“不超过 400 毫秒”的条件，程序就在第二次松手时切换到哭泣表情。\n程序每轮都会检查等待时间。如果超过 400 毫秒仍未收到第二次松手，就判为单击并切换到开心表情。这段等待对应回放中单击后的延迟。\nif (waitingSecondTap && (now - waitingForSecondTap) &gt; DOUBLE_TAP_WINDOW) {\n  waitingSecondTap = false;\n  triggerExpression(MOOD_HAPPY);\n}\n\n\n根据手势绘制表情\ntriggerExpression() 把选好的表情存进 currentMood，并记下表情开始的时间。绘图函数 renderFrame() 再按这个值选择画法。下面只展开图里的两种表情。\nswitch (currentMood) {\n  case MOOD_HAPPY:  drawHappyEyes(blinkAmount); break;\n  case MOOD_CRYING: drawCryingEyes(blinkAmount, lookX, lookY); break;\n  // 其他表情的画法略去\n}\ndisplay.display();\n这些绘图函数先在内存里画好 128 × 64 个像素，最后一行才把整幅画面通过 I²C 发给 OLED。开发板大约每 30 毫秒重画一次，所以眼睛会动。3 秒是触摸表情的持续时间。如果中途没有新的手势，时间一到，程序就换回平常的眼睛。\n\n\n主循环中的触摸检测与屏幕刷新\n\n上电时 setup() 先把 GPIO10 设为输入，启动 I²C 和屏幕。之后，开发板反复运行下面的 loop()。millis() 给出开机以来的毫秒数。程序每轮循环都检查经过的时间，因此在等待第二次松手期间仍能读取引脚、刷新屏幕。\nvoid loop() {\n  handleTouch();\n  handleTempExpressionTimeout();\n  handleIdleCycle();\n\n  unsigned long now = millis();\n  if (now - lastFrameTime &gt;= FRAME_INTERVAL) {\n    lastFrameTime = now;\n    updateBlink();\n    updateLook();\n    renderFrame();\n  }\n}\nhandleTouch() 里还有一道检查。程序只接受与上次已记录变化相隔超过 50 毫秒的电平变化，用来过滤短时间内的抖动。handleTempExpressionTimeout() 管触摸表情的 3 秒，handleIdleCycle() 管空闲时的 15 秒轮换。\n\n\n\n笑眼的弧线和眨眼动画\n\n屏幕的 y 坐标向下增大。drawHappyEyes() 让每只眼睛的两端落在 y = 40，中间抬到 y = 26，形成一道向上拱起的弧线。程序从左到右计算弧线上每个点的位置，再用半径为 2 像素的小圆把这些点连成笔画。\nconst int halfWidth = 16;\nconst float archHeight = 14.0f * (1.0f - blink);\nfor (int dx = -halfWidth; dx &lt;= halfWidth; ++dx) {\n  float position = (float)dx / halfWidth;\n  int y = 40 - lroundf(archHeight * (1.0f - position * position));\n  display.fillCircle(35 + dx, y, 2, SSD1306_WHITE);\n  display.fillCircle(93 + dx, y, 2, SSD1306_WHITE);\n}\n两次 fillCircle() 使用相同的 y 坐标，分别以 x = 35 和 x = 93 为中心画左眼和右眼。眨眼时，blink 从 0 增加到 1，弧高从 14 像素降到 0，两道笑弧逐渐压成短横线。睁开时，弧高恢复。"
+  },
+  {
+    "objectID": "classroom/demo.html#enclosure",
+    "href": "classroom/demo.html#enclosure",
+    "title": "Tobi 桌宠的工作原理与双舵机改造",
+    "section": "原项目的三个 3D 零件 14–18 分钟",
+    "text": "原项目的三个 3D 零件 14–18 分钟\n打开课程包的 3d-models/。这里有三个独立文件。先看每件的形状，再看头盔怎样合起来。点下图可以单独旋转对应的零件。\n\n Helmet1.stl头壳。正面的面窗露出眼睛，底部敞开。\n Core .stl底板。两侧的立架从下面伸入头壳。\n Core 2.stl独立的小折板。作者的资料没有标明它的固定位置。\n\n在下图切换「合起」和「从底部分解」。头壳和底板按原文件坐标对齐，朝前的面窗正是开场照片里亮起眼睛的位置。\n\n\n\n头盔里的屏幕、触摸片和开发板\nOLED 的显示面对着面窗，托架要支撑电路板边缘。TTP223 的电极朝头顶内壁，手指可以隔壳触摸。开发板可在底板上试摆，接上实际的 USB 插头，再看导线从哪里经过。下图按两个 STL 的中央剖面绘制，三块电路板的位置是供试装的布置方案。\n\n\n\n头盔剖面与三块电路板的拟议位置\n\n\n\n\n项目文件和工具\n解压学生课程包，在编辑器里打开 course-kit/，可以找到前面用过的器件清单、接线图、固件和模型。\n\n\n课程包文件对照\n\n\n\n\n\n\n\n\n\n用途\n文件\n工具与操作\n\n\n\n\n备料与接线\nhardware/bom.csv、hardware/wiring.svg\n看清单和引脚图，核对模块。\n\n\n检查实物\nfirmware/hardware_check/hardware_check.ino\nArduino IDE 上传自检，串口看屏幕地址和触摸电平。\n\n\n读手势和表情\nfirmware/original/original.ino\n找到 handleTouch() 与 renderFrame()。\n\n\n运行基础电路\nsimulation/tobi-original.vlx\n在 Velxio 中点 Run，用 Touch 按钮触发两种表情。\n\n\n查看原有结构\n3d-models/ 里的三个 STL\n在上方查看器逐件旋转，也可在 PrusaSlicer 中量尺寸和看切片。"
+  },
+  {
+    "objectID": "classroom/demo.html#neck",
+    "href": "classroom/demo.html#neck",
+    "title": "Tobi 桌宠的工作原理与双舵机改造",
+    "section": "点头和摇头的双舵机头架 18–22 分钟",
+    "text": "点头和摇头的双舵机头架 18–22 分钟\n给刚才的 Tobi 加两个动作：单击，显示笑眼并点头；双击，显示哭泣并摇头。 开发板仍然按前面的 400 毫秒规则判断手势。要让这颗头能动，还要给它两个方向不同的转轴。\n\n在 Velxio 画布上运行双舵机\n下载工程，在 Velxio 的文件区点文件夹按钮，选中 .vlx，然后点 Load → Run。屏幕亮起后，单击绿色 Touch，看上方俯仰舵机摆动一次并回中；快速双击，看下方水平舵机向两边摆动后回中。OLED 的笑眼和泪滴能帮助你判断程序认出了哪种手势。下载 Velxio 双舵机课堂工程 · 打开 Velxio 官方编辑器\n\n\nVelxio 电路画布实录。观察绿色 Touch 按钮、OLED，以及上下两只舵机的舵臂。\n\n课堂工程使用 ESP32 DevKit V1，当前 Velxio 版本能在这块虚拟板上直接显示两只舵臂的转动。制作 Tobi 时仍用课程包里的 ESP32-C3。两份程序采用相同的手势判断和动作序列，各板的接线列在下一节。\n\n\n把两只舵机装到原头盔下面\n点头时看侧面。 一台位置舵机装在 U 形架的侧面，输出轴沿头盔左右方向。头盔在两臂之间前倾再抬回，另一侧的支点要和舵机轴在一条直线上。\n摇头时看底座。 第二台舵机固定在桌面底座上，轴竖直向上。舵盘带动整个 U 形架，所以头盔和侧面的点头舵机一起向左、向右，再回到正前方。检查这两端的姿态时，也要看 USB 线和触摸模块的导线有没有被拉紧。\n\n\n查看装上 Tobi 头盔后的三维运动与 OpenSCAD 结构\n\n\n\n解压结构模型包，打开 tobi-neck.scad，按 F5。先只改 pitch，再只改 yaw；show_axes 可以显示转轴。part 可单独查看 U 形架（yoke）或桌面底座（base）。用自己的舵机外形、安装耳、舵盘和紧固件实测尺寸替换示例值后，再制作安装试片。双轴头架模型包"
+  },
+  {
+    "objectID": "classroom/demo.html#servo-code",
+    "href": "classroom/demo.html#servo-code",
+    "title": "Tobi 桌宠的工作原理与双舵机改造",
+    "section": "从触摸信号到舵机动作 22–26 分钟",
+    "text": "从触摸信号到舵机动作 22–26 分钟\n两台舵机各占用一个信号引脚。打开工程时，先看画布上的板名，再沿对应的 GPIO 找接线。\n\n\n\n信号\nVelxio 课堂画布 · ESP32 DevKit V1\n课程实物 · ESP32-C3\n\n\n\n\n触摸模块 OUT（仿真用 Touch 按钮）\nGPIO27\nGPIO10\n\n\nOLED 的 SDA、SCL\nGPIO21、22\nGPIO20、21\n\n\n俯仰舵机信号\nGPIO25\nGPIO5\n\n\n水平舵机信号\nGPIO26\nGPIO6\n\n\n\n实物中，开发板由 USB 供电，两只舵机由符合型号电压和总电流要求的外部稳压电源供电。把舵机地线、电源负极和开发板 GND 接在一起，GPIO 输出的脉冲才有共同的电压参考。双舵机接线说明\n代码。 找到前面判断手势时调用的 triggerExpression()。判出单击或双击后，除了换表情，再给舵机安排一个动作。空闲轮换也会出现笑眼，它没有收到单击，所以头保持静止。\nif (m == MOOD_HAPPY) requestMotion(NOD);\nif (m == MOOD_CRYING) requestMotion(SHAKE);\nESP32 每 20 毫秒输出一个控制脉冲，高电平持续多久决定舵机的目标位置。示例把 1500 微秒设为中位。程序每隔约 300 毫秒换一次目标，这段时间内主循环继续读触摸并刷新屏幕。在 Velxio 打开串口监视器，可以用 HEAD GPIO… 开头的记录对照两个动作。\n\n\n\n输入\n俯仰舵机\n水平舵机\n\n\n\n\n单击\n1580 → 1500 µs，点头后回中\n保持 1500 µs\n\n\n双击\n保持 1500 µs\n1400 → 1600 → 1500 µs，左右转动后回中\n\n\n\n\n\n两个动作接连发生时\n\nloop() 每轮都调用 updateMotion(now)，用经过的毫秒数判断要不要发下一个目标。动作中收到新手势，屏幕先显示新表情，程序记住最近一次待执行的头部动作。当前轴回中并停满一个节拍后，再开始下一个动作。课堂画布工程（内含源码） · C3 实物固件 · C3 串口记录"
+  },
+  {
+    "objectID": "classroom/demo.html#change",
+    "href": "classroom/demo.html#change",
+    "title": "Tobi 桌宠的工作原理与双舵机改造",
+    "section": "用 coding agent 修改并在仿真中验证 26–30 分钟",
+    "text": "用 coding agent 修改并在仿真中验证 26–30 分钟\n前面已经在 Velxio 看到两只舵臂动作。现在只把点头幅度调小，摇头和两种表情照常运行。把画布工程里的 head_motion_canvas.ino 交给 coding agent，可以直接用下面这段要求。\n请读 head_motion_canvas.ino，把点头脉宽相对中位的偏移从 80 微秒改成 60 微秒。\n保留单击和双击的判定、摇头的三个目标和回中时间。告诉我在 Velxio 里\n分别点一次、点两次，串口各应该出现哪些脉宽。我会核对舵臂和 OLED。\n就在 Velxio 里验证。 停止当前运行，把修改后的代码放回同名草图，再点 Run。单击时，上方舵臂的摆幅变小，串口应显示 GPIO25=1560us 后回到 1500us。双击时，下方舵臂的目标仍为 1400 → 1600 → 1500 µs。双舵机画布工程 · 打开 Velxio 官方编辑器\n把动作落实到外壳。 在课程包副本中，让 coding agent 用原来的头盔设计两轴支架。把实测的舵机、舵盘和紧固件尺寸交给它，导出的模型可以在 OpenSCAD 检查。\n参考 3d-models/Helmet1.stl 和原底板 Core .stl，给这颗头设计一个 U 形架和桌面底座。\n标出左右俯仰轴和竖直转轴。先告诉我需要量哪些舵机、舵盘和安装孔尺寸。\n在新的 SCAD 文件里分别预览中位、低头、左转、右转，检查架臂、底座和线束的空间。\n在 OpenSCAD 中分别调整 pitch 和 yaw，逐个观察哪些部件一起动。信号和舵臂动作可以在 Velxio 验证；真实转角、供电余量和头部负载要用实物测试。双轴头架与原始模型\n\n\n选做 · 用本机 Velxio 运行三维头盔的 ESP32-C3 固件\n\n三维头盔可以直接播放已有的动作记录。要让它运行自己编译的固件，先在这台电脑上启动 Velxio 服务。解压双舵机源码，将 NOD_TRAVEL_US 从 80 改为 60，在含有 .ino 的目录运行下面的命令。本机服务配置\npython3 compile_head_motion.py head_motion.ino\n在「查看装上 Tobi 头盔后的三维运动」里展开「运行自己编译的版本」，选择生成的 head_motion.bin，点「运行所选固件」。单击后，俯仰脉宽应从 1500 变到 1560 µs 再回中。双击时，水平脉宽仍依次为 1400、1600、1500 µs。电路编辑器里的 C3 舵机图标在当前版本会停在原位，可以用课堂头架查看实际仿真通道发出的动作。\n\n\n\n课后练习与工具\n\n用 Codex 或 Claude Code 可以生成 .scad，OpenSCAD 用来预览和导出。使用 Claude Code 的同学可选用参数化建模模板。OpenSCAD skill\n如果想为同一套电路重新设计外形，可参考带导槽的两件式方盒和局部打印试片。修改名牌、屏幕托架、开心表情时长或学习提醒也有独立练习。外壳改造 · 方盒装配图 · 修改表情时长 · 学习提醒"
+  },
+  {
+    "objectID": "setup/computer.html",
+    "href": "setup/computer.html",
+    "title": "准备电脑与工具",
+    "section": "",
+    "text": "如果今天用电脑仿真，把课程包里的 simulation/tobi-original.vlx 导入 Velxio，就可以开始观察触摸和表情。给实物开发板写程序时用 Arduino IDE，改外壳时再用 OpenSCAD。下载课程包 · 在 Velxio 中打开工程",
+    "crumbs": [
+      "首页",
+      "准备",
+      "准备电脑与工具"
+    ]
+  },
+  {
+    "objectID": "setup/computer.html#让-coding-agent-打开课程文件",
+    "href": "setup/computer.html#让-coding-agent-打开课程文件",
+    "title": "准备电脑与工具",
+    "section": "让 coding agent 打开课程文件",
+    "text": "让 coding agent 打开课程文件\n解压课程包，在编辑器或 coding agent 里打开含有 README.md 的 course-kit/ 目录。先让它根据你手里的文件回答一个问题。\n读 README.md，找出器件清单、控制眼睛的 Arduino 程序和头盔的三个 STL。\n列出它们相对于当前目录的路径，保留文件名里的空格。先不用改文件。\n在文件列表里打开它找到的 firmware/original/original.ino。能看到 setup() 和 loop()，后面就可以对着同一份程序讨论。若回答里找不到这个文件，先检查打开的目录。",
+    "crumbs": [
+      "首页",
+      "准备",
+      "准备电脑与工具"
+    ]
+  },
+  {
+    "objectID": "setup/computer.html#配置-arduino-ide",
+    "href": "setup/computer.html#配置-arduino-ide",
+    "title": "准备电脑与工具",
+    "section": "配置 Arduino IDE",
+    "text": "配置 Arduino IDE\n安装 Arduino IDE 2。打开设置，Windows 在 File → Preferences，macOS 在 Arduino IDE → Settings。在 Additional Boards Manager URLs 中新增下面一行，保留已有地址。Arduino IDE 下载 · Espressif 安装说明\nhttps://espressif.github.io/arduino-esp32/package_esp32_index.json\n\n在左侧 Boards Manager 搜索 esp32，安装由 Espressif Systems 提供的软件包。课程仿真使用 3.3.10。列表里若找不到这个版本，可选稳定的 3.x 版本，记下版本号。\n在 Library Manager 安装 Adafruit SSD1306 和 Adafruit GFX Library，按提示一并安装 Adafruit BusIO。课程编译时用的是 SSD1306 2.5.17、GFX 1.13.0 和 BusIO 1.17.4。Wire 随开发板软件包安装。课程编译记录\n打开 firmware/original/original.ino，在 Tools → Board 中选择 ESP32C3 Dev Module。板名里的 C3 对应课程包使用的芯片。",
+    "crumbs": [
+      "首页",
+      "准备",
+      "准备电脑与工具"
+    ]
+  },
+  {
+    "objectID": "setup/computer.html#编译程序连接实物",
+    "href": "setup/computer.html#编译程序连接实物",
+    "title": "准备电脑与工具",
+    "section": "编译程序，连接实物",
+    "text": "编译程序，连接实物\n点左上角的 Verify（对勾）。这一步可以在开发板还没接入时做。成功后，窗口底部会列出程序占用的存储空间。遇到报错时，保留完整输出，用里面出现的板名、库名或文件名查原因。编译与串口排错\n需要写入实物时，用 USB 数据线接上 C3 SuperMini，在 Tools → Port 选插入后新出现的端口。Windows 常见 COM3 一类的名称，macOS 常见 /dev/cu.usbmodem…。用板上的原生 USB 看串口时，将 USB CDC On Boot 设为 Enabled。完成接线后，先打开自检程序，再点 Upload（右箭头）写入，打开串口监视器读结果。接线与自检 · Arduino 上传说明",
+    "crumbs": [
+      "首页",
+      "准备",
+      "准备电脑与工具"
+    ]
+  },
+  {
+    "objectID": "setup/computer.html#预览模型和切片",
+    "href": "setup/computer.html#预览模型和切片",
+    "title": "准备电脑与工具",
+    "section": "预览模型和切片",
+    "text": "预览模型和切片\n安装 OpenSCAD，把名牌源码 nameplate.scad 放进工作副本的 3d-models/。打开文件，按 F5 预览，把 pet_name 改成自己的名字，再按 F5。如果字超出底板，调小 font_size，再比较前后两次预览。OpenSCAD 下载 · 名牌源码\n要看模型会怎样逐层打印，可以把 STL 拖进实验室使用的切片器，选择对应的打印机、喷嘴和耗材，看逐层预览。课程示例也可用 PrusaSlicer 打开。PrusaSlicer\n\n\n用 Arduino CLI 让 coding agent 编译程序\n\n安装 Arduino CLI 后打开新终端，执行 arduino-cli version。能看到版本号后，在课程包根目录执行以下命令。最后一行编译 Tobi 的表情程序。Arduino CLI 安装说明\narduino-cli core update-index --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json\narduino-cli core install esp32:esp32@3.3.10 --additional-urls https://espressif.github.io/arduino-esp32/package_esp32_index.json\narduino-cli lib install \"Adafruit GFX Library@1.13.0\" \"Adafruit SSD1306@2.5.17\" \"Adafruit BusIO@1.17.4\"\narduino-cli compile --fqbn esp32:esp32:esp32c3 firmware/original\n如果在 IDE 里选了其他 3.x 版本，将第二行的版本号改成同一个。若一边编译成功、另一边报缺库，对照 IDE 的 Library Manager 和终端里 arduino-cli lib list 的结果，确认两边安装了相同的库。",
+    "crumbs": [
+      "首页",
+      "准备",
+      "准备电脑与工具"
+    ]
+  },
+  {
+    "objectID": "projects/tiny-engineer.html",
+    "href": "projects/tiny-engineer.html",
+    "title": "Tiny Engineer 的机械动作与电脑控制",
+    "section": "",
+    "text": "Tiny Engineer 用一块 ESP32-C3 控制显示屏和五个 SG90 舵机。作者给出的一个例子是，电脑上的任务完成时，桌上的机器人敲铃。这个动作需要电脑传递事件、固件选择动作、机构把舵机的转动传到铃上。作者的项目与动作演示"
+  },
+  {
+    "objectID": "projects/tiny-engineer.html#追踪一次敲铃动作",
+    "href": "projects/tiny-engineer.html#追踪一次敲铃动作",
+    "title": "Tiny Engineer 的机械动作与电脑控制",
+    "section": "追踪一次敲铃动作",
+    "text": "追踪一次敲铃动作\n\n作者的集成程序将任务结束映射为名叫 ring 的动作。如果选择 HTTP，电脑向开发板发送 POST /anim?name=ring。USB 串口也可以传递同一个动作。电脑端的集成与命令示例\n在固件中从接收消息的位置读下去，找出程序选了哪个动作、哪些舵机需要转动。\n对照装配说明和三维模型，找出舵机、舵臂和被带动的零件。观察敲铃结束时各零件怎样回到下一次动作的起始位置。机械装配说明"
+  },
+  {
+    "objectID": "projects/tiny-engineer.html#从文档到装配",
+    "href": "projects/tiny-engineer.html#从文档到装配",
+    "title": "Tiny Engineer 的机械动作与电脑控制",
+    "section": "从文档到装配",
+    "text": "从文档到装配\n准备实作时，先看 Getting started 和 Shopping list 确认器件，再对照 Main control board、3D models 和 Assembly 查供电、零件形状和安装顺序。只想先观察两个转轴如何配合，可以在 Tobi 的双舵机练习中分别触发点头和摇头。\n本课程尚未装配并测试 Tiny Engineer 整机。项目软件采用 MIT 许可证，硬件 CAD 与 PCB 采用 CERN-OHL-S-2.0，具体文件的授权范围见项目许可证说明。"
+  },
+  {
+    "objectID": "projects/tobi.html",
+    "href": "projects/tobi.html",
+    "title": "Tobi 的触摸输入、表情和头壳",
+    "section": "",
+    "text": "Tobi 头部的面窗里有一块 OLED。触摸片负责检测手指接触，ESP32-C3 根据触摸的次数和间隔选择表情，再把眼睛画到屏幕上。"
+  },
+  {
+    "objectID": "projects/tobi.html#从触摸到屏幕",
+    "href": "projects/tobi.html#从触摸到屏幕",
+    "title": "Tobi 的触摸输入、表情和头壳",
+    "section": "从触摸到屏幕",
+    "text": "从触摸到屏幕\n在课程接线中，TTP223 的 OUT 连到 GPIO10。手指接触时 OUT 变为高电平，松手后回到低电平。第一次松手后，程序留出 400 ms 等待第二次松手。单击显示两道向上拱起的笑眼，双击显示泪滴。这两种表情持续 3 秒。空闲时，程序每 15 秒在默认、开心、生气、困倦和惊讶之间轮换。\n可以先在仿真中分别操作一次单击和双击，再打开 firmware/original/original.ino，对照输入判断和眼睛的绘制函数。程序通过 I²C 把画面发给 128 × 64 的 SSD1306，SDA 接 GPIO20，SCL 接 GPIO21。课堂演示 · 接线与固件验证记录"
+  },
+  {
+    "objectID": "projects/tobi.html#头壳和底板",
+    "href": "projects/tobi.html#头壳和底板",
+    "title": "Tobi 的触摸输入、表情和头壳",
+    "section": "头壳和底板",
+    "text": "头壳和底板\nHelmet1.stl 是带面窗的头壳，Core .stl 是两侧带立板的底板。观察两个零件的相对位置，可以找到屏幕应朝向哪一面。Core 2.stl 是一块小折板，现有装配资料还不足以确认它固定在哪里。查看三个零件的模型\n课程包保存了 Sam Zare 发布的项目文件和 MIT 许可证（版权标注 SRT）。收录版本的提交号为 428afbe。项目源文件 · 认识 Tobi · 下载课程包"
+  },
+  {
+    "objectID": "tutorial/02-read-with-agent.html",
+    "href": "tutorial/02-read-with-agent.html",
+    "title": "2. 用 coding agent 阅读项目",
+    "section": "",
+    "text": "coding agent 在电脑上读课程文件，能帮你把接线图、程序里的引脚名和屏幕上的反应对应起来。先让它解释一次单击，再到源码中核对解释。",
+    "crumbs": [
+      "首页",
+      "读懂与运行",
+      "2. 用 coding agent 阅读项目"
+    ]
+  },
+  {
+    "objectID": "tutorial/02-read-with-agent.html#根据源码核对一次单击",
+    "href": "tutorial/02-read-with-agent.html#根据源码核对一次单击",
+    "title": "2. 用 coding agent 阅读项目",
+    "section": "根据源码核对一次单击",
+    "text": "根据源码核对一次单击\n在 Codex 或 Claude Code 中打开解压后的 course-kit/。把问题限定在这个目录里的文件，便于沿着回答回到源码。\n请读 README.md、hardware/bom.csv 和 firmware/original/original.ino。\n说明开发板、屏幕和触摸模块分别做什么。沿着一次单击，\n指出哪个引脚收到信号、哪个函数确认手势、哪个函数画笑眼。\n请标出文件名和对应的函数或常量。这一步只读文件。\n打开 original.ino，搜索 DOUBLE_TAP_WINDOW 和 SCREEN_ADDRESS。前者是判断双击的 400 毫秒窗口，后者是程序使用的屏幕地址 0x3C。如果助手说“按下就开始计时”，继续看 handleTouch() 中的 if (rawState == false)，确认程序在哪一次电平变化时记录了时间。",
+    "crumbs": [
+      "首页",
+      "读懂与运行",
+      "2. 用 coding agent 阅读项目"
+    ]
+  },
+  {
+    "objectID": "tutorial/02-read-with-agent.html#保留基础程序建立工作副本",
+    "href": "tutorial/02-read-with-agent.html#保留基础程序建立工作副本",
+    "title": "2. 用 coding agent 阅读项目",
+    "section": "保留基础程序，建立工作副本",
+    "text": "保留基础程序，建立工作副本\n复制整个 firmware/original/ 文件夹，把副本改名为 firmware/my_pet/，再把里面的 original.ino 改名为 my_pet.ino。Arduino 要求主草图与所在文件夹同名。之后编辑和编译 firmware/my_pet/my_pet.ino。需要比较修改时，仍可打开 original.ino。\n\n\n用 Git 保存起始版本\n\n在解压的课程包目录运行以下命令。第一次提交时，Git 可能提示你配置提交者姓名和邮箱。\ngit init\ngit add README.md firmware hardware 3d-models simulation LICENSE\ngit commit -m \"保存课程包起始版本\"\n改完工作副本后，用 git diff 查看尚未暂存的修改。编译并运行通过后，再把这次改动的文件加入下一次提交。",
+    "crumbs": [
+      "首页",
+      "读懂与运行",
+      "2. 用 coding agent 阅读项目"
+    ]
+  },
+  {
+    "objectID": "tutorial/02-read-with-agent.html#写下修改目标与测试方法",
+    "href": "tutorial/02-read-with-agent.html#写下修改目标与测试方法",
+    "title": "2. 用 coding agent 阅读项目",
+    "section": "写下修改目标与测试方法",
+    "text": "写下修改目标与测试方法\n例如，做题时快速摸一下桌宠，希望笑眼能多停留两秒。在课程包根目录新建 my-notes.md，把这个要求写成两条可以实测的行为。\n\n\n\n\n\n\n\n\n操作\n预期结果\n核对方法\n\n\n\n\n单击一次\n笑眼显示 5 秒，再回到普通眼睛。\n在串口记录中，找开心和恢复默认的时刻，相减。\n\n\n快速双击\n哭泣表情仍显示 3 秒。\n从哭泣的起始时刻算到恢复默认。\n\n\n\n把这两条交给助手，请它指出需要修改的文件与计时参数。下一章先运行基础程序，记下两种手势原本的表情时长。",
+    "crumbs": [
+      "首页",
+      "读懂与运行",
+      "2. 用 coding agent 阅读项目"
+    ]
+  },
+  {
+    "objectID": "tutorial/02-read-with-agent.html#在项目里记录引脚与文件约定",
+    "href": "tutorial/02-read-with-agent.html#在项目里记录引脚与文件约定",
+    "title": "2. 用 coding agent 阅读项目",
+    "section": "在项目里记录引脚与文件约定",
+    "text": "在项目里记录引脚与文件约定\n如果使用 Codex，把下面几行保存到课程包根目录的 AGENTS.md。使用其他助手时，也可以在开始工作时请它先读这个文件。\n课程硬件是 ESP32-C3、SSD1306 屏幕和 TTP223 触摸模块。\nSDA 接 GPIO20，SCL 接 GPIO21，触摸输出接 GPIO10，逻辑电平为 3.3 V。\n基础固件位于 firmware/original/，我的修改写在 firmware/my_pet/。\n改完列出改动的文件、编译结果，以及用什么输入验证了哪些行为。\n引脚或器件尺寸有变动时，同时更新对应的接线图或尺寸记录。\n单击和双击目前共用一个时长参数。检查助手的修改计划时，看它有没有考虑双击后哭泣多久。",
+    "crumbs": [
+      "首页",
+      "读懂与运行",
+      "2. 用 coding agent 阅读项目"
+    ]
+  },
+  {
+    "objectID": "tutorial/04-first-change.html",
+    "href": "tutorial/04-first-change.html",
+    "title": "4. 调整单击后的表情时长",
+    "section": "",
+    "text": "这次只改一个行为。单击后的笑眼延长到 5 秒，双击后的哭泣仍持续 3 秒。两种表情原来共用一个时长参数，因此要先看程序在哪里选择和使用这个参数。",
+    "crumbs": [
+      "首页",
+      "改出自己的版本",
+      "4. 调整单击后的表情时长"
+    ]
+  },
+  {
+    "objectID": "tutorial/04-first-change.html#用串口记录表情的起止时间",
+    "href": "tutorial/04-first-change.html#用串口记录表情的起止时间",
+    "title": "4. 调整单击后的表情时长",
+    "section": "用串口记录表情的起止时间",
+    "text": "用串口记录表情的起止时间\n运行基础程序，单击后等它恢复普通眼睛，再快速双击。串口打印的 MOOD=1 表示开心，MOOD=5 表示哭泣，MOOD=0 表示恢复默认。用恢复时的 t 减去进入表情时的 t，就得到持续时间。原程序的两组结果都应接近 3000 毫秒。\n从程序切换表情时开始计时，便能把笑眼显示了多久和此前等待双击的 400 毫秒分开。仿真运行快慢也不会改变这两个程序时间戳的含义。",
+    "crumbs": [
+      "首页",
+      "改出自己的版本",
+      "4. 调整单击后的表情时长"
+    ]
+  },
+  {
+    "objectID": "tutorial/04-first-change.html#找到两个表情共用的时长",
+    "href": "tutorial/04-first-change.html#找到两个表情共用的时长",
+    "title": "4. 调整单击后的表情时长",
+    "section": "找到两个表情共用的时长",
+    "text": "找到两个表情共用的时长\n在编辑器中打开第 2 章建立的工作副本。请 coding agent 读 firmware/my_pet/my_pet.ino，给它这项修改要求。\n请查找 TOUCH_EXPRESSION_DURATION 在哪里使用，说明直接把它改成 5000\n会影响哪些表情，然后修改 firmware/my_pet/my_pet.ino。\n单击后的笑眼持续 5 秒，双击后的哭泣持续 3 秒。\n保留触摸判定和空闲轮换。指出我应该在哪两次状态切换之间计时。\n打开助手指出的 triggerExpression() 和 handleTempExpressionTimeout()。前者知道刚选中了哪种表情，后者每轮都要判断这次表情何时结束。适合在前者中选好时长，存下来供后者读取。",
+    "crumbs": [
+      "首页",
+      "改出自己的版本",
+      "4. 调整单击后的表情时长"
+    ]
+  },
+  {
+    "objectID": "tutorial/04-first-change.html#对照参考代码",
+    "href": "tutorial/04-first-change.html#对照参考代码",
+    "title": "4. 调整单击后的表情时长",
+    "section": "对照参考代码",
+    "text": "对照参考代码\nactiveExpressionDuration = (m == MOOD_HAPPY)\n    ? HAPPY_DURATION : CRYING_DURATION;\n这是参考程序在触发表情时执行的赋值语句。如果 m 是开心，就选 HAPPY_DURATION（5000 毫秒）。触摸触发的另一种表情是哭泣，选 CRYING_DURATION（3000 毫秒）。到期检查把已经过去的毫秒数与 activeExpressionDuration 比较，达到设定时长便恢复默认。核对代码差异时，重点看这两处。参考修改补丁",
+    "crumbs": [
+      "首页",
+      "改出自己的版本",
+      "4. 调整单击后的表情时长"
+    ]
+  },
+  {
+    "objectID": "tutorial/04-first-change.html#编译并测量自己的版本",
+    "href": "tutorial/04-first-change.html#编译并测量自己的版本",
+    "title": "4. 调整单击后的表情时长",
+    "section": "编译并测量自己的版本",
+    "text": "编译并测量自己的版本\n使用实物时，在 Arduino IDE 中打开 my_pet.ino，点击 Verify 编译，再上传。使用 Velxio 时，停止当前工程，把修改后的源码放入代码编辑区，再点 Run。只改电脑上的文件，已导入的 Velxio 工程仍会运行原来的代码。\n\n\n\n操作\n检查结果\n\n\n\n\n单击，等到普通眼睛出现\n开心到恢复默认约为 5000 毫秒。\n\n\n双击，等到普通眼睛出现\n哭泣到恢复默认约为 3000 毫秒。\n\n\n继续静置\n屏幕恢复空闲表情轮换。\n\n\n重新启动\n屏幕正常点亮，仍能响应两种手势。\n\n\n\n\n\n参考程序的运行记录与回放\n\nMOOD=1 t=1230\nMOOD=0 t=6230\nMOOD=5 t=7337\nMOOD=0 t=10338\n参考程序在 ESP32-C3 仿真中，笑眼持续了 6230 − 1230 = 5000 毫秒，哭泣持续了 10338 − 7337 = 3001 毫秒。屏幕回放取自这次运行写入 OLED 的像素。\n\n\n\n解压参考固件，可在 Arduino IDE 打开 happy5/happy5.ino。要在 Velxio 中对照，可直接导入配套工程。参考固件 · 参考仿真工程\n\n要给自己的桌宠换一组时长，可以试试笑眼 4 秒、哭泣 2 秒，再用同一种方法核对。把最终选择的两个参数和两组串口记录保存在 my-notes.md 中。",
+    "crumbs": [
+      "首页",
+      "改出自己的版本",
+      "4. 调整单击后的表情时长"
+    ]
+  },
+  {
+    "objectID": "tutorial/08-your-design.html",
+    "href": "tutorial/08-your-design.html",
+    "title": "8. 设计和验证自己的桌宠",
+    "section": "",
+    "text": "选一个你能演示的使用场景，写明谁用桌宠、什么时候用，以及一次操作后应该发生什么。例如，做题时长按 Tobi 开始计时，到时在屏幕上提醒休息，中途可以取消。有了这句话，就能确定要改哪些程序、需要哪些器件，以及怎样验证。",
+    "crumbs": [
+      "首页",
+      "改出自己的版本",
+      "8. 设计和验证自己的桌宠"
+    ]
+  },
+  {
+    "objectID": "tutorial/08-your-design.html#按使用场景比较方案",
+    "href": "tutorial/08-your-design.html#按使用场景比较方案",
+    "title": "8. 设计和验证自己的桌宠",
+    "section": "按使用场景比较方案",
+    "text": "按使用场景比较方案\n如果桌宠放在自习室，学习提醒可以用屏幕文字，也可以加一个蜂鸣器。前一种做法可以沿用现有屏幕和接线，使用者需要看向桌宠才能注意到提醒。后一种可以靠声音提醒使用者，同时要考虑周围的同学、蜂鸣器的供电和壳内空间。比较器件成本、动手时间和使用效果，再说明你的选择。\n也可以用转头这一类动作表达状态。课堂里的双舵机头架展示了点头和摇头分别要改动的信号、程序和结构，可作为这种方案的实例。双舵机头架与控制",
+    "crumbs": [
+      "首页",
+      "改出自己的版本",
+      "8. 设计和验证自己的桌宠"
+    ]
+  },
+  {
+    "objectID": "tutorial/08-your-design.html#用三张图说明同一个交互",
+    "href": "tutorial/08-your-design.html#用三张图说明同一个交互",
+    "title": "8. 设计和验证自己的桌宠",
+    "section": "用三张图说明同一个交互",
+    "text": "用三张图说明同一个交互\n以学习提醒为例，功能图讲一次使用过程，状态图说明程序如何响应，硬件连接图标出信号经过的器件。画自己的项目时，可以把接线表和状态说明交给 coding agent，请它生成 Mermaid 草图，再对照固件和实物逐项核对。\n\n\n\n\n\n\n\n\n图\n学习提醒的例子\n图上应能找到什么\n\n\n\n\n功能图\n长按启动 → 计时 → 显示休息提醒\n输入是什么，使用者能看到什么结果。\n\n\n状态图\n普通眼睛 → 长按 1 秒 → 倒计时。倒计时中短触取消，到时进入休息提醒，短触确认后恢复普通眼睛。\n每条箭头的起点、终点和触发条件。\n\n\n硬件连接图\nTTP223 的 OUT 接 ESP32-C3 的 GPIO10，OLED 通过 SDA 和 SCL 与开发板相连。\n哪块板读输入，哪块板显示结果，信号线和电源线怎么接。可配一张标出安装位置的照片。\n\n\n\n拿状态图沿着“开始后又取消”走一遍。如果图上的箭头回到普通眼睛，代码里就应有取消计时和恢复显示的处理。找到触发条件后，还可以直接按图写出测试步骤。",
+    "crumbs": [
+      "首页",
+      "改出自己的版本",
+      "8. 设计和验证自己的桌宠"
+    ]
+  },
+  {
+    "objectID": "tutorial/08-your-design.html#为每个需求写一次可重复的测试",
+    "href": "tutorial/08-your-design.html#为每个需求写一次可重复的测试",
+    "title": "8. 设计和验证自己的桌宠",
+    "section": "为每个需求写一次可重复的测试",
+    "text": "为每个需求写一次可重复的测试\n\n\n\n\n\n\n\n\n要验证的行为\n操作\n通过条件\n\n\n\n\n长按启动\n从普通眼睛开始，按住 1 秒，松手。\n松手后还有倒计时，数字继续变小。\n\n\n取消后不会再提醒\n重新开始一轮 25 秒计时，在第 5 秒轻触取消，再等过本轮的第 25 秒。\n取消时回到眼睛，原定到时点没有出现休息提醒。\n\n\n提醒可以确认\n再长按一次，等满 25 秒，看到提醒后轻触。\n屏幕先出现休息提醒，再恢复眼睛，之后仍能响应单击。\n\n\n\n按自己的设计增加快速重复输入或断电重启的测试。记下每次操作、预期结果和实际结果，并标明是用 Velxio 还是真机得到的。仿真日志可以记录提醒时刻，隔着壳体能否触摸则需要装配后的实测记录。",
+    "crumbs": [
+      "首页",
+      "改出自己的版本",
+      "8. 设计和验证自己的桌宠"
+    ]
+  },
+  {
+    "objectID": "tutorial/08-your-design.html#交付源码接线说明和演示记录",
+    "href": "tutorial/08-your-design.html#交付源码接线说明和演示记录",
+    "title": "8. 设计和验证自己的桌宠",
+    "section": "交付源码、接线说明和演示记录",
+    "text": "交付源码、接线说明和演示记录\n用报告模板整理使用场景、选用的方案、示意图、器件、修改和测试。保留上游项目的来源与许可证，列出你修改过的文件。做了外壳的项目应同时交付可编辑的设计源文件和打印用的 STL。下载项目报告模板\n拍演示时，让观众看到操作输入和屏幕或机构的反应。先完成一次正常交互，再演示一次取消、重启或你处理过的故障，说明仍需实测的部分。视频时长按课程要求安排。\n最后，把要提交的版本解压到一个新文件夹，请同学按说明运行。如果遇到缺库、找不到模型或引脚对不上，补上相应文件或操作说明，再从新文件夹验证一次。",
+    "crumbs": [
+      "首页",
+      "改出自己的版本",
+      "8. 设计和验证自己的桌宠"
+    ]
+  },
+  {
+    "objectID": "tutorial/01-meet-the-pet.html",
+    "href": "tutorial/01-meet-the-pet.html",
+    "title": "1. Tobi 的触摸输入与表情",
+    "section": "",
+    "text": "Tobi 的两只眼睛共用一块 OLED 屏幕。头顶的触摸模块只能报告手指有没有碰到它。单击和双击的区别，由开发板根据两次松手的时间判断。",
+    "crumbs": [
+      "首页",
+      "读懂与运行",
+      "1. Tobi 的触摸输入与表情"
+    ]
+  },
+  {
+    "objectID": "tutorial/01-meet-the-pet.html#观察三种反应",
+    "href": "tutorial/01-meet-the-pet.html#观察三种反应",
+    "title": "1. Tobi 的触摸输入与表情",
+    "section": "观察三种反应",
+    "text": "观察三种反应\n在 Velxio 中打开课程包的 simulation/tobi-original.vlx，点 Run，用绿色 Touch 按钮模拟触摸。也可以播放课堂页的实录，对照下表观察眼睛。课堂回放 · Velxio 操作说明\n\n\n\n\n\n\n\n操作\nOLED 上的反应\n\n\n\n\n保持静置\n眼睛偶尔眨动、移动。约每 15 秒，程序换一种表情。\n\n\n点一下并松开\n松手超过 400 毫秒，仍没有第二次松手，两只眼睛变成笑弧。约 3 秒后恢复普通眼睛。\n\n\n快速点两下\n两次松手相隔不超过 400 毫秒，第二次松手时眼睛下方出现泪滴。约 3 秒后恢复。\n\n\n\n单击要稍等，是因为第一次松手时还不能确定手势。双击在第二次松手时就可以确认。触摸信号与判断流程图",
+    "crumbs": [
+      "首页",
+      "读懂与运行",
+      "1. Tobi 的触摸输入与表情"
+    ]
+  },
+  {
+    "objectID": "tutorial/01-meet-the-pet.html#沿接线图找到输入和输出",
+    "href": "tutorial/01-meet-the-pet.html#沿接线图找到输入和输出",
+    "title": "1. Tobi 的触摸输入与表情",
+    "section": "沿接线图找到输入和输出",
+    "text": "沿接线图找到输入和输出\n\n\n\nTTP223 的 OUT 接 GPIO10。OLED 的数据线 SDA 接 GPIO20，时钟线 SCL 接 GPIO21。\n\n\n手指触摸 TTP223 时，OUT 输出高电平，松开后回到低电平。ESP32-C3 从 GPIO10 读取这个变化。选定表情后，开发板通过 SDA 和 SCL 两根线把画面发给 OLED。屏幕与触摸模块都由开发板的 3V3 供电，并与开发板共地。",
+    "crumbs": [
+      "首页",
+      "读懂与运行",
+      "1. Tobi 的触摸输入与表情"
+    ]
+  },
+  {
+    "objectID": "tutorial/01-meet-the-pet.html#课程包里的文件",
+    "href": "tutorial/01-meet-the-pet.html#课程包里的文件",
+    "title": "1. Tobi 的触摸输入与表情",
+    "section": "课程包里的文件",
+    "text": "课程包里的文件\n解压课程包，在编辑器中打开整个 course-kit/ 文件夹。下载课程包\n\n\n\n\n\n\n\n目录\n本章用到的内容\n\n\n\n\nhardware/\n用 bom.csv 核对器件，用 wiring.svg 找到信号线。\n\n\nfirmware/\noriginal/original.ino 是桌宠上电后运行的程序。hardware_check/ 用于实物接线自检。\n\n\n3d-models/\nHelmet1.stl 是头壳，Core .stl 是底板，Core 2.stl 是单独的小折板。\n\n\nsimulation/\ntobi-original.vlx 包含可以直接在 Velxio 中运行的基础电路与程序。\n\n\n\n课程里的实物接线采用 USB 供电。需要追溯屏幕地址或引脚配置时，可以查阅课程记录。配置与来源 · 固件修改记录",
+    "crumbs": [
+      "首页",
+      "读懂与运行",
+      "1. Tobi 的触摸输入与表情"
+    ]
+  },
+  {
+    "objectID": "tutorial/01-meet-the-pet.html#从一次双击追到屏幕",
+    "href": "tutorial/01-meet-the-pet.html#从一次双击追到屏幕",
+    "title": "1. Tobi 的触摸输入与表情",
+    "section": "从一次双击追到屏幕",
+    "text": "从一次双击追到屏幕\n打开 firmware/original/original.ino。setup() 在上电时配置引脚和屏幕，之后开发板反复执行 loop()。以双击为例，可以按下面的顺序找代码。\n\n\n\n\n\n\n\n函数\n双击发生时做什么\n\n\n\n\nhandleTouch()\n从 GPIO10 读取触摸信号，计算两次松手之间的时间。\n\n\ntriggerExpression()\n确认双击后触发 MOOD_CRYING，记录这次临时表情的起始时间。\n\n\nsetMood()\n把 currentMood 设为选中的表情，开始一次快速眨眼。\n\n\nrenderFrame()\n读取 currentMood，调用 drawCryingEyes() 绘制眼睛和泪滴，再把像素送给屏幕。\n\n\nhandleTempExpressionTimeout()\n到了设定时长，将表情恢复为默认值。\n\n\n\n把双击换成单击，找到 triggerExpression(MOOD_HAPPY) 和 drawHappyEyes()。前者决定何时显示笑眼，后者决定笑弧的形状。下一章会用这两个位置练习向 coding agent 提问。",
+    "crumbs": [
+      "首页",
+      "读懂与运行",
+      "1. Tobi 的触摸输入与表情"
+    ]
+  },
+  {
+    "objectID": "tutorial/07-print-and-assemble.html",
+    "href": "tutorial/07-print-and-assemble.html",
+    "title": "7. 打印与装配头盔",
+    "section": "",
+    "text": "屏幕是否对齐、USB 插头能否插到底、隔着头盔能否触发 TTP223，都要用自己的器件试装。先打印上一章设计的局部试片。它只包含需要检验的一小段结构，调整后可以很快再试一次。",
+    "crumbs": [
+      "首页",
+      "改出自己的版本",
+      "7. 打印与装配头盔"
+    ]
+  },
+  {
+    "objectID": "tutorial/07-print-and-assemble.html#在切片器中检查打印路径",
+    "href": "tutorial/07-print-and-assemble.html#在切片器中检查打印路径",
+    "title": "7. 打印与装配头盔",
+    "section": "在切片器中检查打印路径",
+    "text": "在切片器中检查打印路径\n切片器把 STL 转换成打印机逐层执行的运动指令。生成的 G-code 包含温度、速度和坐标，与打印机及材料有关。向实验室确认打印机型号、喷嘴直径、耗材、可打印尺寸和文件提交方式，再选择匹配的配置。交给他人切片时，一起提供 STL、设计源文件和模型单位（毫米）。\n\n导入内支架的局部试片，对照设计尺寸，确认底面贴在平台上。做方形外壳的同学可用配套的窗口与导槽试片。\n切到逐层预览，沿窗口和导槽查看每一层的路径。设计里有薄壁、预览中却没有走线，打印出来这里就会缺一块。\n检查悬空部分是否需要支撑，打印后能否取出支撑。对照平台尺寸、预计耗时和材料用量，再提交打印。\n\n\n\n\n课程名牌在第 1、6 和 13 层的挤出路径。外围灰线是裙边，紫线是零件轮廓。\n\n\n图中是 PrusaSlicer 按 0.2 mm 层高切出的名牌。第 1 和第 6 层都在底牌内，第 13 层已经到了凸起的字。其他打印机和材料应使用实验室给出的层高与温度。",
+    "crumbs": [
+      "首页",
+      "改出自己的版本",
+      "7. 打印与装配头盔"
+    ]
+  },
+  {
+    "objectID": "tutorial/07-print-and-assemble.html#用试片确定配合尺寸",
+    "href": "tutorial/07-print-and-assemble.html#用试片确定配合尺寸",
+    "title": "7. 打印与装配头盔",
+    "section": "用试片确定配合尺寸",
+    "text": "用试片确定配合尺寸\n清理毛刺后，把屏幕的 PCB 放入试片。如果窗口在左右两侧各遮住 0.3 mm 显示区，记录遮挡方向和数值。在保持窗口中心不变的条件下，可以把窗口总宽增加 0.6 mm，重新导出并打印同一段试片。\n检查支架的受力位置。两边应托住电路板的空白板边，让屏幕玻璃、背面元件和接线都有余量。若使用金属紧固件，要调整绝缘支撑，避免紧固件碰到焊点。将通过试装的尺寸写回设计文件。",
+    "crumbs": [
+      "首页",
+      "改出自己的版本",
+      "7. 打印与装配头盔"
+    ]
+  },
+  {
+    "objectID": "tutorial/07-print-and-assemble.html#将三个模块装入头盔",
+    "href": "tutorial/07-print-and-assemble.html#将三个模块装入头盔",
+    "title": "7. 打印与装配头盔",
+    "section": "将三个模块装入头盔",
+    "text": "将三个模块装入头盔\n\n在壳外测试。 上电后确认屏幕能显示两只完整的眼睛，触摸能切换表情。拔下 USB 线，再开始试装。\n将 OLED 对准面窗。 用试合过的支架托住 PCB，从正面检查显示区的四条边是否完整露出。留出排针和导线的位置。\n定位 TTP223 和 ESP32-C3。 让感应电极朝向头顶预定的触摸位置。把开发板放在底部，用未接电源的 USB 线试插，确认插头能插到底，板子不会被推走。\n接线、合壳。 按接线图连接三个模块，给需要拆卸的底板留出线长。先试合头壳，确认没有夹线，再固定部件、接上电源。头盔与器件的位置示意\n\n\n\n方形外壳的装配顺序\n\n把 OLED 和 TTP223 滑入上盖背面的导槽，把开发板从底壳后侧滑向 USB 开口。试插后拔下插头，接好线，给上盖留出掀开的余量，再拧紧四角螺丝。查看装配图",
+    "crumbs": [
+      "首页",
+      "改出自己的版本",
+      "7. 打印与装配头盔"
+    ]
+  },
+  {
+    "objectID": "tutorial/07-print-and-assemble.html#合壳后复测",
+    "href": "tutorial/07-print-and-assemble.html#合壳后复测",
+    "title": "7. 打印与装配头盔",
+    "section": "合壳后复测",
+    "text": "合壳后复测\n\n\n\n\n\n\n\n项目\n操作和记录\n\n\n\n\n上电\n拔插 USB 数次，记录屏幕能否每次正常启动。\n\n\n触摸\n隔着头盔做单击和双击，检查是否漏触发或误触发。使用学习提醒的版本再试一次长按和取消。\n\n\n显示\n检查普通眼睛、笑眼和泪滴的边缘是否被挡住。有学习提醒时，再看倒计时数字和提示文字。\n\n\n接口\n插拔 USB 后查看开发板、固定点和导线是否位移。\n\n\n连续使用\n完整跑过一次预定使用过程，记录时长、异常现象和重启次数。\n\n\n\n例如，在壳外能识别双击、装好后经常漏掉第二下，可以先保持接线和固件不变，只调整电极与头盔内壁的距离，重复同一组触摸。保存这次试装照片、打印参数和检查结果，便于别人按相同条件复测。",
+    "crumbs": [
+      "首页",
+      "改出自己的版本",
+      "7. 打印与装配头盔"
+    ]
+  },
+  {
+    "objectID": "tutorial/03-run-the-original.html",
+    "href": "tutorial/03-run-the-original.html",
+    "title": "3. 接线、自检与上传固件",
+    "section": "",
+    "text": "有实物时，先分别检查触摸输入和屏幕连接，再上传桌宠程序。手边只有电脑时，可以在 Velxio 中运行课程包内的 simulation/tobi-original.vlx，观察同样的单击和双击。Velxio 操作步骤",
+    "crumbs": [
+      "首页",
+      "读懂与运行",
+      "3. 接线、自检与上传固件"
+    ]
+  },
+  {
+    "objectID": "tutorial/03-run-the-original.html#连接触摸模块和屏幕",
+    "href": "tutorial/03-run-the-original.html#连接触摸模块和屏幕",
+    "title": "3. 接线、自检与上传固件",
+    "section": "连接触摸模块和屏幕",
+    "text": "连接触摸模块和屏幕\n核对开发板为 ESP32-C3 SuperMini，屏幕为 SSD1306、I²C 接口、128 × 64 像素。拔下 USB 线，按引脚旁印的名称接线。同一型号的不同模块，引脚排列可能不同。\n\n\n\n开发板\n接到模块\n作用\n\n\n\n\n3V3\nOLED VCC、TTP223 VCC\n给两块模块供电\n\n\nGND\nOLED GND、TTP223 GND\n让三个部件共用电压参考\n\n\nGPIO20\nOLED SDA\n传输屏幕数据\n\n\nGPIO21\nOLED SCL\n提供同步时钟\n\n\nGPIO10\nTTP223 OUT 或 I/O\n读取触摸信号\n\n\n\n\n\n\nESP32-C3、OLED 和 TTP223 的接线。",
+    "crumbs": [
+      "首页",
+      "读懂与运行",
+      "3. 接线、自检与上传固件"
+    ]
+  },
+  {
+    "objectID": "tutorial/03-run-the-original.html#check",
+    "href": "tutorial/03-run-the-original.html#check",
+    "title": "3. 接线、自检与上传固件",
+    "section": "用自检程序读地址和电平",
+    "text": "用自检程序读地址和电平\n如果 Arduino IDE 中还没有 ESP32 板型或屏幕库，先按电脑准备页完成安装。安装板卡支持和屏幕库\n\n在 Arduino IDE 中打开 firmware/hardware_check/ 文件夹里的 hardware_check.ino，选择 ESP32C3 Dev Module。用开发板的原生 USB 看日志时，启用 USB CDC On Boot。\n点击 Verify 编译。插上 USB 线，选择新出现的串口，点击 Upload 上传。若一直停在 Connecting，可按板型说明进入下载模式。有 BOOT 和 RESET 两个按键的板子，通常是按住 BOOT，按一下 RESET，再松开 BOOT。\n打开 Serial Monitor，波特率设为 115200。自检程序启动时扫描 I²C 总线，之后每隔约 5 秒再扫一次。每次触摸电平变化，也会输出一行记录。\n\n例如，一块地址为 0x3C 的屏幕和一个高电平有效的触摸模块，可能给出下面的记录。\nI2C device 0x3C\nTOUCH=0\nTOUCH=1\nTOUCH=0\n0x3C 是屏幕响应的 I²C 地址。扫描为空时，检查供电、共地和 SDA、SCL 的接法。若读到 0x3D，把实际使用的桌宠草图中的 SCREEN_ADDRESS 改成 0x3D，并记录下来。\n观察最后三行。手指移开时是 0，碰到时变为 1，再移开后回到 0。若松手后仍保持为 1，检查 TTP223 的输出模式和 OUT 所接引脚。课程程序使用高电平有效、松手即复位的模块。",
+    "crumbs": [
+      "首页",
+      "读懂与运行",
+      "3. 接线、自检与上传固件"
+    ]
+  },
+  {
+    "objectID": "tutorial/03-run-the-original.html#上传桌宠固件",
+    "href": "tutorial/03-run-the-original.html#上传桌宠固件",
+    "title": "3. 接线、自检与上传固件",
+    "section": "上传桌宠固件",
+    "text": "上传桌宠固件\n打开 firmware/original/original.ino。若已按上一章建立工作副本，也可以打开 firmware/my_pet/my_pet.ino。核对刚扫到的地址、板型和串口，再点击 Upload。上传后，串口应出现以 TOBI READY 开头的一行，屏幕上应看到眼睛。\nMOOD=1 t=... 这样的记录表示程序切换了表情。0 是普通眼睛，1 是开心，5 是哭泣。t 是从程序启动算起的毫秒数。",
+    "crumbs": [
+      "首页",
+      "读懂与运行",
+      "3. 接线、自检与上传固件"
+    ]
+  },
+  {
+    "objectID": "tutorial/03-run-the-original.html#记录单击双击和重启的结果",
+    "href": "tutorial/03-run-the-original.html#记录单击双击和重启的结果",
+    "title": "3. 接线、自检与上传固件",
+    "section": "记录单击、双击和重启的结果",
+    "text": "记录单击、双击和重启的结果\n\n\n\n操作\n应看到的结果\n\n\n\n\n单击、松手并等候\n显示笑眼，约 3 秒后恢复。\n\n\n快速双击\n第二次松手时显示泪滴，约 3 秒后恢复。\n\n\n恢复后保持静置\n眼睛眨动，约 15 秒后自动换表情。\n\n\n重复操作，再拔插 USB\n能继续响应，重新接电后正常启动并显示眼睛。\n\n\n\n把结果写进 my-notes.md，注明使用实物还是仿真。若触摸后屏幕一直没反应，重新运行自检。能看到 TOUCH 随手指变化时，再去检查屏幕地址和识别手势的代码。\n\n\nVelxio 里的触摸按钮\n\n基础工程的按钮接在 GPIO10 和 3V3 之间。松开时，芯片内部下拉使 GPIO10 保持低电平，按下时变成高电平。真实的 TTP223 由自己的 OUT 引脚输出高低电平，按上表接到 GPIO10。",
+    "crumbs": [
+      "首页",
+      "读懂与运行",
+      "3. 接线、自检与上传固件"
+    ]
+  },
+  {
+    "objectID": "tutorial/05-add-behavior.html",
+    "href": "tutorial/05-add-behavior.html",
+    "title": "5. 用长按启动学习提醒",
+    "section": "",
+    "text": "上一章的单击和双击都会切换表情。这次加入长按手势。手指按住 1 秒，屏幕切到学习倒计时。练习先把倒计时设为 25 秒。第一轮中途取消，第二轮等到提醒出现，再轻触确认。",
+    "crumbs": [
+      "首页",
+      "改出自己的版本",
+      "5. 用长按启动学习提醒"
+    ]
+  },
+  {
+    "objectID": "tutorial/05-add-behavior.html#同一个触摸在不同状态下的作用",
+    "href": "tutorial/05-add-behavior.html#同一个触摸在不同状态下的作用",
+    "title": "5. 用长按启动学习提醒",
+    "section": "同一个触摸在不同状态下的作用",
+    "text": "同一个触摸在不同状态下的作用\n\n\n\n\n\n\n\n\n当前屏幕\n操作或事件\n接下来显示什么\n\n\n\n\n普通眼睛\n按住 1 秒\n显示 Focus time 和剩余秒数。此时松手，计时继续。\n\n\n倒计时\n重新轻触并松手\n取消本次计时，恢复普通眼睛。\n\n\n倒计时\n经过 25 秒\n显示 Time for a break!。\n\n\n休息提醒\n轻触并松手\n确认提醒，恢复普通眼睛。\n\n\n\n长按启动那次触摸的松手和下一次轻触的松手，都让 GPIO10 回到低电平。程序要记住哪一次按下已经触发了长按，才能把这两次松手区分开。",
+    "crumbs": [
+      "首页",
+      "改出自己的版本",
+      "5. 用长按启动学习提醒"
+    ]
+  },
+  {
+    "objectID": "tutorial/05-add-behavior.html#让-coding-agent-修改工作副本",
+    "href": "tutorial/05-add-behavior.html#让-coding-agent-修改工作副本",
+    "title": "5. 用长按启动学习提醒",
+    "section": "让 coding agent 修改工作副本",
+    "text": "让 coding agent 修改工作副本\n在 firmware/my_pet/my_pet.ino 中加入学习提醒。按住 1 秒开始 25 秒倒计时，\n开始后第一次松手，倒计时继续。计时中再次轻触并松手时取消。\n到时显示休息提醒，轻触并松手后回到普通眼睛。\n普通状态下保留单击、双击和上一版设置的表情时长。用 millis() 计时，\n让主循环在倒计时期间继续读输入。更新操作说明，列出开始、取消、到时和确认的检查步骤。\n参考固件从基础程序增加计时功能，使用基础程序的 3 秒表情时长。若从上一章自己的工作副本继续，测试时用自己设定的时长核对。参考固件 · Velxio 计时工程",
+    "crumbs": [
+      "首页",
+      "改出自己的版本",
+      "5. 用长按启动学习提醒"
+    ]
+  },
+  {
+    "objectID": "tutorial/05-add-behavior.html#主循环怎样同时计时和读触摸",
+    "href": "tutorial/05-add-behavior.html#主循环怎样同时计时和读触摸",
+    "title": "5. 用长按启动学习提醒",
+    "section": "主循环怎样同时计时和读触摸",
+    "text": "主循环怎样同时计时和读触摸\n参考固件把计时开始的时刻存进 focusStarted，在 updateFocus() 中判断是否到时。\nif (focusActive && millis() - focusStarted &gt;= FOCUS_DURATION_MS) {\n  focusActive = false;\n  focusDone = true;\n  Serial.printf(\"FOCUS=DONE t=%lu\\n\", millis());\n}\n每轮循环都用当前时间减去起始时间。达到 FOCUS_DURATION_MS 时，程序从“计时”切到“完成”。两个时间都按无符号毫秒数计算，即使计数值在这段时间内回绕，也能算出经过的时间。如果改用 delay(25000)，主循环会停 25 秒，期间的触摸取消就无法及时处理。\n另一个关键变量是 longTouchHandled。程序在确认长按时设置它。开始计时后第一次松手只清除这个标记，之后再来一次短触摸才取消计时。",
+    "crumbs": [
+      "首页",
+      "改出自己的版本",
+      "5. 用长按启动学习提醒"
+    ]
+  },
+  {
+    "objectID": "tutorial/05-add-behavior.html#用两轮输入检查四次状态变化",
+    "href": "tutorial/05-add-behavior.html#用两轮输入检查四次状态变化",
+    "title": "5. 用长按启动学习提醒",
+    "section": "用两轮输入检查四次状态变化",
+    "text": "用两轮输入检查四次状态变化\n\n按住 1 秒后松手。看到剩余秒数继续变小，再轻触一次，应回到普通眼睛。\n重新长按，松手后等满 25 秒。看到休息提醒后轻触确认，再试单击和双击，检查普通状态的表情和时长。\n\n如果一松手就退回眼睛，把“按住、开始倒计时、松手”的顺序和串口里的 FOCUS 记录交给 coding agent，检查它是否把开始时的松手也算成一次取消。\n\n\n两轮触摸的仿真记录\n\n\n\n\n第二轮的串口记录为 FOCUS=RUNNING t=3904、FOCUS=DONE t=28905。两者相差 25001 毫秒。屏幕上的变化来自同一次仿真运行。",
+    "crumbs": [
+      "首页",
+      "改出自己的版本",
+      "5. 用长按启动学习提醒"
+    ]
+  },
+  {
+    "objectID": "tutorial/05-add-behavior.html#延长到实际使用的时间",
+    "href": "tutorial/05-add-behavior.html#延长到实际使用的时间",
+    "title": "5. 用长按启动学习提醒",
+    "section": "延长到实际使用的时间",
+    "text": "延长到实际使用的时间\n将 FOCUS_DURATION_MS 换为 25UL * 60UL * 1000UL，即 25 分钟。先保留 25 秒的测试版本，方便改代码时重复验证。最终再按实际时长完整运行一次。参考程序把状态保存在内存中，断电重启后从普通眼睛开始。",
+    "crumbs": [
+      "首页",
+      "改出自己的版本",
+      "5. 用长按启动学习提醒"
+    ]
+  },
+  {
+    "objectID": "tutorial/06-change-enclosure.html",
+    "href": "tutorial/06-change-enclosure.html",
+    "title": "6. 为 Tobi 头盔设计配件",
+    "section": "",
+    "text": "给 Tobi 加一个零件，可以保留课程包里的头盔外形。名牌只需要与外表面配合，屏幕支架还要同时对准面窗和电路板。这两个例子需要提供给 coding agent 的尺寸不同。",
+    "crumbs": [
+      "首页",
+      "改出自己的版本",
+      "6. 为 Tobi 头盔设计配件"
+    ]
+  },
+  {
+    "objectID": "tutorial/06-change-enclosure.html#头壳底板和小折板",
+    "href": "tutorial/06-change-enclosure.html#头壳底板和小折板",
+    "title": "6. 为 Tobi 头盔设计配件",
+    "section": "头壳、底板和小折板",
+    "text": "头壳、底板和小折板\n在查看器中分别打开课程包的三个 STL。转动 Helmet1.stl，找到正面的面窗和底部开口。再看 Core .stl，底板两侧各有一根立架。第三个文件 Core 2.stl 是小折板，项目资料没有标明它固定的器件。单独打开模型查看器\n\n\nSTL 用三角形保存零件表面。可以量出面窗有多宽，却很难像修改设计草图那样单独改它的宽度。整体放大头壳会连安装空间一起放大。3MF 还可保存单位、材料等信息，能否修改孔径、壁厚等参数，取决于是否有可编辑的设计源文件。",
+    "crumbs": [
+      "首页",
+      "改出自己的版本",
+      "6. 为 Tobi 头盔设计配件"
+    ]
+  },
+  {
+    "objectID": "tutorial/06-change-enclosure.html#用-openscad-改名牌",
+    "href": "tutorial/06-change-enclosure.html#用-openscad-改名牌",
+    "title": "6. 为 Tobi 头盔设计配件",
+    "section": "用 OpenSCAD 改名牌",
+    "text": "用 OpenSCAD 改名牌\n将名牌源码放到工作副本的 3d-models/ 中。OpenSCAD 用代码描述零件，pet_name 决定文字，plate_w、plate_h 和 plate_t 分别决定底牌的宽、高、厚。可以把以下要求交给 coding agent。下载名牌源码\n请用 3d-models/nameplate.scad 另存一份名为 MIKA 的名牌。\n底牌宽 32 mm、高 12 mm、厚 2 mm，字面比底牌高出 0.8 mm。\n保留平整的底面，给出可编辑源文件和打印用的 STL。\n在 OpenSCAD 打开修改后的源码，按 F5 预览。看文字是否落在底牌内，再按 F6 渲染，通过 File → Export → Export as STL 导出。确定名牌在头盔上的位置时，检查它是否遮挡屏幕、触摸区或底板的拆卸位置。MIKA 示例源码 · MIKA 示例 STL",
+    "crumbs": [
+      "首页",
+      "改出自己的版本",
+      "6. 为 Tobi 头盔设计配件"
+    ]
+  },
+  {
+    "objectID": "tutorial/06-change-enclosure.html#measure",
+    "href": "tutorial/06-change-enclosure.html#measure",
+    "title": "6. 为 Tobi 头盔设计配件",
+    "section": "测量屏幕、触摸模块和开发板",
+    "text": "测量屏幕、触摸模块和开发板\n\n\n\n测量屏幕的显示区与电路板、触摸位置和 USB 插头所需空间。\n\n\n把尺寸表保存为 3d-models/enclosure-measurements.txt，以毫米记录每个尺寸。注明数值来自 STL 还是实物，未量过的填“待测”。下载尺寸记录表\n\n\n\n\n\n\n\n测量部位\n测量方法与用途\n\n\n\n\n面窗和底部开口\n以面窗中心和下沿为基准，量到立架和底板的距离。再沿支架装入的方向量最窄处。\n\n\nOLED\n分别量亮屏区域和整块电路板（PCB）。前者用来对准面窗，后者决定支架宽度。标出能托住的空白板边，并量出插好导线后的总深度。\n\n\nTTP223\n记录感应电极在哪一面、头顶的触摸位置和壁厚。拿同材料、同厚度的试片盖住电极，实际试一次单击和双击。\n\n\nESP32-C3\n插上要用的 USB 线，测量插头外壳、排针和弯曲的导线占用的空间。检查底板能否连同接线一起取出。",
+    "crumbs": [
+      "首页",
+      "改出自己的版本",
+      "6. 为 Tobi 头盔设计配件"
+    ]
+  },
+  {
+    "objectID": "tutorial/06-change-enclosure.html#请-coding-agent-设计屏幕支架",
+    "href": "tutorial/06-change-enclosure.html#请-coding-agent-设计屏幕支架",
+    "title": "6. 为 Tobi 头盔设计配件",
+    "section": "请 coding agent 设计屏幕支架",
+    "text": "请 coding agent 设计屏幕支架\n屏幕支架要让亮屏区域居中，还要能从底部装进头壳。把记录表和课程包的模型放在同一项目中，再给助手这段要求。\n请读 3d-models/enclosure-measurements.txt，以 Helmet1.stl 和 Core .stl 为参照。\n为我的 OLED 设计可拆的内支架，让显示区对准面窗，用支架托住 PCB 的空白板边。\n说明支架从哪里装入，靠什么定位，还有哪些尺寸需要我实测。\n尺寸齐备后，另存 3d-models/helmet-oled-mount.scad。\n给出一段可单独打印的局部试片，用来检查板边配合和窗口位置。\n按 F5 预览，沿实际装入方向检查支架能否穿过壳体开口。按 F6 渲染，分别导出试片和支架，用切片器重新打开 STL 并核对尺寸。先打印试片，用同一块 OLED 检查板边能否放入，插上线之后还能否对准面窗。课堂中的器件布局\n\n\n方形外壳的窗口尺寸练习\n\n方形外壳示例有三组 PCB 导槽。下载源码，在工作副本中保存为 3d-models/my-case.scad。打开分解视图和剖面视图，找到屏幕从哪侧装入。方形外壳源码 · 四个装配视图\n假设屏幕试装后，显示区左右各被挡住 0.5 mm。窗口原宽 22 mm，要保留中心位置，两边各放宽 0.5 mm。可以这样要求助手修改。\n请修改 3d-models/my-case.scad，把 window_w 从 22 mm 调为 23 mm。\n保留窗口中心、PCB 导槽和触摸区的位置。显示上盖内侧的预览，\n重新导出窗口试片，列出修改前后的尺寸。\n在 OpenSCAD 的 part 参数中选择 coupon，按 F6 渲染并导出试片。切片后，检查窗口边缘和导槽是否都有连续的打印路径，再用同一块屏幕试装。要导出底壳和上盖，分别选择 base 和 lid。示例模型的窗口与导槽试片\n只练习开窗口时，也可以使用结构更简单的方盒。它同样用 part 选择底壳、上盖或试片。基础方盒源码 · 基础方盒的窗口试片",
+    "crumbs": [
+      "首页",
+      "改出自己的版本",
+      "6. 为 Tobi 头盔设计配件"
+    ]
+  },
+  {
+    "objectID": "projects/lucas.html",
+    "href": "projects/lucas.html",
+    "title": "Lucas 的触摸、声音和休眠",
+    "section": "",
+    "text": "Lucas 用 TTP223 检测触摸，用 OLED 显示表情，用无源蜂鸣器发声。程序会记录互动情况，因此即使触摸的是同一个位置，触摸时长、次数和间隔也可能影响它的反应。作者的项目仓库"
+  },
+  {
+    "objectID": "projects/lucas.html#沿着一次触摸读程序",
+    "href": "projects/lucas.html#沿着一次触摸读程序",
+    "title": "Lucas 的触摸、声音和休眠",
+    "section": "沿着一次触摸读程序",
+    "text": "沿着一次触摸读程序\n打开 code/desktop_robot_companion.ino，先看程序怎样记录触摸的开始和结束，再找到短触和长触各自进入的分支。对照两个分支，记下它们更新了哪些状态、下一帧画什么、是否调用蜂鸣器。阅读休眠逻辑时，再找出进入休眠所需的空闲时长，以及唤醒所需的输入。"
+  },
+  {
+    "objectID": "projects/lucas.html#选择器件并分别测试",
+    "href": "projects/lucas.html#选择器件并分别测试",
+    "title": "Lucas 的触摸、声音和休眠",
+    "section": "选择器件并分别测试",
+    "text": "选择器件并分别测试\n固件引入 Adafruit_SH110X.h，用 Adafruit_SH1107 display(128, 128, &Wire) 创建显示对象。选屏幕时要核对 SH1107 驱动、128 × 128 分辨率和 I²C 接口。按同一版本的接线图连接 ESP32，分别试着点亮屏幕、读取触摸片的输出、让蜂鸣器发出一个音。这样，运行完整程序时若能看到表情却听不到声音，便可以先检查蜂鸣器引脚和发声调用。\n仓库中的接线图、装配照片和 STL 可与固件对照。选定开发板和屏幕后，先按实物核对面窗、固定位置和供电，再打印外壳。课程已核对项目源文件，完整程序的编译和整机运行尚未经本课程验证。仓库采用 GPL-3.0 许可证。Lucas 项目文件与许可证"
+  },
+  {
+    "objectID": "projects/index.html",
+    "href": "projects/index.html",
+    "title": "三个开源桌面机器人项目",
+    "section": "",
+    "text": "主教程用 Tobi 讲解触摸输入、程序判断和屏幕绘图。Lucas 和 Tiny Engineer 提供了另外两种可查阅的设计。前者把同一次触摸变成表情和声音，后者能把电脑上的任务进度变成机械动作。\n\n\n\n项目\n可以追踪的现象\n从哪里读起\n\n\n\n\nTobi\n单击后出现笑眼，双击后出现泪滴\n对照触摸接线和表情程序，再查看头壳与底板的模型。\n\n\nLucas\n触摸会影响表情和音效，长时间没有互动会进入休眠\n在固件中找到触摸输入，沿着状态变化找到屏幕和蜂鸣器的输出。\n\n\nTiny Engineer\n电脑发出任务完成事件，桌面机器人敲铃\n在通信文档中找到命令，再对照舵机程序和装配图看铃如何被敲响。\n\n\n\nTobi 的固件、仿真工程和三个打印模型都在课程包里。Lucas 和 Tiny Engineer 的项目页分别链接到作者的文件。"
+  },
+  {
+    "objectID": "setup/hardware.html",
+    "href": "setup/hardware.html",
+    "title": "器件清单与引脚",
+    "section": "",
+    "text": "Tobi 用三个模块完成触摸反馈。TTP223 感应手指，ESP32-C3 读取信号并判断手势，OLED 显示眼睛。第一次在桌面上接好这三个模块，用 USB 给开发板供电，就可以运行表情程序。下载器件清单（CSV） · 查看接线图",
+    "crumbs": [
+      "首页",
+      "准备",
+      "器件清单与引脚"
+    ]
+  },
+  {
+    "objectID": "setup/hardware.html#按型号和接口选器件",
+    "href": "setup/hardware.html#按型号和接口选器件",
+    "title": "器件清单与引脚",
+    "section": "按型号和接口选器件",
+    "text": "按型号和接口选器件\n\n\n\n\n\n\n\n\n器件\n数量\n核对什么\n\n\n\n\nESP32-C3 SuperMini 开发板\n1\n对照板上丝印和引脚图，找到 GPIO20、GPIO21 和 GPIO10。USB 接口用于供电和传输程序。\n\n\nSSD1306 OLED 屏幕\n1\n128 × 64 像素、四针 I2C 接口、支持 3.3 V 供电。驱动芯片和接口类型都要看，外观相似的屏幕也可能用另一种驱动。\n\n\nTTP223 触摸模块\n1\n支持 3.3 V，选高电平有效、非锁存模式。手指放上去输出 1，松开后回到 0。\n\n\nUSB 数据线\n1\n与板上的接口匹配，并且能传输数据。只支持充电的线可以点亮电源灯，却无法上传程序。\n\n\n面包板和杜邦线\n1 套\n线头要能接到模块排针。若开发板还没焊排针，先焊好或请实验室协助。\n\n\n螺丝、绝缘垫或支架\n按实测选\n装壳时要用。等手边有模块，量好安装孔和壳内空间，再选尺寸。\n\n\n\n收到模块后，拍下正反面的标识。先只将开发板插到电脑上，检查是否出现新的串口。如果电源灯亮了却找不到端口，先换一根已知可以传数据的线。设置开发板和串口",
+    "crumbs": [
+      "首页",
+      "准备",
+      "器件清单与引脚"
+    ]
+  },
+  {
+    "objectID": "setup/hardware.html#从引脚名看接线",
+    "href": "setup/hardware.html#从引脚名看接线",
+    "title": "器件清单与引脚",
+    "section": "从引脚名看接线",
+    "text": "从引脚名看接线\n3V3 是开发板的 3.3 V 电源输出，GND 是各模块共同的电位参考。GPIO 是读写信号的引脚。接线时先拔掉 USB，对照自己模块上印的引脚名逐根连接。\n\n\n\n\n\n\n\n\n模块\n电源和地\n信号\n\n\n\n\nSSD1306 屏幕\nVCC 接 3V3，GND 接 GND\nSDA 接 GPIO20，传送数据。SCL 接 GPIO21，提供时钟。有些四针模块把时钟脚写作 SCK，可在该模块的引脚图中确认。\n\n\nTTP223 触摸模块\nVCC 接 3V3，GND 接 GND\nOUT（有时标成 SIG 或 I/O）接 GPIO10，开发板从这里读取触摸电平。\n\n\n\n面包板的一小排孔通常内部相通，中间沟槽两侧互相隔开。长电源轨有的会在中间断开。拿不准哪几个孔相连时，断电，用万用表的通断档检查，或查看面包板的连接图。\n\n\n\n\n\n\n警告接回 USB 之前\n\n\n\n核对 3V3 和 GND 分处不同的连通排，各模块已经共地，GPIO 没有接到 5 V。上电后如果模块发热、有异味或电脑提示 USB 过流，马上拔掉 USB，断电检查接线。",
+    "crumbs": [
+      "首页",
+      "准备",
+      "器件清单与引脚"
+    ]
+  },
+  {
+    "objectID": "setup/hardware.html#通电后先读两条结果",
+    "href": "setup/hardware.html#通电后先读两条结果",
+    "title": "器件清单与引脚",
+    "section": "通电后先读两条结果",
+    "text": "通电后先读两条结果\n上传 firmware/hardware_check/hardware_check.ino，打开 115200 波特率的串口监视器。屏幕接通后，程序会定期打印探测到的 I2C 地址，例如 I2C device 0x3C。再把手指放上触摸片，应看到 TOUCH=1，松开应看到 TOUCH=0。如果松开后仍保持 1，要核对 TTP223 的锁存设置。等地址和电平都符合预期，再上传表情程序，观察单击和双击。接线、自检与运行步骤",
+    "crumbs": [
+      "首页",
+      "准备",
+      "器件清单与引脚"
+    ]
+  },
+  {
+    "objectID": "classroom/preparation.html",
+    "href": "classroom/preparation.html",
+    "title": "教师课前准备",
+    "section": "",
+    "text": "这堂课用 30 分钟讲清楚 Tobi 怎样检测触摸、显示表情，以及怎样用两只舵机让头部转动。先看接线和固件，再拆看头盔的三个原有零件，最后在 Velxio 里演示点头和摇头。打开课堂讲义"
+  },
+  {
+    "objectID": "classroom/preparation.html#备齐两个工程和三个模型",
+    "href": "classroom/preparation.html#备齐两个工程和三个模型",
+    "title": "教师课前准备",
+    "section": "备齐两个工程和三个模型",
+    "text": "备齐两个工程和三个模型\n\n解压学生课程包。基础工程是 simulation/tobi-original.vlx，可以用它讲单击、双击和眼睛的变化。需要读代码时，打开 firmware/original/original.ino。学生课程包\n打开 3d-models/，依次看 Helmet1.stl、Core .stl、Core 2.stl。课堂页提供三个单件模型和头壳与底板的分解视图。小折板的安装用途尚无作者说明。原项目的三个零件\n另存一份双舵机课堂工程。它在 Velxio 里使用经典 ESP32 DevKit V1，编辑器能显示两只舵臂的转动。课程实物使用 ESP32-C3，烧录时选 C3 固件。要现场演示改代码，请让 coding agent 打开草图的工作副本。双舵机画布工程 · C3 实物固件"
+  },
+  {
+    "objectID": "classroom/preparation.html#在教室电脑上排演",
+    "href": "classroom/preparation.html#在教室电脑上排演",
+    "title": "教师课前准备",
+    "section": "在教室电脑上排演",
+    "text": "在教室电脑上排演\n在官方编辑器中依次打开基础工程和双舵机工程。两次都从文件区点 Open project，选择下载的 .vlx 文件，再点 Load → Run。看到串口的 TOBI READY 后再按绿色 Touch 按钮。导入下一个工程前先保存当前修改。打开 Velxio 官方编辑器 · 仿真操作步骤\n\n\n\n\n\n\n\n课堂时间\n演示动作和可指给学生看的结果\n\n\n\n\n0–14 分钟\n从实物照片和基础回放开始。在接线图上从 TTP223 的 OUT 找到 GPIO10，再找开发板到 OLED 的两根线。对照单击、双击的工作原理图与代码，指出第一次松手后等 400 毫秒的原因。单击显示笑眼，双击出现泪滴，约 3 秒后恢复普通眼睛。\n\n\n14–18 分钟\n先展示三个原项目的零件，再切到「从底部分解」。用面窗解释 OLED 显示面的朝向，用头顶内壁解释触摸电极朝向，从底部开口看主板、插头和走线需要的空间。\n\n\n18–22 分钟\n在双舵机画布上输入一次单击和一次双击。单击时上方橙色舵臂偏转后回中。双击时下方蓝色舵臂向两边摆动后回中。对照三维头架，指出点头时转动的头盔和摇头时一起转动的 U 形架。\n\n\n22–26 分钟\n在经典 ESP32 画布上把两根信号线追到 GPIO25、26，再对照课程实物 C3 的 GPIO5、6。找到两轴回中的 1500 微秒命令，说明外部舵机电源怎样与开发板共地。\n\n\n26–30 分钟\n将点头偏移从 80 改为 60 微秒。在 Velxio 重新编译，单击查 GPIO25=1560us，双击查 GPIO26 的三个目标有没有变化。最后从 OLED 和两只舵臂再核对一次。\n\n\n\n若课堂电脑无法运行仿真，讲义中有基础表情回放和双舵机画布实录。结构部分可以用网页里的模型，也可在切片器里逐件打开 STL。录屏用于讲解预先运行过的程序，学生修改的草图仍需重新编译测试。双舵机实录"
+  },
+  {
+    "objectID": "classroom/preparation.html#local-velxio",
+    "href": "classroom/preparation.html#local-velxio",
+    "title": "教师课前准备",
+    "section": "在教学电脑上运行 Velxio 服务",
+    "text": "在教学电脑上运行 Velxio 服务\n如果要用网页里的三维头架实时运行 C3 固件，或用课程脚本在本机编译，需在演示用的电脑上启动 Velxio。127.0.0.1 指向打开网页的那台电脑。\n在已经配置过的备课电脑上，先启动 Docker Desktop，再运行 docker start desk-pet-velxio。在浏览器打开本机编辑器，确认课前已能导入并运行工程。本机 Velxio 编辑器\n在新电脑上，先安装 Docker，再运行下面的命令创建容器。命令使用课程测试过的镜像，端口仅监听本机。首次下载需要时间，宜在上课前完成。以下写法适用于 macOS 或 Linux，在 PowerShell 中可去掉续行符，合为一行执行。Velxio 项目说明\ndocker run -d --pull=missing --name desk-pet-velxio \\\n  -p 127.0.0.1:3080:80 \\\n  -e VELXIO_NEWS=off \\\n  -v desk-pet-velxio-data:/app/data \\\n  -v desk-pet-velxio-arduino:/root/.arduino15 \\\n  -v desk-pet-velxio-libs:/root/Arduino \\\n  -v desk-pet-velxio-ccache:/var/cache/ccache \\\n  -v desk-pet-velxio-build:/var/lib/velxio-build \\\n  ghcr.io/davidmonterocrespo24/velxio@sha256:2f3c65c4ce11fc681e79758fa6edce43f7b5d052b2922b1d8ae570794792aeef"
+  },
+  {
+    "objectID": "classroom/preparation.html#课后制作",
+    "href": "classroom/preparation.html#课后制作",
+    "title": "教师课前准备",
+    "section": "课后制作",
+    "text": "课后制作\n制作能动的头架，要准备两只位置舵机和能承担两轴负载的独立电源。安装舵盘前先单独让舵机回中，再断电装配，逐轴检查运动方向、线束余量和带动头部时的供电。需要更短的练习时，可选表情时长或 OLED 支架。双舵机实物练习 · 表情时长练习 · 头盔支架与试片"
+  },
+  {
+    "objectID": "extensions/computer-control.html",
+    "href": "extensions/computer-control.html",
+    "title": "通过 USB 串口切换表情",
+    "section": "",
+    "text": "电脑可以把一个事件发给 Tobi。例如，电脑上的测试程序运行成功，就发送一条命令，让屏幕显示笑眼。要完成这个实验，需要在课程固件的工作副本里加入命令接收和回复功能。",
+    "crumbs": [
+      "首页",
+      "继续尝试",
+      "通过 USB 串口切换表情"
+    ]
+  },
+  {
+    "objectID": "extensions/computer-control.html#约定每一行命令的含义",
+    "href": "extensions/computer-control.html#约定每一行命令的含义",
+    "title": "通过 USB 串口切换表情",
+    "section": "约定每一行命令的含义",
+    "text": "约定每一行命令的含义\n\n\n\n电脑发送\n桌宠执行\n串口回复\n\n\n\n\nHAPPY\n调用现有的开心表情，显示 3 秒\nOK HAPPY\n\n\nIDLE\n结束当前触发表情，恢复空闲画面\nOK IDLE\n\n\n其他文字\n继续当前行为\nERR UNKNOWN\n\n\n\n每条命令以换行结束。请 coding agent 在主循环里收集已到达的字符，收到换行后再处理整行，给缓冲区设置长度上限。如果一行超长，就丢弃该行并报告错误。这样，电脑只发来半条命令时，屏幕和触摸还可以继续刷新。",
+    "crumbs": [
+      "首页",
+      "继续尝试",
+      "通过 USB 串口切换表情"
+    ]
+  },
+  {
+    "objectID": "extensions/computer-control.html#在串口监视器中核对回执",
+    "href": "extensions/computer-control.html#在串口监视器中核对回执",
+    "title": "通过 USB 串口切换表情",
+    "section": "在串口监视器中核对回执",
+    "text": "在串口监视器中核对回执\n将修改后的程序上传到 ESP32-C3。使用原生 USB 串口时启用 USB CDC On Boot，选择开发板的端口，将波特率设为课程固件使用的 115200，并选择换行结尾。先发 HAPPY，同时查看笑眼和回执，再发 IDLE。最后故意发一个拼错的命令，确认桌宠只报告错误，画面继续按原来的状态运行。",
+    "crumbs": [
+      "首页",
+      "继续尝试",
+      "通过 USB 串口切换表情"
+    ]
+  },
+  {
+    "objectID": "extensions/computer-control.html#让电脑程序发送命令",
+    "href": "extensions/computer-control.html#让电脑程序发送命令",
+    "title": "通过 USB 串口切换表情",
+    "section": "让电脑程序发送命令",
+    "text": "让电脑程序发送命令\n关闭串口监视器，让脚本打开同一个端口。脚本每次发一行，等待对应的回执，并在超时后报告设备没有响应。先手动运行脚本，确认能触发表情，再把这次调用放到测试成功或任务完成的分支。拔掉连接再接回时也试一次，核对脚本的超时提示以及桌宠重新上电后的触摸功能。\n如果调用方是 coding agent，也让它从已经实现的命令中选择。设备端仍按同一张表检查消息。Tiny Engineer 的项目文档另有串口和 HTTP 接口实例。Tiny Engineer 的电脑控制",
+    "crumbs": [
+      "首页",
+      "继续尝试",
+      "通过 USB 串口切换表情"
+    ]
+  },
+  {
+    "objectID": "extensions/sensors.html",
+    "href": "extensions/sensors.html",
+    "title": "用光照传感器切换表情",
+    "section": "",
+    "text": "这个实验给 Tobi 增加光照输入。房间变暗时显示困倦表情，重新变亮时恢复原先的表情轮换。若想做靠近时打招呼的效果，则要选择能测距离或检测接近的器件。",
+    "crumbs": [
+      "首页",
+      "继续尝试",
+      "用光照传感器切换表情"
+    ]
+  },
+  {
+    "objectID": "extensions/sensors.html#观察亮处和暗处的读数",
+    "href": "extensions/sensors.html#观察亮处和暗处的读数",
+    "title": "用光照传感器切换表情",
+    "section": "观察亮处和暗处的读数",
+    "text": "观察亮处和暗处的读数\n先查所选模块的数据手册，确认供电、信号电平和接口。即使模块支持 5 V 供电，它的输出也要与 ESP32 的 3.3 V 输入兼容。若与 OLED 共用 I²C，还要核对两个器件的地址。\n用厂商的示例把读数打印到串口。在桌面正常光照下记录一组数值，再用手遮住感光面记录一组。这样既能看到亮暗两组读数相差多少，也能确定遮挡时数值是升高还是降低。",
+    "crumbs": [
+      "首页",
+      "继续尝试",
+      "用光照传感器切换表情"
+    ]
+  },
+  {
+    "objectID": "extensions/sensors.html#设置进入和退出条件",
+    "href": "extensions/sensors.html#设置进入和退出条件",
+    "title": "用光照传感器切换表情",
+    "section": "设置进入和退出条件",
+    "text": "设置进入和退出条件\n以下以越亮读数越大的传感器为例。先根据刚才的记录选两个数。读数降到较低阈值以下时进入困倦状态，重新升到较高阈值以上时才退出。读数落在两者之间时，保留当前状态。这种处理称为滞回，可以避免光照在一个临界值附近轻微波动时屏幕反复切换。如果遮挡让读数变大，两处比较的方向也要随之调整。",
+    "crumbs": [
+      "首页",
+      "继续尝试",
+      "用光照传感器切换表情"
+    ]
+  },
+  {
+    "objectID": "extensions/sensors.html#把读数接入表情程序",
+    "href": "extensions/sensors.html#把读数接入表情程序",
+    "title": "用光照传感器切换表情",
+    "section": "把读数接入表情程序",
+    "text": "把读数接入表情程序\n将模块型号、示例和两组读数交给 coding agent，请它在工作副本中按固定间隔读取光照，并用主循环已有的计时方式安排采样。事先规定触摸和光照的优先级，例如单击或双击后先完整显示 3 秒触摸表情，再按光照选择画面。\n缓慢遮住传感器再移开，对照表情和两次切换时的串口读数。在临界亮度附近保持一会儿，观察屏幕有无来回闪动。若模块能报告读取错误，可在断电后拔掉传感器再开机，检查读取失败时触摸和动画是否仍能工作。",
+    "crumbs": [
+      "首页",
+      "继续尝试",
+      "用光照传感器切换表情"
+    ]
+  },
+  {
+    "objectID": "extensions/index.html",
+    "href": "extensions/index.html",
+    "title": "Tobi 的扩展实验",
+    "section": "",
+    "text": "在课程固件的副本上做实验。下面五项可以独立选择，每一项都给出了修改后能观察到的现象。\n\n\n\n实验\n改动\n怎样检验\n\n\n\n\n表情与手势\n修改一张眼睛图案，或增加长按判断\n单击观察图形，按住再松手，查看程序识别了几次。\n\n\n可拆附件\n为名牌设计插槽\n用同一块插片试三个槽宽，量出合适的间隙。\n\n\n双舵机头架\n把点头和摇头分别分配给两个转轴\n在 Velxio 单击和双击，对照舵臂和串口输出。\n\n\n光照传感器\n根据光照读数切换表情\n缓慢遮住传感器再移开，记录两次切换时的读数。\n\n\n电脑串口控制\n让电脑发送一行文字来切换表情\n对照发出的命令、设备回执和屏幕图案。\n\n\n\n如果是第一次把程序输出接到活动机构，可以从双舵机实验开始。从双舵机实验页下载课堂工程，在 Velxio 里运行，改一个动作的持续时间，再比较修改前后的舵臂动作。"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "用 coding agent 改造开源桌宠 Tobi",
+    "section": "",
+    "text": "Tobi 的两只眼睛画在同一块小屏幕上。摸一下头顶再松开，屏幕显示笑眼。快速摸两下，眼睛下方出现泪滴。头壳里的触摸模块把信号送给开发板，由程序决定画哪一种表情。\n这门课从这套电路讲起。你会在电脑上用编程助手（coding agent）找出识别手势的代码，修改一次触摸的反馈，再用仿真或实物检查结果。课堂演示还会给这个头盔加上两只舵机，让它能点头和摇头。\n\n开始制作 30 分钟课堂讲义 下载课程包\n\n\n\n\n\n\nSam Zare 制作的两只 Tobi。头盔正面的窗口露出 OLED 屏幕。"
+  },
+  {
+    "objectID": "index.html#从一次触摸读懂电路",
+    "href": "index.html#从一次触摸读懂电路",
+    "title": "用 coding agent 改造开源桌宠 Tobi",
+    "section": "从一次触摸读懂电路",
+    "text": "从一次触摸读懂电路\n看演示时，留意两次松手之间的间隔。第一次松手后，程序还要等一会儿才能确定是单击。如果第二次松手出现在 400 毫秒内，它就能当场确认双击。讲义用一张图把手指的动作、引脚上的高低电平和屏幕的变化对应起来。看触摸回放 · 看信号与判断过程"
+  },
+  {
+    "objectID": "index.html#在电脑上仿真或接线制作",
+    "href": "index.html#在电脑上仿真或接线制作",
+    "title": "用 coding agent 改造开源桌宠 Tobi",
+    "section": "在电脑上仿真，或接线制作",
+    "text": "在电脑上仿真，或接线制作\n\n用电脑运行 Tobi。 在 Velxio 导入课程包的基础工程，点击绿色 Touch 按钮，观察眼睛。双舵机另有一份已接好线的课堂工程，可以直接在画布上看到两只舵臂转动。Velxio 操作 · 双舵机演示\n用实物制作 Tobi。 准备 ESP32-C3、OLED 和触摸模块。先接线，运行自检程序读出屏幕地址和触摸电平，再把表情程序写入开发板。器件清单 · 接线与自检"
+  },
+  {
+    "objectID": "index.html#第一次改动",
+    "href": "index.html#第一次改动",
+    "title": "用 coding agent 改造开源桌宠 Tobi",
+    "section": "第一次改动",
+    "text": "第一次改动\n把单击后的笑眼从 3 秒延长到 5 秒，双击后的哭泣仍保持 3 秒。目前两种表情共用一个计时参数。要单独延长笑眼，先找到程序选择表情和恢复普通眼睛的位置。修改后，用串口里两次表情切换的时间戳算出笑眼持续了多久。修改表情时长\nTobi 的原始代码、头盔模型和实物照片来自 Sam Zare 的开源项目。课程使用的版本、接线和仿真记录可在资料页查到。项目来源与验证记录"
+  },
+  {
+    "objectID": "reference/troubleshooting.html",
+    "href": "reference/troubleshooting.html",
+    "title": "按现象排错",
+    "section": "",
+    "text": "在输出窗口向上找到第一条包含 error: 的报错，连同文件名、行号和附近几行一起保存。末尾的 exit status 1 只表示编译失败，具体原因在它前面。\n\n\n\n\n\n\n\n报错或现象\n检查方法\n\n\n\n\nAdafruit_SSD1306.h: No such file\n在库管理器中安装 Adafruit SSD1306 及其依赖。如果交替使用 IDE 和命令行，核对编译时使用的库目录。\n\n\n找不到 Wire.h\n确认已安装 Espressif 的 ESP32 开发板软件包，并在 IDE 中选中所用板型。\n\n\nSCREEN_ADDRESS 附近出现语法错误\n打开草图，检查这行是否写了地址值。课程基础草图写的是 0x3C。\n\n\n找不到 ledcAttach 或 ledcSetup\n查看 Arduino-ESP32 软件包版本。2.x 和 3.x 的函数名不同，课程舵机草图按版本选择调用方式。\n\n\n下载开发板包或库失败\n记下失败的包名和下载错误。网络恢复后重试，安装成功再编译。"
+  },
+  {
+    "objectID": "reference/troubleshooting.html#编译失败",
+    "href": "reference/troubleshooting.html#编译失败",
+    "title": "按现象排错",
+    "section": "",
+    "text": "在输出窗口向上找到第一条包含 error: 的报错，连同文件名、行号和附近几行一起保存。末尾的 exit status 1 只表示编译失败，具体原因在它前面。\n\n\n\n\n\n\n\n报错或现象\n检查方法\n\n\n\n\nAdafruit_SSD1306.h: No such file\n在库管理器中安装 Adafruit SSD1306 及其依赖。如果交替使用 IDE 和命令行，核对编译时使用的库目录。\n\n\n找不到 Wire.h\n确认已安装 Espressif 的 ESP32 开发板软件包，并在 IDE 中选中所用板型。\n\n\nSCREEN_ADDRESS 附近出现语法错误\n打开草图，检查这行是否写了地址值。课程基础草图写的是 0x3C。\n\n\n找不到 ledcAttach 或 ledcSetup\n查看 Arduino-ESP32 软件包版本。2.x 和 3.x 的函数名不同，课程舵机草图按版本选择调用方式。\n\n\n下载开发板包或库失败\n记下失败的包名和下载错误。网络恢复后重试，安装成功再编译。"
+  },
+  {
+    "objectID": "reference/troubleshooting.html#上传失败或找不到串口",
+    "href": "reference/troubleshooting.html#上传失败或找不到串口",
+    "title": "按现象排错",
+    "section": "上传失败或找不到串口",
+    "text": "上传失败或找不到串口\n用可传数据的 USB 线连接开发板，拔下再插回，观察端口列表里出现了哪一项。制作课程实物时选择 ESP32C3 Dev Module 和新出现的端口，关闭其他占用该端口的串口工具后再上传。\n若上传仍停在连接阶段，按手中板卡的说明进入下载模式。Windows 设备管理器若显示 USB 转串口芯片缺少驱动，按芯片型号从厂商获取驱动。"
+  },
+  {
+    "objectID": "reference/troubleshooting.html#屏幕没有眼睛",
+    "href": "reference/troubleshooting.html#屏幕没有眼睛",
+    "title": "按现象排错",
+    "section": "屏幕没有眼睛",
+    "text": "屏幕没有眼睛\n\n断电后检查屏幕的电源、GND 和信号线。课程实物 C3 的 SDA 接 GPIO20，SCL 接 GPIO21。\n打开课程包的 firmware/hardware_check/ 文件夹，把其中的 hardware_check.ino 上传到开发板。以 115200 波特率打开串口监视器。若出现 I2C device 0x3C，说明该地址有器件应答。将扫描到的实际地址与显示程序中的 SCREEN_ADDRESS 核对。\n如果有应答但屏幕仍空白，查看模块背面的型号和接口。本课固件使用 128 × 64 的 I²C SSD1306。SPI 接口或 SH1106 驱动的模块还要相应修改接线和显示程序。"
+  },
+  {
+    "objectID": "reference/troubleshooting.html#屏幕正常触摸后表情不变",
+    "href": "reference/troubleshooting.html#屏幕正常触摸后表情不变",
+    "title": "按现象排错",
+    "section": "屏幕正常，触摸后表情不变",
+    "text": "屏幕正常，触摸后表情不变\n在实物上运行 hardware_check，观察手指碰到感应区时是否出现 TOUCH=1，松开后是否出现 TOUCH=0。若数字始终不变，检查 TTP223 的 OUT 是否接到 GPIO10。若松开后还维持高电平，核对模块的输出模式。本课用高电平有效、松手即复位的非锁存模式。\n在 Velxio 中，点绿色 Touch 后松开。程序在松手时记一次触摸，等待 400 毫秒的双击窗口结束才显示笑眼。"
+  },
+  {
+    "objectID": "reference/troubleshooting.html#双击被识别为两次单击",
+    "href": "reference/troubleshooting.html#双击被识别为两次单击",
+    "title": "按现象排错",
+    "section": "双击被识别为两次单击",
+    "text": "双击被识别为两次单击\n程序比较两次松开的时刻。在 Velxio 中连续做两次短按，例如让两次松手相隔约 250 毫秒。必要时在 handleTouch() 记录松手时的 millis()，根据程序时间计算间隔。若实物的 OUT 信号持续过久，先观察电平变化，再决定是否调整 DOUBLE_TAP_WINDOW。调长后，单击也得多等一会儿才会被确认。"
+  },
+  {
+    "objectID": "reference/troubleshooting.html#有眼睛串口监视器没有日志",
+    "href": "reference/troubleshooting.html#有眼睛串口监视器没有日志",
+    "title": "按现象排错",
+    "section": "有眼睛，串口监视器没有日志",
+    "text": "有眼睛，串口监视器没有日志\n检查端口和波特率（115200）。课程 C3 的 GPIO20 和 GPIO21 用于 I²C，同时也是这款芯片常用的 UART0 RX、TX。用板载原生 USB 接口看日志时，在 Arduino IDE 中启用 USB CDC On Boot。如果使用外接串口适配器，课程固件的非 CDC 配置将 RX、TX 分别设在 GPIO3、GPIO4。"
+  },
+  {
+    "objectID": "reference/troubleshooting.html#velxio-里有表情舵臂停在原位",
+    "href": "reference/troubleshooting.html#velxio-里有表情舵臂停在原位",
+    "title": "按现象排错",
+    "section": "Velxio 里有表情，舵臂停在原位",
+    "text": "Velxio 里有表情，舵臂停在原位\n先看工程的板名。课堂上能看到两只舵臂转动的是 Tobi ESP32 DevKit V1。单击后在串口找 HEAD GPIO25=1580us，双击后找 HEAD GPIO26=1400us。如果板名是 ESP32-C3，本课所用的 Velxio 版本能记录两路脉冲输出，但画布上的 C3 舵臂保持静止。要看舵臂，打开 tobi-head-motion-esp32.vlx。双舵机画布工程和操作"
+  },
+  {
+    "objectID": "reference/troubleshooting.html#打印后电路板装不进支架",
+    "href": "reference/troubleshooting.html#打印后电路板装不进支架",
+    "title": "按现象排错",
+    "section": "打印后电路板装不进支架",
+    "text": "打印后电路板装不进支架\n先在切片器中核对单位和零件尺寸，再用卡尺量实际 PCB 和打印出的导槽，记录是槽宽、槽高还是排针位置挡住了。修改对应尺寸，按原打印方向打一小段试片，再用同一块板试插。整体缩放会同时移动面窗、安装孔和 USB 开口。测量与试片"
+  },
+  {
+    "objectID": "reference/troubleshooting.html#把现象交给-coding-agent",
+    "href": "reference/troubleshooting.html#把现象交给-coding-agent",
+    "title": "按现象排错",
+    "section": "把现象交给 coding agent",
+    "text": "把现象交给 coding agent\n我使用 [板型、库版本]，运行的文件是 [路径]。\n我先做了 [操作]，预期出现 [屏幕、串口或舵臂的变化]，实际看到 [现象]。\n第一条报错和附近的输出如下：[粘贴报错或日志]。\n请建议先做哪一项检查，以及不同结果各说明什么。等我补充检查结果再改代码。"
+  },
+  {
+    "objectID": "reference/glossary.html",
+    "href": "reference/glossary.html",
+    "title": "常用术语",
+    "section": "",
+    "text": "术语\n在 Tobi 上的含义\n\n\n\n\n微控制器（MCU）、开发板\nESP32-C3 是执行程序的芯片。开发板把芯片、供电电路和 USB 接口等装在一块板上，并引出可接线的引脚。\n\n\n传感器、执行器\n触摸模块把手指的接触变成电信号。舵机接收控制信号，带动头部转动。前者是传感器，后者是执行器。\n\n\nGPIO\n可由程序读取或设置高低电平的通用引脚。Tobi 在 GPIO10 读触摸。舵机的信号线接 GPIO，运动所需的电流由舵机电源提供。\n\n\n地（GND）、共地\n电路用 GND 作为电压参考。开发板和舵机用不同电源时，把两边的地相连，舵机才能按同一个参考读控制信号。\n\n\nI²C（I2C）\n开发板通过 SDA 数据线和 SCL 时钟线与屏幕通信。发送画面前，程序用地址选中总线上的屏幕。\n\n\n上拉、下拉\n通过电阻使引脚在没有其他信号驱动时保持高电平或低电平。仿真按钮松开时，GPIO10 由内部下拉保持在低电平。\n\n\nPWM、脉宽、占空比\nPWM 是周期性的脉冲信号。以课程舵机为例，每个周期为 20 毫秒，其中高电平持续 1.5 毫秒（1500 微秒）。这个时间是脉宽，所占比例 7.5% 是占空比。ESP32 用片上的 LEDC 外设产生这类信号。"
+  },
+  {
+    "objectID": "reference/glossary.html#器件与接线",
+    "href": "reference/glossary.html#器件与接线",
+    "title": "常用术语",
+    "section": "",
+    "text": "术语\n在 Tobi 上的含义\n\n\n\n\n微控制器（MCU）、开发板\nESP32-C3 是执行程序的芯片。开发板把芯片、供电电路和 USB 接口等装在一块板上，并引出可接线的引脚。\n\n\n传感器、执行器\n触摸模块把手指的接触变成电信号。舵机接收控制信号，带动头部转动。前者是传感器，后者是执行器。\n\n\nGPIO\n可由程序读取或设置高低电平的通用引脚。Tobi 在 GPIO10 读触摸。舵机的信号线接 GPIO，运动所需的电流由舵机电源提供。\n\n\n地（GND）、共地\n电路用 GND 作为电压参考。开发板和舵机用不同电源时，把两边的地相连，舵机才能按同一个参考读控制信号。\n\n\nI²C（I2C）\n开发板通过 SDA 数据线和 SCL 时钟线与屏幕通信。发送画面前，程序用地址选中总线上的屏幕。\n\n\n上拉、下拉\n通过电阻使引脚在没有其他信号驱动时保持高电平或低电平。仿真按钮松开时，GPIO10 由内部下拉保持在低电平。\n\n\nPWM、脉宽、占空比\nPWM 是周期性的脉冲信号。以课程舵机为例，每个周期为 20 毫秒，其中高电平持续 1.5 毫秒（1500 微秒）。这个时间是脉宽，所占比例 7.5% 是占空比。ESP32 用片上的 LEDC 外设产生这类信号。"
+  },
+  {
+    "objectID": "reference/glossary.html#读程序与运行",
+    "href": "reference/glossary.html#读程序与运行",
+    "title": "常用术语",
+    "section": "读程序与运行",
+    "text": "读程序与运行\n\n\n\n\n\n\n\n术语\n在 Tobi 上的含义\n\n\n\n\n固件（firmware）\n写入开发板、通电后运行的程序。Tobi 的固件读取触摸、判断手势并绘制眼睛。\n\n\n消抖\n忽略输入切换时过于密集的电平变化，减少一次操作被计数多次的情况。\n\n\n状态机\n程序记住当前状态，根据输入决定下一步。例如学习提醒有空闲、计时和完成三个状态，同一次触摸在不同状态下会触发不同动作。\n\n\n非阻塞计时\n程序记下开始时间，每轮循环检查时间是否已到。等待第二次松手期间，眼睛仍能刷新。\n\n\n编译\n把草图和它用到的库转换成目标芯片能执行的程序。编译前要选对开发板。\n\n\n烧录、上传\n把编译好的固件写入实物开发板。Arduino IDE 中对应的按钮是 Upload。\n\n\n串口监视器\n显示开发板发出的文字，也能向开发板发送数据。测试 Tobi 时，可以查到 TOUCH=1 或表情切换的时刻。\n\n\n差异（diff）、补丁（patch）\n差异列出两个版本增删或修改的行，补丁将这些修改保存为可应用的文件。"
+  },
+  {
+    "objectID": "reference/glossary.html#设计与打印",
+    "href": "reference/glossary.html#设计与打印",
+    "title": "常用术语",
+    "section": "设计与打印",
+    "text": "设计与打印\n\n\n\n\n\n\n\n术语\n在 Tobi 上的含义\n\n\n\n\nCAD、参数化模型\nCAD 是用计算机设计零件。参数化模型把尺寸写成可改的数值，例如在 OpenSCAD 中单独调整屏幕窗口宽度。\n\n\nSTL\n用三角形描述零件表面的文件。格式本身不记录单位，导入 Tobi 的模型时要按毫米核对尺寸。\n\n\n切片、G-code\n切片器按照打印机和材料把模型转成逐层的打印路径。导出的 G-code 包含打印机的运动、挤出和温度指令。\n\n\n公差、装配间隙\n公差是尺寸允许的变动范围，间隙是配合零件之间预留的空间。打印一小段导槽，用实际电路板试插，可以检查预留的空间是否合适。"
+  },
+  {
+    "objectID": "reference/simulation.html",
+    "href": "reference/simulation.html",
+    "title": "在 Velxio 中测试触摸、表情与舵机",
+    "section": "",
+    "text": "Velxio 在电脑上运行桌宠固件。绿色 Touch 按钮代替触摸模块，按下时送出高电平，松开时送出低电平。程序读到这个变化后，再决定屏幕和舵机的动作。有开发板的同学也可以在实物上做同样的触摸测试。在 ESP32-C3 上运行基础程序"
+  },
+  {
+    "objectID": "reference/simulation.html#选择工程",
+    "href": "reference/simulation.html#选择工程",
+    "title": "在 Velxio 中测试触摸、表情与舵机",
+    "section": "选择工程",
+    "text": "选择工程\n\n\n\n要观察的内容\n工程\n虚拟板型\n\n\n\n\n单击显示笑眼、双击显示泪滴\nTobi 基础工程，也在课程包的 simulation/ 里\nESP32-C3 SuperMini，与课程实物使用相同的引脚\n\n\n单击点头、双击摇头，同时看两只舵臂\n双舵机课堂工程\nESP32 DevKit V1，Velxio 画布可显示两只舵臂的转动\n\n\n\n从表中下载要试的工程，再打开官方编辑器。文件区的 Open project 可载入刚下载的 .vlx 文件，包括代码、器件和接线。打开 Velxio 官方编辑器 · 官方工程导入说明"
+  },
+  {
+    "objectID": "reference/simulation.html#导入并运行基础工程",
+    "href": "reference/simulation.html#导入并运行基础工程",
+    "title": "在 Velxio 中测试触摸、表情与舵机",
+    "section": "导入并运行基础工程",
+    "text": "导入并运行基础工程\n\n保存编辑器中正在做的工程。点击文件区的文件夹按钮 Open project (.vlx Velxio or .zip Wokwi)，选择 tobi-original.vlx，点 Load 载入文件。\n左侧应出现 original.ino，右侧应有开发板、OLED 和绿色按钮。如果只看到空的 setup() 和 loop()，重新导入 .vlx。想把电路投到屏幕上，可选 View → Circuit 和 View → Center canvas view。选 View → Both 可同时看代码和电路。\n点 Run。需要编译时编辑器会先编译，也可以单独点 Compile。出现 Compilation successful 后等屏幕亮起，在 Serial 中核对启动信息。\n\nTOBI READY: SDA20 SCL21 TOUCH10 OLED0x3C\n\n\n\n基础工程运行时的 Velxio 画面，开发板连接 OLED 屏幕和绿色 Touch 按钮。\n\n\n单击一次并松开，超过 400 毫秒仍没有第二次松手时，普通眼睛变成两道笑弧。快速双击时，两次松手相隔不超过 400 毫秒，第二次松手后出现泪滴。这是固件计时的毫秒数，可以在串口记录中对照。\n基础工程里，Touch 一端接 3V3，另一端接 GPIO10，松开时由内部下拉保持低电平。OLED 的 SDA 接 GPIO20，SCL 接 GPIO21。板图上这两处可能标作 RX 和 TX。"
+  },
+  {
+    "objectID": "reference/simulation.html#在电路画布上观察点头和摇头",
+    "href": "reference/simulation.html#在电路画布上观察点头和摇头",
+    "title": "在 Velxio 中测试触摸、表情与舵机",
+    "section": "在电路画布上观察点头和摇头",
+    "text": "在电路画布上观察点头和摇头\n停止基础工程，载入 tobi-head-motion-esp32.vlx，点 Run。确认板名是 Tobi ESP32 DevKit V1，草图是 head_motion_canvas.ino。画布上方橙色舵臂对应点头，下方蓝色舵臂对应摇头。打开 Velxio 官方编辑器\n\n\n\n\n\n\n\n\n输入\n屏幕和舵臂\n串口中依次出现的目标脉宽\n\n\n\n\n单击并松开\n显示笑眼，橙色舵臂偏转一次再回中，蓝色舵臂保持原位。\nGPIO25 输出 1580、1500 微秒。\n\n\n快速双击\n显示泪滴，蓝色舵臂先向一侧、再向另一侧摆动，最后回中。\nGPIO26 输出 1400、1600、1500 微秒。\n\n\n\n每个控制周期为 20 毫秒，两个舵机的中位脉宽都是 1500 微秒，约占周期的 7.5%。固件每隔约 300 毫秒发送下一个目标，运动期间继续读触摸、刷新屏幕。\n\n\n课程实物 ESP32-C3 的工程与引脚\n\n\n\n\n信号\n课堂双舵机画布（ESP32 DevKit V1）\n课程实物（ESP32-C3）\n\n\n\n\n触摸输入\nGPIO27\nGPIO10\n\n\nOLED 的 SDA、SCL\nGPIO21、22\nGPIO20、21\n\n\n俯仰、水平舵机\nGPIO25、26\nGPIO5、6\n\n\n\n两份固件使用相同的手势判断和动作时序。当前本机 Velxio 能报告 C3 的两路 LEDC 占空比，C3 电路画布里的舵臂会停在初始位置。在课堂页展开三维头架，可以直接回放点头和摇头。要点「运行本机固件」实时驱动头盔，需先在自己的电脑上启动 Velxio 服务。本机服务配置\n头架按 C3 仿真输出的占空比运动，面窗显示同一固件通过 I²C 发出的画面。源码包内的脚本也可以编译修改后的 C3 草图。C3 双舵机工程 · C3 源码与脚本 · 三维头架"
+  },
+  {
+    "objectID": "reference/simulation.html#验证自己的改动",
+    "href": "reference/simulation.html#验证自己的改动",
+    "title": "在 Velxio 中测试触摸、表情与舵机",
+    "section": "验证自己的改动",
+    "text": "验证自己的改动\n先点 Stop，修改当前草图或用改过的 .ino 替换编辑区的源码，再点 Run。例如把课堂画布工程中的 NOD_TRAVEL_US 从 80 改为 60 后，单击时 GPIO25 应输出 1560、1500 微秒。再做一次双击，核对 GPIO26 的三个目标仍是 1400、1600、1500 微秒。\n检查表情时长时，看串口中的 MOOD=1（开心）、MOOD=5（哭泣）和 MOOD=0（普通）。t= 后的值是固件启动后经过的毫秒数。用恢复普通眼睛的时刻减去表情开始的时刻，就得到持续时间。还可以导入单击开心 5 秒或长按计时的参考工程，按同一方法复核。5 秒表情工程 · 学习提醒工程"
+  },
+  {
+    "objectID": "reference/simulation.html#运行回放与实物测试",
+    "href": "reference/simulation.html#运行回放与实物测试",
+    "title": "在 Velxio 中测试触摸、表情与舵机",
+    "section": "运行回放与实物测试",
+    "text": "运行回放与实物测试\n\n\n\n这段回放根据一次 ESP32-C3 仿真中发给屏幕的 I²C 数据生成，依次展示单击、双击和空闲时的表情。没有仿真服务时可以用它对照程序。要验证自己的修改，需要重新编译并运行修改后的版本。双舵机电路画布实录\n三维模型可以用来观察哪些零件一起转动。隔着头盔能否感应触摸、实际舵机能转多少度、转动时是否碰壳或拉紧导线、供电能否带动头部，都要在实物上测量。测试记录 · 故障排查"
+  }
+]
